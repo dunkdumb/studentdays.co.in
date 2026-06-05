@@ -342,8 +342,8 @@ export default function Home() {
               <h4 className="font-bold text-lg mb-6 text-blue-900">Contact</h4>
               <ul className="space-y-4 text-gray-600">
                 <li><a href="mailto:hello@studentdays.co" className="hover:text-primary transition-colors" data-testid="footer-email">hello@studentdays.co</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-instagram">Instagram</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-whatsapp">WhatsApp</a></li>
+                <li><a href="https://www.instagram.com/studentdays.co?igsh=MWg2cDBtN2NjYXJuaQ==" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors" data-testid="footer-instagram">Instagram</a></li>
+                <li><a href="https://chat.whatsapp.com/HLAUVsG1Kv9LGiIXgj0DuV?mode=gi_t" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors" data-testid="footer-whatsapp">WhatsApp</a></li>
               </ul>
             </div>
           </div>
