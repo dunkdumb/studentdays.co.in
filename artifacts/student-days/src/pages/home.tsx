@@ -309,12 +309,16 @@ export default function Home() {
             <p className="text-2xl font-medium text-gray-800 mb-6">Ready To Travel Like A Student?</p>
             <p className="text-gray-700 mb-12 text-lg">Drop us a hello. We'll get you on the next trip that matches your vibe and budget.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button data-testid="button-whatsapp" size="lg" className="rounded-full bg-[#25D366] hover:bg-[#25D366]/90 text-white w-full sm:w-auto h-14 px-8 text-lg shadow-[0_0_20px_rgba(37,211,102,0.3)]">
-                Join WhatsApp Community
-              </Button>
-              <Button data-testid="button-instagram" size="lg" className="rounded-full bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F56040] hover:opacity-90 text-white w-full sm:w-auto h-14 px-8 text-lg border-0 shadow-[0_0_20px_rgba(253,29,29,0.3)]">
-                Follow Instagram
-              </Button>
+              <a href="https://chat.whatsapp.com/HLAUVsG1Kv9LGiIXgj0DuV?mode=gi_t" target="_blank" rel="noopener noreferrer" data-testid="button-whatsapp">
+                <Button size="lg" className="rounded-full bg-[#25D366] hover:bg-[#25D366]/90 text-white w-full sm:w-auto h-14 px-8 text-lg shadow-[0_0_20px_rgba(37,211,102,0.3)]">
+                  Join WhatsApp Community
+                </Button>
+              </a>
+              <a href="https://www.instagram.com/studentdays.co?igsh=MWg2cDBtN2NjYXJuaQ==" target="_blank" rel="noopener noreferrer" data-testid="button-instagram">
+                <Button size="lg" className="rounded-full bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F56040] hover:opacity-90 text-white w-full sm:w-auto h-14 px-8 text-lg border-0 shadow-[0_0_20px_rgba(253,29,29,0.3)]">
+                  Follow Instagram
+                </Button>
+              </a>
             </div>
           </div>
         </section>
