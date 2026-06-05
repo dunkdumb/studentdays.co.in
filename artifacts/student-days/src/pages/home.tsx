@@ -20,7 +20,6 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    document.documentElement.classList.add("dark");
     const timer = setTimeout(() => setLoading(false), 3500);
     return () => clearTimeout(timer);
   }, []);
@@ -96,7 +95,7 @@ export default function Home() {
               playsInline
               className="w-full h-full object-cover opacity-70"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-background/60" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/50" />
             <div className="absolute inset-0 bg-black/40" />
           </div>
 
@@ -161,7 +160,7 @@ export default function Home() {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.1 }}
                     viewport={{ once: true }}
-                    className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/10"
+                    className="flex items-center gap-4 bg-blue-50 p-4 rounded-2xl border border-blue-200"
                   >
                     <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary">
                       ✓
@@ -240,13 +239,13 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="stories" className="py-32 relative overflow-hidden bg-[#050812]">
+        <section id="stories" className="py-32 relative overflow-hidden bg-blue-50">
           <div className="container mx-auto px-6 text-center">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-6xl font-black mb-6 text-white tracking-tight"
+              className="text-4xl md:text-6xl font-black mb-6 text-blue-900 tracking-tight"
             >
               The Coldest Journey.<br/>The Warmest Memory.
             </motion.h2>
@@ -255,7 +254,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-xl text-gray-400 max-w-2xl mx-auto mb-10"
+              className="text-xl text-blue-600 max-w-2xl mx-auto mb-10"
             >
               Every StudentDays journey comes with a dedicated filmmaker. You live it. We film it. You rewatch it forever.
             </motion.p>
@@ -265,7 +264,7 @@ export default function Home() {
               transition={{ delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <Button data-testid="button-watch-reels" variant="outline" size="lg" className="rounded-full border-white/20 hover:bg-white hover:text-black transition-colors px-8 h-14 text-lg">
+              <Button data-testid="button-watch-reels" size="lg" className="rounded-full bg-primary hover:bg-primary/90 text-white transition-colors px-8 h-14 text-lg">
                 Watch Trip Reels
               </Button>
             </motion.div>
@@ -283,32 +282,32 @@ export default function Home() {
               { name: "Harsha Reddy", uni: "MLRITM", quote: "Never thought student travel could feel this premium." },
               { name: "Ayesha Khan", uni: "Sreenidhi Institute", quote: "Met amazing people and created lifelong memories." }
             ].map((review, i) => (
-              <Card key={i} className="min-w-[300px] snap-center bg-card/40 border-white/5 shrink-0">
+              <Card key={i} className="min-w-[300px] snap-center bg-white border-blue-200 shrink-0 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4 mb-4">
-                    <Avatar className="h-12 w-12 border border-primary/20">
+                    <Avatar className="h-12 w-12 border border-primary/30">
                       <AvatarFallback className="bg-primary/10 text-primary">{review.name.split(' ').map(n=>n[0]).join('')}</AvatarFallback>
                     </Avatar>
                     <div>
-                      <p className="font-bold">{review.name}</p>
-                      <p className="text-xs text-muted-foreground">{review.uni}</p>
+                      <p className="font-bold text-blue-900">{review.name}</p>
+                      <p className="text-xs text-blue-500">{review.uni}</p>
                     </div>
                   </div>
                   <div className="flex gap-1 mb-3 text-yellow-500">
                     {'⭐⭐⭐⭐⭐'}
                   </div>
-                  <p className="text-gray-300 italic">"{review.quote}"</p>
+                  <p className="text-blue-700 italic">"{review.quote}"</p>
                 </CardContent>
               </Card>
             ))}
           </div>
         </section>
 
-        <section id="contact" className="py-32 bg-card/30 relative">
+        <section id="contact" className="py-32 bg-blue-50 relative">
           <div className="container mx-auto px-6 text-center max-w-3xl">
-            <h2 className="text-5xl font-black mb-4">Your Turn.</h2>
-            <p className="text-2xl font-medium text-gray-300 mb-6">Ready To Travel Like A Student?</p>
-            <p className="text-gray-400 mb-12 text-lg">Drop us a hello. We'll get you on the next trip that matches your vibe and budget.</p>
+            <h2 className="text-5xl font-black mb-4 text-blue-900">Your Turn.</h2>
+            <p className="text-2xl font-medium text-blue-700 mb-6">Ready To Travel Like A Student?</p>
+            <p className="text-blue-600 mb-12 text-lg">Drop us a hello. We'll get you on the next trip that matches your vibe and budget.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button data-testid="button-whatsapp" size="lg" className="rounded-full bg-[#25D366] hover:bg-[#25D366]/90 text-white w-full sm:w-auto h-14 px-8 text-lg shadow-[0_0_20px_rgba(37,211,102,0.3)]">
                 Join WhatsApp Community
@@ -320,7 +319,7 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <footer className="bg-[#050812] pt-20 pb-10 border-t border-white/5">
+      <footer className="bg-white pt-20 pb-10 border-t border-blue-200">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
             <div>
@@ -328,23 +327,23 @@ export default function Home() {
               <p className="text-primary font-medium tracking-wide">Live It. Love It. Remember It.</p>
             </div>
             <div>
-              <h4 className="font-bold text-lg mb-6">About Us</h4>
-              <ul className="space-y-4 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors" data-testid="footer-story">Our Story</a></li>
-                <li><a href="#" className="hover:text-white transition-colors" data-testid="footer-partners">College Partnerships</a></li>
-                <li><a href="#" className="hover:text-white transition-colors" data-testid="footer-communities">Student Communities</a></li>
+              <h4 className="font-bold text-lg mb-6 text-blue-900">About Us</h4>
+              <ul className="space-y-4 text-blue-600">
+                <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-story">Our Story</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-partners">College Partnerships</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-communities">Student Communities</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold text-lg mb-6">Contact</h4>
-              <ul className="space-y-4 text-gray-400">
-                <li><a href="mailto:hello@studentdays.co" className="hover:text-white transition-colors" data-testid="footer-email">hello@studentdays.co</a></li>
-                <li><a href="#" className="hover:text-white transition-colors" data-testid="footer-instagram">Instagram</a></li>
-                <li><a href="#" className="hover:text-white transition-colors" data-testid="footer-whatsapp">WhatsApp</a></li>
+              <h4 className="font-bold text-lg mb-6 text-blue-900">Contact</h4>
+              <ul className="space-y-4 text-blue-600">
+                <li><a href="mailto:hello@studentdays.co" className="hover:text-primary transition-colors" data-testid="footer-email">hello@studentdays.co</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-instagram">Instagram</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-whatsapp">WhatsApp</a></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-white/10 pt-8 text-center text-sm text-gray-500 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="border-t border-blue-200 pt-8 text-center text-sm text-blue-400 flex flex-col md:flex-row justify-between items-center gap-4">
             <p>© 2026 StudentDays.co</p>
             <p>Made for students across India</p>
             <p>A Banoth Rohith's & Team Vision</p>
