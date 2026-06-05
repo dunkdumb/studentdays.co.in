@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 // Brand Assets
 import logoPath from "@assets/WhatsApp_Image_2026-05-18_at_12.12.18_AM-removebg-preview_1780684297152.png";
@@ -27,6 +28,10 @@ export default function Home() {
   const [form, setForm] = useState({ name: "", college: "", phone: "" });
   const [submitted, setSubmitted] = useState(false);
 
+  const [joinOpen, setJoinOpen] = useState(false);
+  const [joinForm, setJoinForm] = useState({ name: "", college: "", phone: "", trip: "" });
+  const [joinSubmitted, setJoinSubmitted] = useState(false);
+
   const openReserve = (trip: Trip) => {
     setSelectedTrip(trip);
     setForm({ name: "", college: "", phone: "" });
@@ -36,6 +41,17 @@ export default function Home() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
+  };
+
+  const openJoin = () => {
+    setJoinForm({ name: "", college: "", phone: "", trip: "" });
+    setJoinSubmitted(false);
+    setJoinOpen(true);
+  };
+
+  const handleJoinSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setJoinSubmitted(true);
   };
 
   useEffect(() => {
@@ -119,7 +135,7 @@ export default function Home() {
             <button onClick={() => scrollTo("contact")} className="hover:text-primary transition-colors" data-testid="nav-contact">About Us</button>
           </nav>
 
-          <Button data-testid="button-join" className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 shadow-[0_0_20px_rgba(26,107,255,0.3)] hover:shadow-[0_0_30px_rgba(26,107,255,0.5)] transition-all">
+          <Button data-testid="button-join" onClick={openJoin} className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 shadow-[0_0_20px_rgba(26,107,255,0.3)] hover:shadow-[0_0_30px_rgba(26,107,255,0.5)] transition-all">
             May I Join?
           </Button>
         </div>
@@ -394,6 +410,92 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      <Dialog open={joinOpen} onOpenChange={setJoinOpen}>
+        <DialogContent className="sm:max-w-md bg-white" data-testid="join-dialog">
+          {!joinSubmitted ? (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-2xl font-black text-blue-900">May I Join? 🙋</DialogTitle>
+                <DialogDescription className="text-gray-600">
+                  Tell us a bit about yourself and we'll match you with the perfect trip.
+                </DialogDescription>
+              </DialogHeader>
+              <form onSubmit={handleJoinSubmit} className="flex flex-col gap-4 mt-2" data-testid="join-form">
+                <div className="flex flex-col gap-1.5">
+                  <Label htmlFor="join-name" className="text-gray-700 font-medium">Full Name</Label>
+                  <Input
+                    id="join-name"
+                    data-testid="join-input-name"
+                    placeholder="e.g. Priya Sharma"
+                    required
+                    value={joinForm.name}
+                    onChange={(e) => setJoinForm({ ...joinForm, name: e.target.value })}
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <Label htmlFor="join-college" className="text-gray-700 font-medium">College Name</Label>
+                  <Input
+                    id="join-college"
+                    data-testid="join-input-college"
+                    placeholder="e.g. Anurag University"
+                    required
+                    value={joinForm.college}
+                    onChange={(e) => setJoinForm({ ...joinForm, college: e.target.value })}
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <Label htmlFor="join-phone" className="text-gray-700 font-medium">Phone Number</Label>
+                  <Input
+                    id="join-phone"
+                    data-testid="join-input-phone"
+                    type="tel"
+                    placeholder="e.g. 9876543210"
+                    required
+                    value={joinForm.phone}
+                    onChange={(e) => setJoinForm({ ...joinForm, phone: e.target.value })}
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <Label className="text-gray-700 font-medium">Preferred Trip</Label>
+                  <Select value={joinForm.trip} onValueChange={(val) => setJoinForm({ ...joinForm, trip: val })}>
+                    <SelectTrigger data-testid="join-select-trip" className="w-full">
+                      <SelectValue placeholder="Pick your vibe..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="goa">Goa Escape — ₹5,999</SelectItem>
+                      <SelectItem value="pondicherry">Pondicherry Diaries — ₹4,999</SelectItem>
+                      <SelectItem value="hampi">Hampi Backpacking — ₹3,999</SelectItem>
+                      <SelectItem value="manali">Manali</SelectItem>
+                      <SelectItem value="kashmir">Kashmir</SelectItem>
+                      <SelectItem value="ooty">Ooty</SelectItem>
+                      <SelectItem value="darjeeling">Darjeeling</SelectItem>
+                      <SelectItem value="surprise">Surprise me!</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <Button data-testid="join-submit" type="submit" className="rounded-full bg-primary hover:bg-primary/90 text-white h-12 text-base font-semibold mt-2">
+                  Count Me In!
+                </Button>
+              </form>
+            </>
+          ) : (
+            <div className="flex flex-col items-center text-center py-6 gap-4" data-testid="join-success">
+              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center text-3xl">✈️</div>
+              <h3 className="text-2xl font-black text-blue-900">Welcome aboard, {joinForm.name.split(" ")[0]}!</h3>
+              <p className="text-gray-600 max-w-xs">
+                We've got your interest noted. Our team will call you at <span className="font-semibold text-gray-800">{joinForm.phone}</span> to sort your trip details.
+              </p>
+              <p className="text-sm text-gray-500">Meanwhile, join our WhatsApp community for trip updates and early-bird offers!</p>
+              <a href="https://chat.whatsapp.com/HLAUVsG1Kv9LGiIXgj0DuV?mode=gi_t" target="_blank" rel="noopener noreferrer" className="w-full">
+                <Button data-testid="join-success-whatsapp" className="w-full rounded-full bg-[#25D366] hover:bg-[#25D366]/90 text-white h-12 text-base">
+                  Join WhatsApp Community
+                </Button>
+              </a>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
 
       <Dialog open={!!selectedTrip} onOpenChange={(open) => !open && setSelectedTrip(null)}>
         <DialogContent className="sm:max-w-md bg-white" data-testid="reserve-dialog">
