@@ -106,7 +106,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight mb-6 text-[#d4e3fc]"
+              className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tight mb-6"
             >
               India's First Student <br className="hidden md:block"/> Experience Platform
             </motion.h1>
@@ -116,10 +116,10 @@ export default function Home() {
               transition={{ duration: 1, delay: 0.4 }}
               viewport={{ once: true }}
               className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed"
-            >Create student-only trips across India. 
-            Live it. Love it. Remember it. 
-            Take home a cinematic documentary film of your journey.
-            Here Every Trips Becomes A Story</motion.p>
+            >Create student-only trips across India. Live it. Love it. Remember it. Take home a cinematic documentary film of your journey. 
+
+
+</motion.p>
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
