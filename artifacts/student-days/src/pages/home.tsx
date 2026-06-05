@@ -254,7 +254,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-xl text-blue-600 max-w-2xl mx-auto mb-10"
+              className="text-xl text-gray-700 max-w-2xl mx-auto mb-10"
             >
               Every StudentDays journey comes with a dedicated filmmaker. You live it. We film it. You rewatch it forever.
             </motion.p>
@@ -289,14 +289,14 @@ export default function Home() {
                       <AvatarFallback className="bg-primary/10 text-primary">{review.name.split(' ').map(n=>n[0]).join('')}</AvatarFallback>
                     </Avatar>
                     <div>
-                      <p className="font-bold text-blue-900">{review.name}</p>
-                      <p className="text-xs text-blue-500">{review.uni}</p>
+                      <p className="font-bold text-gray-900">{review.name}</p>
+                      <p className="text-xs text-gray-500">{review.uni}</p>
                     </div>
                   </div>
                   <div className="flex gap-1 mb-3 text-yellow-500">
                     {'⭐⭐⭐⭐⭐'}
                   </div>
-                  <p className="text-blue-700 italic">"{review.quote}"</p>
+                  <p className="text-gray-700 italic">"{review.quote}"</p>
                 </CardContent>
               </Card>
             ))}
@@ -306,8 +306,8 @@ export default function Home() {
         <section id="contact" className="py-32 bg-blue-50 relative">
           <div className="container mx-auto px-6 text-center max-w-3xl">
             <h2 className="text-5xl font-black mb-4 text-blue-900">Your Turn.</h2>
-            <p className="text-2xl font-medium text-blue-700 mb-6">Ready To Travel Like A Student?</p>
-            <p className="text-blue-600 mb-12 text-lg">Drop us a hello. We'll get you on the next trip that matches your vibe and budget.</p>
+            <p className="text-2xl font-medium text-gray-800 mb-6">Ready To Travel Like A Student?</p>
+            <p className="text-gray-700 mb-12 text-lg">Drop us a hello. We'll get you on the next trip that matches your vibe and budget.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button data-testid="button-whatsapp" size="lg" className="rounded-full bg-[#25D366] hover:bg-[#25D366]/90 text-white w-full sm:w-auto h-14 px-8 text-lg shadow-[0_0_20px_rgba(37,211,102,0.3)]">
                 Join WhatsApp Community
@@ -328,7 +328,7 @@ export default function Home() {
             </div>
             <div>
               <h4 className="font-bold text-lg mb-6 text-blue-900">About Us</h4>
-              <ul className="space-y-4 text-blue-600">
+              <ul className="space-y-4 text-gray-600">
                 <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-story">Our Story</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-partners">College Partnerships</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-communities">Student Communities</a></li>
@@ -336,14 +336,14 @@ export default function Home() {
             </div>
             <div>
               <h4 className="font-bold text-lg mb-6 text-blue-900">Contact</h4>
-              <ul className="space-y-4 text-blue-600">
+              <ul className="space-y-4 text-gray-600">
                 <li><a href="mailto:hello@studentdays.co" className="hover:text-primary transition-colors" data-testid="footer-email">hello@studentdays.co</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-instagram">Instagram</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-whatsapp">WhatsApp</a></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-blue-200 pt-8 text-center text-sm text-blue-400 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="border-t border-gray-200 pt-8 text-center text-sm text-gray-500 flex flex-col md:flex-row justify-between items-center gap-4">
             <p>© 2026 StudentDays.co</p>
             <p>Made for students across India</p>
             <p>A Banoth Rohith's & Team Vision</p>
