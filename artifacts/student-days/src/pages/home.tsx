@@ -63,7 +63,6 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
-
       <header
         className={`fixed top-0 inset-x-0 z-40 transition-all duration-500 border-b border-transparent ${
           scrolled ? "bg-background/80 backdrop-blur-md border-border/50 py-3 shadow-lg" : "bg-transparent py-5"
@@ -86,7 +85,6 @@ export default function Home() {
           </Button>
         </div>
       </header>
-
       <main>
         <section id="hero" className="relative h-screen w-full flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
@@ -118,9 +116,10 @@ export default function Home() {
               transition={{ duration: 1, delay: 0.4 }}
               viewport={{ once: true }}
               className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed"
-            >
-              Create student-only trips across India. Live it. Love it. Remember it. Take home a cinematic documentary film of your journey. Every trip becomes a story.
-            </motion.p>
+            >Create student-only trips across India. Live it. Love it. Remember it. Take home a cinematic documentary film of your journey. 
+
+
+</motion.p>
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -324,7 +323,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-
       <footer className="bg-[#050812] pt-20 pb-10 border-t border-white/5">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
