@@ -1,0 +1,20 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "0B-ebHMVn_Ve0TXDyfsEV"
+uri = "file://artifacts/student-days/src/assets/goa.png"
+type = "image"
+title = "Goa beach golden hour"
+
+[[generated]]
+id = "s4TCng4sDxApH2SpHMaSt"
+uri = "file://artifacts/student-days/src/assets/pondicherry.png"
+type = "image"
+title = "Pondicherry colonial street"
+
+[[generated]]
+id = "XyWHY-LYnpPBM1NajpWB7"
+uri = "file://artifacts/student-days/src/assets/hampi.png"
+type = "image"
+title = "Hampi ancient ruins"

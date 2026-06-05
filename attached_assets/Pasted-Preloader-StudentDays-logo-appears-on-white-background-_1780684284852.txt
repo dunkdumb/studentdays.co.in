@@ -1,0 +1,241 @@
+Preloader
+StudentDays logo appears on white background.
+Logo slowly zooms out.
+Tagline fades in:
+
+LIVE IT • LOVE IT • REMEMBER IT
+
+Logo dissolves into the homepage.
+Background video starts playing.
+
+Duration: 3-4 seconds.
+
+Header
+Left side : StudentDays Logo
+
+Center
+Upcoming Trips
+Documentary Stories
+College Partners
+About Us & Contact
+Right side ,
+Button:
+
+May I Join?
+
+Rounded pill button.
+
+Hero Section
+
+Background:
+
+Uploaded map video
+Slight blur overlay
+Dark gradient for readability
+
+Headline:
+
+India's First Student Experience Platform
+
+Subheadline:
+
+Create student-only trips across India.
+Live it. Love it. Remember it.
+
+Take home a cinematic documentary film of your journey.
+
+Every trip becomes a story.
+
+CTA:
+
+Explore Trips
+
+Below:
+
+Animated Scroll Indicator
+
+↓ Scroll
+
+Destinations Intro
+
+Headline:
+
+Where We Go
+
+Subtext:
+
+✓ Handpicked destinations
+
+✓ Student-friendly budgets
+
+✓ Pick your vibe
+
+✓ We handle everything
+
+Small cinematic transition.
+
+India Map Section, use uploaded map photo
+
+Highlighted:
+
+Goa
+Munnar
+Ooty
+Pondicherry
+Hampi
+Vizag
+Manali
+Kashmir
+Darjeeling
+
+Upcoming Trips Section
+
+Connected with Header Menu.
+
+Cards layout:
+
+Destination Image
+
+Goa Escape
+
+Collaborated with:
+Anurag University
+
+₹5,999
+
+Button:
+
+Reserve My Seat
+
+Pondicherry Diaries
+
+Collaborated with:
+GNU
+
+₹4,999
+
+Reserve My Seat
+
+Hampi Backpacking
+
+Collaborated with:
+MLRITM
+
+₹3,999
+
+Reserve My Seat
+
+Student Reviews
+
+Headline:
+
+What Students Say
+
+Cards:
+
+Rahul Kumar
+
+Anurag University
+
+"Best trip of my college life."
+
+⭐⭐⭐⭐⭐
+
+Priya Sharma
+
+GNU
+
+"The documentary film made me relive everything."
+
+⭐⭐⭐⭐⭐
+
+Harsha Reddy
+
+MLRITM
+
+"Never thought student travel could feel this premium."
+
+⭐⭐⭐⭐⭐
+
+Ayesha Khan
+
+Sreenidhi Institute
+
+"Met amazing people and created lifelong memories."
+
+⭐⭐⭐⭐⭐
+
+Trip Rewiiiind,
+
+Background:
+Documentary clips.
+
+Headline:
+
+The Coldest Journey.
+The Warmest Memory.
+
+Text:
+
+Every StudentDays journey comes with a dedicated filmmaker.
+
+You live it.
+
+We film it.
+
+You rewatch it forever.
+
+Button:
+
+Watch Trip Reels
+
+Final CTA Section
+
+Large centered text.
+
+Your Turn.
+Ready To Travel Like A Student?
+
+Drop us a hello.
+
+We'll get you on the next trip that matches your vibe and budget.
+
+Buttons:
+
+🟢 Join WhatsApp Community
+
+📸 Follow Instagram
+
+Footer
+
+Left:
+
+StudentDays Logo
+
+Tagline:
+
+Live It. Love It. Remember It.
+
+(in brand blue)
+
+Center:
+
+About Us
+
+Our Story
+College Partnerships
+Student Communities
+
+Right:
+
+Contact
+
+hello@studentdays.co
+Instagram
+WhatsApp
+
+Bottom:
+
+© 2026 StudentDays.co
+
+Made for students across India - A Banoth Rohith's & Team Vision,                                                          this is the follow of website, also go through this basic sample website for better understanding and take it as inspiration :https://studentdays.lovable.app/
