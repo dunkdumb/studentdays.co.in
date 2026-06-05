@@ -74,10 +74,31 @@ export default function Home() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 1 }}
-              className="tracking-[0.2em] text-sm font-medium text-gray-800 uppercase"
+              className="tracking-[0.2em] text-sm font-medium text-gray-800 uppercase mb-6"
             >
               LIVE IT • LOVE IT • REMEMBER IT
             </motion.p>
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={{ visible: { transition: { staggerChildren: 0.055, delayChildren: 1.8 } } }}
+              className="flex flex-wrap justify-center"
+              style={{ fontFamily: "'Caveat', cursive" }}
+            >
+              {"Every Trip Becomes A Story".split("").map((char, i) => (
+                <motion.span
+                  key={i}
+                  variants={{
+                    hidden: { opacity: 0, y: 12, rotate: -4 },
+                    visible: { opacity: 1, y: 0, rotate: 0, transition: { duration: 0.4, ease: "easeOut" } }
+                  }}
+                  className="text-3xl font-bold"
+                  style={{ color: "#1a6bff", display: "inline-block", whiteSpace: char === " " ? "pre" : "normal" }}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </motion.span>
+              ))}
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
