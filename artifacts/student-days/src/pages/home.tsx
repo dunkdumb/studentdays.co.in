@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 // Brand Assets
 import logoPath from "@assets/WhatsApp_Image_2026-05-18_at_12.12.18_AM-removebg-preview_1780684297152.png";
@@ -15,9 +18,25 @@ import goaPath from "@/assets/goa.png";
 import pondicherryPath from "@/assets/pondicherry.png";
 import hampiPath from "@/assets/hampi.png";
 
+type Trip = { title: string; collab: string; price: string };
+
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [scrolled, setScrolled] = useState(false);
+  const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
+  const [form, setForm] = useState({ name: "", college: "", phone: "" });
+  const [submitted, setSubmitted] = useState(false);
+
+  const openReserve = (trip: Trip) => {
+    setSelectedTrip(trip);
+    setForm({ name: "", college: "", phone: "" });
+    setSubmitted(false);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 3500);
@@ -228,8 +247,8 @@ export default function Home() {
                         <p className="text-sm text-muted-foreground">Starting from</p>
                         <p className="text-2xl font-bold text-primary">{trip.price}</p>
                       </div>
-                      <Button data-testid={`button-reserve-${i}`} className="bg-primary hover:bg-primary/90 text-white rounded-full px-6">
-                        Reserve
+                      <Button data-testid={`button-reserve-${i}`} onClick={() => openReserve(trip)} className="bg-primary hover:bg-primary/90 text-white rounded-full px-6">
+                        Reserve My Seat
                       </Button>
                     </CardContent>
                   </Card>
@@ -354,6 +373,78 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      <Dialog open={!!selectedTrip} onOpenChange={(open) => !open && setSelectedTrip(null)}>
+        <DialogContent className="sm:max-w-md bg-white" data-testid="reserve-dialog">
+          {!submitted ? (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-2xl font-black text-blue-900">Reserve My Seat</DialogTitle>
+                <DialogDescription className="text-gray-600">
+                  {selectedTrip && (
+                    <span className="flex flex-col gap-1 mt-1">
+                      <span className="font-semibold text-primary text-base">{selectedTrip.title}</span>
+                      <span>Collaborated with: {selectedTrip.collab} · <span className="font-bold text-gray-800">{selectedTrip.price}</span></span>
+                    </span>
+                  )}
+                </DialogDescription>
+              </DialogHeader>
+              <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-2" data-testid="reserve-form">
+                <div className="flex flex-col gap-1.5">
+                  <Label htmlFor="res-name" className="text-gray-700 font-medium">Full Name</Label>
+                  <Input
+                    id="res-name"
+                    data-testid="input-name"
+                    placeholder="e.g. Rahul Kumar"
+                    required
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <Label htmlFor="res-college" className="text-gray-700 font-medium">College Name</Label>
+                  <Input
+                    id="res-college"
+                    data-testid="input-college"
+                    placeholder="e.g. Anurag University"
+                    required
+                    value={form.college}
+                    onChange={(e) => setForm({ ...form, college: e.target.value })}
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <Label htmlFor="res-phone" className="text-gray-700 font-medium">Phone Number</Label>
+                  <Input
+                    id="res-phone"
+                    data-testid="input-phone"
+                    type="tel"
+                    placeholder="e.g. 9876543210"
+                    required
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                  />
+                </div>
+                <Button data-testid="button-submit-reserve" type="submit" className="rounded-full bg-primary hover:bg-primary/90 text-white h-12 text-base font-semibold mt-2">
+                  Confirm My Seat
+                </Button>
+              </form>
+            </>
+          ) : (
+            <div className="flex flex-col items-center text-center py-6 gap-4" data-testid="reserve-success">
+              <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-3xl">🎉</div>
+              <h3 className="text-2xl font-black text-blue-900">You're in, {form.name.split(" ")[0]}!</h3>
+              <p className="text-gray-600 max-w-xs">
+                We've noted your interest for <span className="font-semibold text-primary">{selectedTrip?.title}</span>. Our team will reach out to you shortly on <span className="font-semibold text-gray-800">{form.phone}</span>.
+              </p>
+              <a href="https://chat.whatsapp.com/HLAUVsG1Kv9LGiIXgj0DuV?mode=gi_t" target="_blank" rel="noopener noreferrer" className="w-full">
+                <Button data-testid="button-success-whatsapp" className="w-full rounded-full bg-[#25D366] hover:bg-[#25D366]/90 text-white h-12 text-base">
+                  Join WhatsApp Community
+                </Button>
+              </a>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
