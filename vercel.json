@@ -1,0 +1,5 @@
+{
+  "buildCommand": "pnpm install && pnpm --filter @workspace/student-days run build",
+  "outputDirectory": "artifacts/student-days/dist/public",
+  "installCommand": "pnpm install"
+}
