@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -14,19 +15,19 @@ import logoPath from "@assets/WhatsApp_Image_2026-05-18_at_12.12.18_AM-removebg-
 import mapPath from "@assets/ChatGPT_Image_Jun_5,_2026,_11_18_35_PM_1780684309093.png";
 import videoPath from "@assets/remove_the_pen_in_viedo_and_k_1780684303486.mp4";
 
-// Generated Images
-import goaPath from "@/assets/goa.png";
-import pondicherryPath from "@/assets/pondicherry.png";
-import hampiPath from "@/assets/hampi.png";
+// Trip Assets
+import vizagArakuPath from "@/assets/vizag-araku.png";
 
 type Trip = { title: string; collab: string; price: string };
 
 export default function Home() {
+  const [, setLocation] = useLocation();
   const [loading, setLoading] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
   const [form, setForm] = useState({ name: "", college: "", phone: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [storiesOpen, setStoriesOpen] = useState(false);
 
   const [joinOpen, setJoinOpen] = useState(false);
   const [joinForm, setJoinForm] = useState({ name: "", college: "", phone: "", trip: "" });
@@ -132,7 +133,7 @@ export default function Home() {
             <button onClick={() => scrollTo("upcoming")} className="hover:text-primary transition-colors" data-testid="nav-upcoming">Upcoming Trips</button>
             <button onClick={() => scrollTo("stories")} className="hover:text-primary transition-colors" data-testid="nav-stories">Documentary Stories</button>
             <button onClick={() => scrollTo("partners")} className="hover:text-primary transition-colors" data-testid="nav-partners">College Partners</button>
-            <button onClick={() => scrollTo("contact")} className="hover:text-primary transition-colors" data-testid="nav-contact">About Us</button>
+            <button onClick={() => setLocation("/about")} className="hover:text-primary transition-colors" data-testid="nav-about">About Us</button>
           </nav>
 
           <Button data-testid="button-join" onClick={openJoin} className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 shadow-[0_0_20px_rgba(26,107,255,0.3)] hover:shadow-[0_0_30px_rgba(26,107,255,0.5)] transition-all">
@@ -196,32 +197,32 @@ export default function Home() {
 
         <section className="py-24 bg-background relative z-10">
           <div className="container mx-auto px-6">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="text-center max-w-4xl mx-auto"
             >
               <h2 className="text-3xl md:text-5xl font-bold mb-12">Where We Go</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+              <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-6 text-left">
                 {[
                   "Handpicked destinations",
                   "Student-friendly budgets",
                   "Pick your vibe",
                   "We handle everything"
                 ].map((item, i) => (
-                  <motion.div 
+                  <motion.div
                     key={i}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.1 }}
                     viewport={{ once: true }}
-                    className="flex items-center gap-4 bg-blue-50 p-4 rounded-2xl border border-blue-200"
+                    className="flex items-center gap-3 bg-blue-50 p-4 rounded-2xl border border-blue-200 touch-manipulation"
                   >
-                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                    <div className="w-8 h-8 shrink-0 rounded-full bg-primary/20 flex items-center justify-center text-primary">
                       ✓
                     </div>
-                    <span className="text-lg font-medium">{item}</span>
+                    <span className="text-sm md:text-lg font-medium">{item}</span>
                   </motion.div>
                 ))}
               </div>
@@ -246,7 +247,7 @@ export default function Home() {
 
         <section id="upcoming" className="py-24 bg-background">
           <div className="container mx-auto px-6">
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -255,43 +256,44 @@ export default function Home() {
               Upcoming Trips
             </motion.h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                { img: goaPath, title: "Goa Escape", collab: "Anurag University", price: "₹5,999" },
-                { img: pondicherryPath, title: "Pondicherry Diaries", collab: "GNU", price: "₹4,999" },
-                { img: hampiPath, title: "Hampi Backpacking", collab: "MLRITM", price: "₹3,999" }
-              ].map((trip, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.2 }}
-                  viewport={{ once: true }}
-                >
-                  <Card className="bg-card/50 border-white/10 overflow-hidden group hover:border-primary/50 transition-colors">
-                    <div className="relative h-64 overflow-hidden">
-                      <img src={trip.img} alt={trip.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                      <div className="absolute bottom-4 left-4">
-                        <Badge variant="secondary" className="bg-white/20 hover:bg-white/30 backdrop-blur-md border-none mb-2">
-                          {trip.collab}
-                        </Badge>
-                        <h3 className="text-2xl font-bold text-white">{trip.title}</h3>
-                      </div>
-                    </div>
-                    <CardContent className="p-6 flex items-center justify-between">
-                      <div>
-                        <p className="text-sm text-muted-foreground">Starting from</p>
-                        <p className="text-2xl font-bold text-primary">{trip.price}</p>
-                      </div>
-                      <Button data-testid={`button-reserve-${i}`} onClick={() => openReserve(trip)} className="bg-primary hover:bg-primary/90 text-white rounded-full px-6">
-                        Reserve My Seat
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="max-w-3xl mx-auto"
+            >
+              <Card className="bg-card/50 border-white/10 overflow-hidden group hover:border-primary/50 transition-colors shadow-xl">
+                <div className="relative overflow-hidden rounded-t-xl">
+                  <img
+                    src={vizagArakuPath}
+                    alt="Beach, Chills & Hills – Vizag & Araku"
+                    className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <CardContent className="p-6">
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <Badge className="bg-primary/10 text-primary border-primary/20 font-semibold">🎓 Students Only</Badge>
+                    <Badge variant="secondary" className="bg-blue-50 text-blue-700 border-blue-200">Vizag • Araku Valley</Badge>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-2">Beach, Chills &amp; Hills</h3>
+                  <p className="text-gray-600 mb-4 leading-relaxed">
+                    Experience beaches, scenic valleys, waterfalls, coffee plantations, and unforgettable student memories with fellow travelers.
+                  </p>
+                  <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-6">
+                    <span>📅 Date: <strong className="text-gray-800">TBA</strong></span>
+                    <span>💰 Price: <strong className="text-primary">Student Budget Only</strong></span>
+                  </div>
+                  <Button
+                    data-testid="button-reserve-vizag"
+                    onClick={() => openReserve({ title: "Beach, Chills & Hills – Vizag & Araku", collab: "Students Only", price: "TBA" })}
+                    className="bg-primary hover:bg-primary/90 text-white rounded-full px-8 h-12 text-base font-semibold w-full sm:w-auto shadow-[0_0_20px_rgba(26,107,255,0.3)]"
+                  >
+                    🔔 Get Notified
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
           </div>
         </section>
 
@@ -320,8 +322,8 @@ export default function Home() {
               transition={{ delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <Button data-testid="button-watch-reels" size="lg" className="rounded-full bg-primary hover:bg-primary/90 text-white transition-colors px-8 h-14 text-lg">
-                Watch Trip Reels
+              <Button data-testid="button-watch-stories" onClick={() => setStoriesOpen(true)} size="lg" className="rounded-full bg-primary hover:bg-primary/90 text-white transition-colors px-8 h-14 text-lg">
+                Watch Stories
               </Button>
             </motion.div>
           </div>
@@ -387,17 +389,18 @@ export default function Home() {
               <p className="text-primary font-medium tracking-wide">Live It. Love It. Remember It.</p>
             </div>
             <div>
-              <h4 className="font-bold text-lg mb-6 text-blue-900">About Us</h4>
+              <h4 className="font-bold text-lg mb-6 text-blue-900">Quick Links</h4>
               <ul className="space-y-4 text-gray-600">
-                <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-story">Our Story</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-partners">College Partnerships</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-communities">Student Communities</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-faqs">FAQs</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-terms">Terms &amp; Conditions</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-refund">Refund &amp; Cancellation Policy</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-privacy">Privacy Policy</a></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold text-lg mb-6 text-blue-900">Contact</h4>
               <ul className="space-y-4 text-gray-600">
-                <li><a href="mailto:hello@studentdays.co" className="hover:text-primary transition-colors" data-testid="footer-email">hello@studentdays.co</a></li>
+                <li><a href="mailto:hello@studentdays.co.in" className="hover:text-primary transition-colors" data-testid="footer-email">hello@studentdays.co.in</a></li>
                 <li><a href="https://www.instagram.com/studentdays.co?igsh=MWg2cDBtN2NjYXJuaQ==" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors" data-testid="footer-instagram">Instagram</a></li>
                 <li><a href="https://chat.whatsapp.com/HLAUVsG1Kv9LGiIXgj0DuV?mode=gi_t" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors" data-testid="footer-whatsapp">WhatsApp</a></li>
               </ul>
@@ -410,6 +413,31 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Stories Releasing Soon Modal */}
+      <Dialog open={storiesOpen} onOpenChange={setStoriesOpen}>
+        <DialogContent className="sm:max-w-sm bg-white text-center" data-testid="stories-dialog">
+          <DialogHeader>
+            <div className="flex justify-center mb-4">
+              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center text-3xl">🎬</div>
+            </div>
+            <DialogTitle className="text-2xl font-black text-blue-900 text-center">Stories Releasing Soon</DialogTitle>
+            <DialogDescription className="text-gray-600 text-center mt-2">
+              Our documentary stories are in the making. Every trip, every moment — captured for you to relive forever. Stay tuned!
+            </DialogDescription>
+          </DialogHeader>
+          <div className="mt-4 flex flex-col gap-3">
+            <a href="https://www.instagram.com/studentdays.co?igsh=MWg2cDBtN2NjYXJuaQ==" target="_blank" rel="noopener noreferrer">
+              <Button className="w-full rounded-full bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F56040] text-white border-0 h-11">
+                Follow us on Instagram
+              </Button>
+            </a>
+            <Button variant="outline" onClick={() => setStoriesOpen(false)} className="rounded-full h-11">
+              Close
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <Dialog open={joinOpen} onOpenChange={setJoinOpen}>
         <DialogContent className="sm:max-w-md bg-white" data-testid="join-dialog">
@@ -463,9 +491,7 @@ export default function Home() {
                       <SelectValue placeholder="Pick your vibe..." />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="goa">Goa Escape — ₹5,999</SelectItem>
-                      <SelectItem value="pondicherry">Pondicherry Diaries — ₹4,999</SelectItem>
-                      <SelectItem value="hampi">Hampi Backpacking — ₹3,999</SelectItem>
+                      <SelectItem value="vizag-araku">Beach, Chills &amp; Hills — Vizag &amp; Araku</SelectItem>
                       <SelectItem value="manali">Manali</SelectItem>
                       <SelectItem value="kashmir">Kashmir</SelectItem>
                       <SelectItem value="ooty">Ooty</SelectItem>
