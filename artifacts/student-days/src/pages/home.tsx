@@ -134,7 +134,7 @@ export default function Home() {
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
           <button onClick={() => scrollTo("hero")} className="focus:outline-none" data-testid="button-logo-home">
-            <img src={logoPath} alt="StudentDays" className="h-14 w-auto object-contain" />
+            <img src={logoPath} alt="StudentDays" className="h-22 w-auto object-contain" />
           </button>
           
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/80">
