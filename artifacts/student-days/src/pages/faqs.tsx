@@ -268,7 +268,7 @@ export default function Faqs() {
               </p>
               <p className="text-white/60 text-base italic mb-8">Travel. Connect. Experience.</p>
               <a
-                href="https://chat.whatsapp.com/HLAUVsG1Kv9LGiIXgj0DuV?mode=gi_t"
+                href="https://chat.whatsapp.com/KGGn6INH2lJIzgUylSXbCM?mode=gi_t"
                 target="_blank"
                 rel="noopener noreferrer"
               >

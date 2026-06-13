@@ -17,6 +17,7 @@ import videoPath from "@assets/remove_the_pen_in_viedo_and_k_1780684303486.mp4";
 
 // Trip Assets
 import vizagArakuPath from "@/assets/vizag-araku.png";
+import storiesBgPath from "@/assets/stories-bg.jpg";
 
 type Trip = { title: string; collab: string; price: string };
 
@@ -297,25 +298,26 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="stories" className="py-32 relative overflow-hidden bg-blue-50">
-          <div className="absolute inset-0 opacity-10 pointer-events-none select-none" aria-hidden="true">
-            <img src={mapPath} alt="" className="w-full h-full object-cover" />
+        <section id="stories" className="relative overflow-hidden" style={{ minHeight: "520px" }}>
+          <div className="absolute inset-0">
+            <img src={storiesBgPath} alt="StudentDays filmmaker" className="w-full h-full object-cover object-center" />
+            <div className="absolute inset-0 bg-black/55" />
           </div>
-          <div className="container mx-auto px-6 text-center relative z-10">
-            <motion.h2 
+          <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-32">
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-6xl font-black mb-6 text-blue-900 tracking-tight"
+              className="text-4xl md:text-6xl font-black mb-6 text-white tracking-tight drop-shadow-lg"
             >
               The Coldest Journey.<br/>The Warmest Memory.
             </motion.h2>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-xl text-gray-700 max-w-2xl mx-auto mb-10"
+              className="text-lg md:text-xl text-white/85 max-w-2xl mx-auto mb-10"
             >
               Every StudentDays journey comes with a dedicated filmmaker. You live it. We film it. You rewatch it forever.
             </motion.p>
@@ -325,7 +327,7 @@ export default function Home() {
               transition={{ delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <Button data-testid="button-watch-stories" onClick={() => setStoriesOpen(true)} size="lg" className="rounded-full bg-primary hover:bg-primary/90 text-white transition-colors px-8 h-14 text-lg">
+              <Button data-testid="button-watch-stories" onClick={() => setStoriesOpen(true)} size="lg" className="rounded-full bg-primary hover:bg-primary/90 text-white transition-colors px-8 h-14 text-lg shadow-[0_0_30px_rgba(26,107,255,0.5)]">
                 Watch Stories
               </Button>
             </motion.div>
@@ -370,7 +372,7 @@ export default function Home() {
             <p className="text-2xl font-medium text-gray-800 mb-6">Ready To Travel Like A Student?</p>
             <p className="text-gray-700 mb-12 text-lg">Drop us a hello. We'll get you on the next trip that matches your vibe and budget.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="https://chat.whatsapp.com/HLAUVsG1Kv9LGiIXgj0DuV?mode=gi_t" target="_blank" rel="noopener noreferrer" data-testid="button-whatsapp">
+              <a href="https://chat.whatsapp.com/KGGn6INH2lJIzgUylSXbCM?mode=gi_t" target="_blank" rel="noopener noreferrer" data-testid="button-whatsapp">
                 <Button size="lg" className="rounded-full bg-[#25D366] hover:bg-[#25D366]/90 text-white w-full sm:w-auto h-14 px-8 text-lg shadow-[0_0_20px_rgba(37,211,102,0.3)]">
                   Join WhatsApp Community
                 </Button>
@@ -388,7 +390,7 @@ export default function Home() {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
             <div>
-              <img src={logoPath} alt="StudentDays" className="h-10 w-auto mb-6" />
+              <img src={logoPath} alt="StudentDays" className="h-20 w-auto mb-6" />
               <p className="text-primary font-medium tracking-wide">Live It. Love It. Remember It.</p>
             </div>
             <div>
@@ -413,7 +415,7 @@ export default function Home() {
               <ul className="space-y-4 text-gray-600">
                 <li><a href="mailto:hello@studentdays.co.in" className="hover:text-primary transition-colors" data-testid="footer-email">hello@studentdays.co.in</a></li>
                 <li><a href="https://www.instagram.com/studentdays.co?igsh=MWg2cDBtN2NjYXJuaQ==" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors" data-testid="footer-instagram">Instagram</a></li>
-                <li><a href="https://chat.whatsapp.com/HLAUVsG1Kv9LGiIXgj0DuV?mode=gi_t" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors" data-testid="footer-whatsapp">WhatsApp</a></li>
+                <li><a href="https://chat.whatsapp.com/KGGn6INH2lJIzgUylSXbCM?mode=gi_t" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors" data-testid="footer-whatsapp">WhatsApp</a></li>
               </ul>
             </div>
           </div>
@@ -524,7 +526,7 @@ export default function Home() {
                 We've got your interest noted. Our team will call you at <span className="font-semibold text-gray-800">{joinForm.phone}</span> to sort your trip details.
               </p>
               <p className="text-sm text-gray-500">Meanwhile, join our WhatsApp community for trip updates and early-bird offers!</p>
-              <a href="https://chat.whatsapp.com/HLAUVsG1Kv9LGiIXgj0DuV?mode=gi_t" target="_blank" rel="noopener noreferrer" className="w-full">
+              <a href="https://chat.whatsapp.com/KGGn6INH2lJIzgUylSXbCM?mode=gi_t" target="_blank" rel="noopener noreferrer" className="w-full">
                 <Button data-testid="join-success-whatsapp" className="w-full rounded-full bg-[#25D366] hover:bg-[#25D366]/90 text-white h-12 text-base">
                   Join WhatsApp Community
                 </Button>
@@ -596,7 +598,7 @@ export default function Home() {
               <p className="text-gray-600 max-w-xs">
                 We've noted your interest for <span className="font-semibold text-primary">{selectedTrip?.title}</span>. Our team will reach out to you shortly on <span className="font-semibold text-gray-800">{form.phone}</span>.
               </p>
-              <a href="https://chat.whatsapp.com/HLAUVsG1Kv9LGiIXgj0DuV?mode=gi_t" target="_blank" rel="noopener noreferrer" className="w-full">
+              <a href="https://chat.whatsapp.com/KGGn6INH2lJIzgUylSXbCM?mode=gi_t" target="_blank" rel="noopener noreferrer" className="w-full">
                 <Button data-testid="button-success-whatsapp" className="w-full rounded-full bg-[#25D366] hover:bg-[#25D366]/90 text-white h-12 text-base">
                   Join WhatsApp Community
                 </Button>
