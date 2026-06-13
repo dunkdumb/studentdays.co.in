@@ -23,7 +23,12 @@ type Trip = { title: string; collab: string; price: string };
 
 export default function Home() {
   const [, setLocation] = useLocation();
-  const [loading, setLoading] = useState(true);
+  const shouldShowLoader = () => {
+    const last = sessionStorage.getItem("sd_loader_time");
+    if (!last) return true;
+    return Date.now() - Number(last) > 10 * 60 * 1000; // 10 minutes
+  };
+  const [loading, setLoading] = useState(shouldShowLoader);
   const [scrolled, setScrolled] = useState(false);
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
   const [form, setForm] = useState({ name: "", college: "", phone: "" });
@@ -57,6 +62,8 @@ export default function Home() {
   };
 
   useEffect(() => {
+    if (!loading) return;
+    sessionStorage.setItem("sd_loader_time", String(Date.now()));
     const timer = setTimeout(() => setLoading(false), 3500);
     return () => clearTimeout(timer);
   }, []);
