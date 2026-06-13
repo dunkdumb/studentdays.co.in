@@ -28,7 +28,6 @@ export default function Home() {
   const [form, setForm] = useState({ name: "", college: "", phone: "" });
   const [submitted, setSubmitted] = useState(false);
   const [storiesOpen, setStoriesOpen] = useState(false);
-  const [policyOpen, setPolicyOpen] = useState<string | null>(null);
 
   const [joinOpen, setJoinOpen] = useState(false);
   const [joinForm, setJoinForm] = useState({ name: "", college: "", phone: "", trip: "" });
@@ -396,13 +395,13 @@ export default function Home() {
               <h4 className="font-bold text-lg mb-6 text-blue-900">Quick Links</h4>
               <ul className="space-y-4 text-gray-600">
                 {[
-                  { label: "FAQs", key: "FAQs" },
-                  { label: "Terms & Conditions", key: "Terms & Conditions" },
-                  { label: "Refund & Cancellation Policy", key: "Refund & Cancellation Policy" },
-                  { label: "Privacy Policy", key: "Privacy Policy" },
-                ].map(({ label, key }) => (
-                  <li key={key}>
-                    <button onClick={() => setPolicyOpen(key)} className="hover:text-primary transition-colors text-left">
+                  { label: "FAQs", path: "/faqs" },
+                  { label: "Terms & Conditions", path: "/terms" },
+                  { label: "Refund & Cancellation Policy", path: "/refund" },
+                  { label: "Privacy Policy", path: "/privacy" },
+                ].map(({ label, path }) => (
+                  <li key={path}>
+                    <button onClick={() => setLocation(path)} className="hover:text-primary transition-colors text-left">
                       {label}
                     </button>
                   </li>
@@ -426,26 +425,7 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Policy / Quick Links Coming Soon Modal */}
-      <Dialog open={!!policyOpen} onOpenChange={(open) => !open && setPolicyOpen(null)}>
-        <DialogContent className="sm:max-w-sm bg-white text-center">
-          <DialogHeader>
-            <div className="flex justify-center mb-3">
-              <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center text-2xl">📄</div>
-            </div>
-            <DialogTitle className="text-xl font-black text-blue-900 text-center">{policyOpen}</DialogTitle>
-            <DialogDescription className="text-gray-600 text-center mt-2">
-              This page is being prepared and will be available soon. For any queries, reach us at{" "}
-              <a href="mailto:hello@studentdays.co.in" className="text-primary font-medium">hello@studentdays.co.in</a>
-            </DialogDescription>
-          </DialogHeader>
-          <Button onClick={() => setPolicyOpen(null)} className="mt-4 rounded-full bg-primary text-white w-full h-11">
-            Got it
-          </Button>
-        </DialogContent>
-      </Dialog>
-
-      {/* Stories Releasing Soon Modal */}
+{/* Stories Releasing Soon Modal */}
       <Dialog open={storiesOpen} onOpenChange={setStoriesOpen}>
         <DialogContent className="sm:max-w-sm bg-white text-center" data-testid="stories-dialog">
           <DialogHeader>
