@@ -45,8 +45,20 @@ export default function Home() {
     setSubmitted(false);
   };
 
+  const submitToGoogleForm = (name: string, college: string, phone: string) => {
+    const formId = "1FAIpQLSdVqzBW-qdhJEg5KUshyKfWVjAAVlmmxD8boNkZKlibtJo67A";
+    const body = new FormData();
+    body.append("entry.270489629", name);
+    body.append("entry.1341388790", college);
+    body.append("entry.1577862662", phone);
+    fetch(`https://docs.google.com/forms/d/e/${formId}/formResponse`, {
+      method: "POST", mode: "no-cors", body,
+    }).catch(() => {}); // silent — no-cors means we can't read response, that's expected
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    submitToGoogleForm(form.name, form.college, form.phone);
     setSubmitted(true);
   };
 
@@ -58,6 +70,7 @@ export default function Home() {
 
   const handleJoinSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    submitToGoogleForm(joinForm.name, joinForm.college, joinForm.phone);
     setJoinSubmitted(true);
   };
 
@@ -498,7 +511,7 @@ export default function Home() {
                     id="join-phone"
                     data-testid="join-input-phone"
                     type="tel"
-                    placeholder="e.g. 9876543210"
+                    placeholder="e.g. xxxxx43210"
                     required
                     value={joinForm.phone}
                     onChange={(e) => setJoinForm({ ...joinForm, phone: e.target.value })}
@@ -587,7 +600,7 @@ export default function Home() {
                     id="res-phone"
                     data-testid="input-phone"
                     type="tel"
-                    placeholder="e.g. 9876543210"
+                    placeholder="e.g xxxxx43210"
                     required
                     value={form.phone}
                     onChange={(e) => setForm({ ...form, phone: e.target.value })}
