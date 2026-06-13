@@ -28,6 +28,7 @@ export default function Home() {
   const [form, setForm] = useState({ name: "", college: "", phone: "" });
   const [submitted, setSubmitted] = useState(false);
   const [storiesOpen, setStoriesOpen] = useState(false);
+  const [policyOpen, setPolicyOpen] = useState<string | null>(null);
 
   const [joinOpen, setJoinOpen] = useState(false);
   const [joinForm, setJoinForm] = useState({ name: "", college: "", phone: "", trip: "" });
@@ -179,7 +180,7 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.6 }}
               viewport={{ once: true }}
             >
-              <Button data-testid="button-explore" size="lg" className="rounded-full bg-primary hover:bg-primary/90 text-white text-lg px-8 h-14 shadow-[0_0_30px_rgba(26,107,255,0.4)]">
+              <Button data-testid="button-explore" onClick={() => scrollTo("upcoming")} size="lg" className="rounded-full bg-primary hover:bg-primary/90 text-white text-lg px-8 h-14 shadow-[0_0_30px_rgba(26,107,255,0.4)]">
                 Explore Trips
               </Button>
             </motion.div>
@@ -298,7 +299,10 @@ export default function Home() {
         </section>
 
         <section id="stories" className="py-32 relative overflow-hidden bg-blue-50">
-          <div className="container mx-auto px-6 text-center">
+          <div className="absolute inset-0 opacity-10 pointer-events-none select-none" aria-hidden="true">
+            <img src={mapPath} alt="" className="w-full h-full object-cover" />
+          </div>
+          <div className="container mx-auto px-6 text-center relative z-10">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -391,10 +395,18 @@ export default function Home() {
             <div>
               <h4 className="font-bold text-lg mb-6 text-blue-900">Quick Links</h4>
               <ul className="space-y-4 text-gray-600">
-                <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-faqs">FAQs</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-terms">Terms &amp; Conditions</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-refund">Refund &amp; Cancellation Policy</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors" data-testid="footer-privacy">Privacy Policy</a></li>
+                {[
+                  { label: "FAQs", key: "FAQs" },
+                  { label: "Terms & Conditions", key: "Terms & Conditions" },
+                  { label: "Refund & Cancellation Policy", key: "Refund & Cancellation Policy" },
+                  { label: "Privacy Policy", key: "Privacy Policy" },
+                ].map(({ label, key }) => (
+                  <li key={key}>
+                    <button onClick={() => setPolicyOpen(key)} className="hover:text-primary transition-colors text-left">
+                      {label}
+                    </button>
+                  </li>
+                ))}
               </ul>
             </div>
             <div>
@@ -413,6 +425,25 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Policy / Quick Links Coming Soon Modal */}
+      <Dialog open={!!policyOpen} onOpenChange={(open) => !open && setPolicyOpen(null)}>
+        <DialogContent className="sm:max-w-sm bg-white text-center">
+          <DialogHeader>
+            <div className="flex justify-center mb-3">
+              <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center text-2xl">📄</div>
+            </div>
+            <DialogTitle className="text-xl font-black text-blue-900 text-center">{policyOpen}</DialogTitle>
+            <DialogDescription className="text-gray-600 text-center mt-2">
+              This page is being prepared and will be available soon. For any queries, reach us at{" "}
+              <a href="mailto:hello@studentdays.co.in" className="text-primary font-medium">hello@studentdays.co.in</a>
+            </DialogDescription>
+          </DialogHeader>
+          <Button onClick={() => setPolicyOpen(null)} className="mt-4 rounded-full bg-primary text-white w-full h-11">
+            Got it
+          </Button>
+        </DialogContent>
+      </Dialog>
 
       {/* Stories Releasing Soon Modal */}
       <Dialog open={storiesOpen} onOpenChange={setStoriesOpen}>
