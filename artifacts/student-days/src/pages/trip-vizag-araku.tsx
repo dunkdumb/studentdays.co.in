@@ -262,7 +262,7 @@ export default function TripVizagAraku() {
             <p className="text-white/80 mb-2">Reserve Now with <strong className="text-white">₹2,000</strong></p>
             <p className="text-sm text-white/70 mb-8">Remaining ₹1,999 due 4 days before departure</p>
             <div className="inline-flex items-center gap-2 bg-white/20 rounded-full px-4 py-2 text-sm font-semibold mb-8">
-              🎟️ Seats Left: <strong>30</strong>
+              🎟️ Seats Left: <strong>23</strong>
             </div>
             <div className="flex flex-col gap-3">
               <a href={bookUrl} target="_blank" rel="noopener noreferrer">
