@@ -10,6 +10,7 @@ import Terms from "@/pages/terms";
 import Privacy from "@/pages/privacy";
 import Refund from "@/pages/refund";
 import Faqs from "@/pages/faqs";
+import TripVizagAraku from "@/pages/trip-vizag-araku";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -30,6 +31,7 @@ function Router() {
       <Route path="/privacy" component={Privacy} />
       <Route path="/refund" component={Refund} />
       <Route path="/faqs" component={Faqs} />
+      <Route path="/trips/vizag-araku" component={TripVizagAraku} />
       <Route component={NotFound} />
     </Switch>
   );

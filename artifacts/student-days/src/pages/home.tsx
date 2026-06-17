@@ -36,6 +36,9 @@ export default function Home() {
   const [storiesOpen, setStoriesOpen] = useState(false);
 
   const [joinOpen, setJoinOpen] = useState(false);
+  const [tripAlert, setTripAlert] = useState(() => {
+    return !sessionStorage.getItem("sd_trip_alert_seen");
+  });
   const [joinForm, setJoinForm] = useState({ name: "", college: "", phone: "", trip: "" });
   const [joinSubmitted, setJoinSubmitted] = useState(false);
 
@@ -302,15 +305,16 @@ export default function Home() {
                     Experience beaches, scenic valleys, waterfalls, coffee plantations, and unforgettable student memories with fellow travelers.
                   </p>
                   <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-6">
-                    <span>📅 Date: <strong className="text-gray-800">TBA</strong></span>
-                    <span>💰 Price: <strong className="text-primary">Student Budget Only</strong></span>
+                    <span>📅 <strong className="text-gray-800">27th &amp; 28th June</strong></span>
+                    <span>🚆 <strong className="text-gray-800">Departing 26th June Evening</strong></span>
+                    <span>🎟️ <strong className="text-gray-800">30 Seats Only</strong></span>
                   </div>
                   <Button
                     data-testid="button-reserve-vizag"
-                    onClick={() => openReserve({ title: "Beach, Chills & Hills – Vizag & Araku", collab: "Students Only", price: "TBA" })}
+                    onClick={() => setLocation("/trips/vizag-araku")}
                     className="bg-primary hover:bg-primary/90 text-white rounded-full px-8 h-12 text-base font-semibold w-full sm:w-auto shadow-[0_0_20px_rgba(26,107,255,0.3)]"
                   >
-                    🔔 Get Notified
+                    🎟️ Book Your Slot
                   </Button>
                 </CardContent>
               </Card>
@@ -446,6 +450,54 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+{/* Trip Registration Popup */}
+      <AnimatePresence>
+        {tripAlert && !loading && (
+          <motion.div
+            initial={{ opacity: 0, y: 80, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 80, scale: 0.95 }}
+            transition={{ delay: 1.5, duration: 0.5, ease: "easeOut" }}
+            className="fixed bottom-6 left-4 right-4 sm:left-auto sm:right-6 sm:w-[360px] z-50 bg-white rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.18)] border border-blue-100 overflow-hidden"
+          >
+            <div className="h-1 w-full bg-gradient-to-r from-primary to-orange-400" />
+            <div className="p-5">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center text-2xl shrink-0">🌊</div>
+                  <div>
+                    <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-0.5">Registrations Open!</p>
+                    <p className="font-black text-gray-900 leading-snug">Beach, Chills &amp; Hills</p>
+                    <p className="text-xs text-gray-500">Vizag &amp; Araku · 27–28 June</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => { setTripAlert(false); sessionStorage.setItem("sd_trip_alert_seen", "1"); }}
+                  className="text-gray-400 hover:text-gray-600 text-xl leading-none mt-0.5 shrink-0"
+                  aria-label="Close"
+                >×</button>
+              </div>
+              <p className="text-sm text-gray-600 mt-3 mb-4">Limited seats available. Book your slot before they fill up! 🎟️</p>
+              <div className="flex gap-2">
+                <Button
+                  onClick={() => { setTripAlert(false); sessionStorage.setItem("sd_trip_alert_seen", "1"); setLocation("/trips/vizag-araku"); }}
+                  className="flex-1 rounded-full bg-primary hover:bg-primary/90 text-white h-10 text-sm font-bold shadow-[0_0_15px_rgba(26,107,255,0.3)]"
+                >
+                  Book My Slot
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => { setTripAlert(false); sessionStorage.setItem("sd_trip_alert_seen", "1"); }}
+                  className="rounded-full h-10 text-sm px-4 border-gray-200"
+                >
+                  Later
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
 {/* Stories Releasing Soon Modal */}
       <Dialog open={storiesOpen} onOpenChange={setStoriesOpen}>
