@@ -16,7 +16,7 @@ import mapPath from "@assets/ChatGPT_Image_Jun_5,_2026,_11_18_35_PM_178068430909
 import videoPath from "@assets/remove_the_pen_in_viedo_and_k_1780684303486.mp4";
 
 // Trip Assets
-import vizagArakuPath from "@/assets/vizag-araku.png";
+import vizagArakuPath from "@/assets/vizag-araku-poster.png";
 import storiesBgPath from "@/assets/stories-bg.jpg";
 
 type Trip = { title: string; collab: string; price: string };
@@ -305,8 +305,8 @@ export default function Home() {
                     Experience beaches, scenic valleys, waterfalls, coffee plantations, and unforgettable student memories with fellow travelers.
                   </p>
                   <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-6">
-                    <span>📅 <strong className="text-gray-800">27th &amp; 28th June</strong></span>
-                    <span>🚆 <strong className="text-gray-800">Departing 26th June Evening</strong></span>
+                    <span>📅 <strong className="text-gray-800">11th &amp; 12th July</strong></span>
+                    <span>🚆 <strong className="text-gray-800">Departing 10th July Evening</strong></span>
                     <span>🎟️ <strong className="text-gray-800">30 Seats Only</strong></span>
                   </div>
                   <Button
@@ -469,7 +469,7 @@ export default function Home() {
                   <div>
                     <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-0.5">Registrations Open!</p>
                     <p className="font-black text-gray-900 leading-snug">Beach, Chills &amp; Hills</p>
-                    <p className="text-xs text-gray-500">Vizag &amp; Araku · 27–28 June</p>
+                    <p className="text-xs text-gray-500">Vizag &amp; Araku · 11–12 July</p>
                   </div>
                 </div>
                 <button
