@@ -9,10 +9,9 @@ import heroBgPath from "@/assets/studentdays-bus.png";
 
 const highlights = [
   { icon: "🏖️", label: "Vizag Beach Experience" },
-  { icon: "🎵", label: "Night Beach Jamming Session" },
+  { icon: "🌊", label: "Beachside Nightlife" },
   { icon: "🚠", label: "Kailasagiri Ropeway" },
-  { icon: "⚓", label: "INS Kurusura Submarine Museum" },
-  { icon: "✈️", label: "TU Aircraft Museum" },
+  { icon: "🌅", label: "Sunrise & Sunset Views" },
   { icon: "🏞️", label: "Araku Valley Adventure" },
   { icon: "🕳️", label: "Borra Caves" },
   { icon: "☕", label: "Coffee Plantation" },
@@ -20,49 +19,60 @@ const highlights = [
   { icon: "🌄", label: "Galikonda View Point" },
   { icon: "💦", label: "Katiki Waterfalls" },
   { icon: "🍗", label: "Bamboo Chicken Experience" },
-  { icon: "🎥", label: "Cinematic Travel Documentary" },
+  { icon: "🚌", label: "AC Luxury Bus Journey" },
+];
+
+const day0 = [
+  "Assemble at Hyderabad Railway Station",
+  "Board Train to Vijayawada",
+  "Enjoy the journey with fellow travelers",
+  "Reach Vijayawada",
+  "Board AC Luxury Bus to Vizag",
+  "Overnight journey to Vizag",
 ];
 
 const day1 = [
   "Reach Vizag & Check-in",
   "Breakfast",
-  "Kailasagiri Ropeway",
+  "Kailasagiri",
   "Tenneti Park",
-  "INS Kurusura Submarine Museum",
-  "TU Aircraft Museum",
-  "Beach Sunset",
+  "RK Beach & Beach Road",
+  "Sunset Views",
+  "Explore Beaches & Nearby Places",
+  "Night Life by the Beach",
   "Dinner",
-  "Night Beach Jamming Session",
-  "Overnight Stay",
+  "Fun Activities & Group Bonding",
 ];
 
 const day2 = [
-  "Sunrise & Breakfast",
-  "Checkout",
-  "AC Bus to Araku",
+  "Sunrise View",
+  "Breakfast & Checkout",
+  "Araku Journey through Hills",
   "Borra Caves",
   "Coffee Plantation",
-  "Tribal Museum",
-  "Bamboo Chicken",
   "Galikonda View Point",
+  "Tribal Museum",
   "Katiki Waterfalls",
-  "Shopping (If Time Permits)",
-  "Return to Vizag",
-  "Board Train to Hyderabad",
+  "Local Explore (Shopping & Local Markets)",
 ];
 
-const day3 = ["Reach Hyderabad"];
+const day3 = [
+  "Reach Vijayawada",
+  "Board Train to Hyderabad",
+  "Reach Hyderabad with unforgettable memories & new friendships",
+];
 
 const included = [
-  "Transportation",
-  "Stay Accommodation",
-  "Breakfast & Dinner",
+  "AC Luxury Bus (Vijayawada ↔ Vizag ↔ Araku)",
+  "Train Journey (Hyderabad ↔ Vijayawada)",
+  "Stay & 2 Times Food per Day",
   "Sightseeing & Entry Tickets",
-  "StudentDays Trip Coordination",
-  "Cinematic Documentary Coverage",
+  "Trip Coordinator",
+  "Group Games & Fun Activities",
+  "A Documentary Film",
 ];
 
-const notIncluded = ["Lunch", "Personal Expenses", "Shopping"];
+const notIncluded = ["Lunches", "Personal Expenses"];
 
 const faqs = [
   {
@@ -98,7 +108,7 @@ export default function TripVizagAraku() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const bookUrl = "https://forms.gle/kKbv2UrRm6ofH1MUA";
+  const bookUrl = "https://forms.gle/PxTu5NWB8QRqcdLAA";
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
@@ -153,13 +163,13 @@ export default function TripVizagAraku() {
 
             <div className="flex flex-wrap gap-4 text-base md:text-lg mb-10">
               <span className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full border border-white/20">
-                📅 <strong>27th &amp; 28th June</strong>
+                📅 <strong>11th &amp; 12th July</strong>
               </span>
               <span className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full border border-white/20">
-                🚆 <strong>Departing 26th June Evening</strong>
+                🚆 <strong>Departing 10th July Evening</strong>
               </span>
               <span className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full border border-white/20">
-                💰 <strong>₹3,999 Only</strong>
+                💰 <strong>₹4,199 Only</strong>
               </span>
             </div>
 
@@ -230,7 +240,7 @@ export default function TripVizagAraku() {
           </motion.h2>
           <p className="text-center text-gray-600 text-lg mb-10">No Stress For Planning — We plan everything for you.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {["Travel", "Stay", "Transport", "Entry Tickets", "Group Coordination", "Travel Documentary"].map((item, i) => (
+            {["AC Luxury Bus", "Stay & 2 Meals/Day", "Sightseeing & Entry Tickets", "Trip Coordinator", "Group Games & Fun Activities", "Documentary Film"].map((item, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, x: -20 }}
@@ -258,11 +268,11 @@ export default function TripVizagAraku() {
           >
             <div className="text-4xl mb-4">🎟️</div>
             <h2 className="text-3xl font-black mb-2">Limited Seats Available</h2>
-            <p className="text-white/80 text-lg mb-1">Current Price: <strong className="text-white text-2xl">₹3,999</strong></p>
+            <p className="text-white/80 text-lg mb-1">Current Price: <strong className="text-white text-2xl">₹4,199</strong></p>
             <p className="text-white/80 mb-2">Reserve Now with <strong className="text-white">₹2,000</strong></p>
-            <p className="text-sm text-white/70 mb-8">Remaining ₹1,999 due 4 days before departure</p>
+            <p className="text-sm text-white/70 mb-8">Remaining ₹2,199 due 4 days before departure</p>
             <div className="inline-flex items-center gap-2 bg-white/20 rounded-full px-4 py-2 text-sm font-semibold mb-8">
-              🎟️ Seats Left: <strong>23</strong>
+              🎟️ Seats Left: <strong>23</strong>a
             </div>
             <div className="flex flex-col gap-3">
               <a href={bookUrl} target="_blank" rel="noopener noreferrer">
@@ -291,9 +301,10 @@ export default function TripVizagAraku() {
           </motion.h2>
 
           {[
-            { label: "Day 1 – Vizag (27th June)", items: day1, color: "bg-blue-600" },
-            { label: "Day 2 – Araku (28th June)", items: day2, color: "bg-orange-500" },
-            { label: "Day 3 – Return (29th June)", items: day3, color: "bg-green-600" },
+            { label: "Day 0 – Journey Begins (10th July)", items: day0, color: "bg-gray-700" },
+            { label: "Day 1 – Explore Vizag (11th July)", items: day1, color: "bg-blue-600" },
+            { label: "Day 2 – Araku Adventure (12th July)", items: day2, color: "bg-orange-500" },
+            { label: "Day 3 – Return Home (13th July)", items: day3, color: "bg-green-600" },
           ].map((day, di) => (
             <motion.div
               key={di}
@@ -363,9 +374,9 @@ export default function TripVizagAraku() {
           <div className="bg-white border border-blue-200 rounded-3xl p-8 text-center shadow-sm">
             <h3 className="text-2xl font-black text-gray-900 mb-6">Booking Details</h3>
             <div className="space-y-3 text-gray-700 text-lg">
-              <p>💰 Trip Cost: <strong className="text-primary">₹3,999</strong></p>
+              <p>💰 Trip Cost: <strong className="text-primary">₹4,199</strong></p>
               <p>🎟️ Slot Booking Amount: <strong className="text-primary">₹2,000</strong></p>
-              <p>💳 Remaining Amount: <strong>₹1,999</strong> before 4 days of Departure</p>
+              <p>💳 Remaining Amount: <strong>₹2,199</strong> before 4 days of Departure</p>
             </div>
           </div>
         </div>
@@ -417,7 +428,7 @@ export default function TripVizagAraku() {
             <h2 className="text-3xl md:text-5xl font-black mb-4">
               Ready For Beaches, Hills &amp; New Friends?
             </h2>
-            <p className="text-xl text-white/80 mb-2">₹3,999 Per Person</p>
+            <p className="text-xl text-white/80 mb-2">₹4,199 Per Person</p>
             <p className="text-white/70 mb-10">Reserve your slot with ₹2,000 now.</p>
             <a href={bookUrl} target="_blank" rel="noopener noreferrer">
               <Button
