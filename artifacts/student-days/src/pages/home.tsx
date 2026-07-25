@@ -16,10 +16,114 @@ import mapPath from "@assets/ChatGPT_Image_Jun_5,_2026,_11_18_35_PM_178068430909
 import videoPath from "@assets/remove_the_pen_in_viedo_and_k_1780684303486.mp4";
 
 // Trip Assets
-import vizagArakuPath from "@/assets/vizag-araku-poster.png";
+import soulShorePosterPath from "@/assets/soul-shore-poster.png";
 import storiesBgPath from "@/assets/stories-bg.jpg";
 
 type Trip = { title: string; collab: string; price: string };
+
+const YT_VIDEO_ID = "lN502PsnETI";
+const YT_URL = `https://www.youtube.com/watch?v=${YT_VIDEO_ID}`;
+const INSTAGRAM_REELS = [
+  "https://www.instagram.com/reel/Da17yG6vTWJ/",
+  "https://www.instagram.com/reel/Dax--wcv_7H/",
+];
+
+function StoriesContent({ onClose }: { onClose: () => void }) {
+  const [tab, setTab] = useState<"yt" | "ig">("yt");
+  const [secondsLeft, setSecondsLeft] = useState(60);
+  const [redirected, setRedirected] = useState(false);
+
+  useEffect(() => {
+    if (tab !== "yt" || redirected) return;
+    if (secondsLeft <= 0) {
+      setRedirected(true);
+      window.open(YT_URL, "_blank");
+      return;
+    }
+    const t = setTimeout(() => setSecondsLeft((s) => s - 1), 1000);
+    return () => clearTimeout(t);
+  }, [tab, secondsLeft, redirected]);
+
+  return (
+    <div className="flex flex-col bg-black text-white min-h-[480px]">
+      {/* Tab bar */}
+      <div className="flex items-center justify-between px-4 pt-4 pb-2 border-b border-white/10">
+        <div className="flex gap-2">
+          <button
+            onClick={() => setTab("yt")}
+            className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all ${tab === "yt" ? "bg-red-600 text-white" : "bg-white/10 text-white/60 hover:bg-white/20"}`}
+          >
+            ▶ Documentary
+          </button>
+          <button
+            onClick={() => setTab("ig")}
+            className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all ${tab === "ig" ? "bg-gradient-to-r from-[#833AB4] to-[#F56040] text-white" : "bg-white/10 text-white/60 hover:bg-white/20"}`}
+          >
+            📱 Reels
+          </button>
+        </div>
+        <button onClick={onClose} className="text-white/50 hover:text-white text-2xl leading-none px-2">×</button>
+      </div>
+
+      {/* YouTube tab */}
+      {tab === "yt" && (
+        <div className="flex flex-col flex-1">
+          <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src={`https://www.youtube.com/embed/${YT_VIDEO_ID}?autoplay=1&rel=0`}
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+            />
+          </div>
+          <div className="flex items-center justify-between px-4 py-3 bg-black/80">
+            {!redirected ? (
+              <p className="text-sm text-white/60">
+                Redirecting to YouTube in <strong className="text-white">{secondsLeft}s</strong>
+              </p>
+            ) : (
+              <p className="text-sm text-green-400">Opened in YouTube ✓</p>
+            )}
+            <a
+              href={YT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-red-400 hover:text-red-300 font-semibold"
+            >
+              Watch on YouTube →
+            </a>
+          </div>
+        </div>
+      )}
+
+      {/* Instagram reels tab */}
+      {tab === "ig" && (
+        <div className="flex flex-col sm:flex-row gap-0 flex-1 overflow-auto">
+          {INSTAGRAM_REELS.map((url, i) => (
+            <div key={i} className="flex-1 flex flex-col items-center justify-center p-4">
+              <iframe
+                src={`${url}embed/`}
+                className="w-full rounded-xl border-0"
+                style={{ height: 500, maxWidth: 320 }}
+                scrolling="no"
+                allowTransparency
+                allow="encrypted-media"
+              />
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 text-xs text-white/50 hover:text-white underline"
+              >
+                Open on Instagram
+              </a>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function Home() {
   const [, setLocation] = useLocation();
@@ -155,7 +259,7 @@ export default function Home() {
           
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/80">
             <button onClick={() => scrollTo("upcoming")} className="hover:text-primary transition-colors" data-testid="nav-upcoming">Upcoming Trips</button>
-            <button onClick={() => scrollTo("stories")} className="hover:text-primary transition-colors" data-testid="nav-stories">Documentary Stories</button>
+            <button onClick={() => setLocation("/stories")} className="hover:text-primary transition-colors" data-testid="nav-stories">Documentary Stories</button>
             <button onClick={() => scrollTo("partners")} className="hover:text-primary transition-colors" data-testid="nav-partners">College Partners</button>
             <button onClick={() => setLocation("/about")} className="hover:text-primary transition-colors" data-testid="nav-about">About Us</button>
           </nav>
@@ -290,31 +394,30 @@ export default function Home() {
               <Card className="bg-card/50 border-white/10 overflow-hidden group hover:border-primary/50 transition-colors shadow-xl">
                 <div className="relative overflow-hidden rounded-t-xl">
                   <img
-                    src={vizagArakuPath}
-                    alt="Beach, Chills & Hills – Vizag & Araku"
+                    src={soulShorePosterPath}
+                    alt="Between Soul & Shore – Arunachalam & Pondicherry"
                     className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
                 <CardContent className="p-6">
                   <div className="flex flex-wrap gap-2 mb-4">
                     <Badge className="bg-primary/10 text-primary border-primary/20 font-semibold">🎓 Students Only</Badge>
-                    <Badge variant="secondary" className="bg-blue-50 text-blue-700 border-blue-200">Vizag • Araku Valley</Badge>
+                    <Badge variant="secondary" className="bg-orange-50 text-orange-700 border-orange-200">Arunachalam • Pondicherry</Badge>
                   </div>
-                  <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-2">Beach, Chills &amp; Hills</h3>
+                  <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-2">Between Soul &amp; Shore</h3>
                   <p className="text-gray-600 mb-4 leading-relaxed">
-                    Experience beaches, scenic valleys, waterfalls, coffee plantations, and unforgettable student memories with fellow travelers.
+                    Discover spirituality at Arunachalam Temple, then unwind at Pondicherry's French Colony, Rock Beach, and Mangrove Forest with your travel crew.
                   </p>
                   <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-6">
-                    <span>📅 <strong className="text-gray-800">11th &amp; 12th July</strong></span>
-                    <span>🚆 <strong className="text-gray-800">Departing 10th July Evening</strong></span>
+                    <span>📅 <strong className="text-gray-800">August 7 to 10</strong></span>
+                    <span>🚆 <strong className="text-gray-800">Departing 7th Evening</strong></span>
                     <span>🎟️ <strong className="text-gray-800">30 Seats Only</strong></span>
                   </div>
                   <Button
-                    data-testid="button-reserve-vizag"
-                    onClick={() => setLocation("/trips/vizag-araku")}
+                    onClick={() => setLocation("/trips/arunachalam-pondicherry")}
                     className="bg-primary hover:bg-primary/90 text-white rounded-full px-8 h-12 text-base font-semibold w-full sm:w-auto shadow-[0_0_20px_rgba(26,107,255,0.3)]"
                   >
-                    🎟️ Book Your Slot
+                    🎟️ Trip Details
                   </Button>
                 </CardContent>
               </Card>
@@ -351,8 +454,8 @@ export default function Home() {
               transition={{ delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <Button data-testid="button-watch-stories" onClick={() => setStoriesOpen(true)} size="lg" className="rounded-full bg-primary hover:bg-primary/90 text-white transition-colors px-8 h-14 text-lg shadow-[0_0_30px_rgba(26,107,255,0.5)]">
-                Watch Stories
+              <Button data-testid="button-watch-stories" onClick={() => setLocation("/stories")} size="lg" className="rounded-full bg-primary hover:bg-primary/90 text-white transition-colors px-8 h-14 text-lg shadow-[0_0_30px_rgba(26,107,255,0.5)]">
+                Watch Stories &amp; Documentaries
               </Button>
             </motion.div>
           </div>
@@ -366,7 +469,7 @@ export default function Home() {
             {[
               { name: "Rahul Kumar", uni: "Anurag University", quote: "Best trip of my college life." },
               { name: "Priya Sharma", uni: "GNU", quote: "The documentary film made me relive everything." },
-              { name: "Harsha Reddy", uni: "MLRITM", quote: "Never thought student travel could feel this premium." },
+              { name: "N Varadarajulu", uni: "Rao Institute", quote: "Never thought student travel could feel this premium." },
               { name: "Ayesha Khan", uni: "Sreenidhi Institute", quote: "Met amazing people and created lifelong memories." }
             ].map((review, i) => (
               <Card key={i} className="min-w-[300px] snap-center bg-white border-blue-200 shrink-0 shadow-sm">
@@ -465,11 +568,11 @@ export default function Home() {
             <div className="p-5">
               <div className="flex items-start justify-between gap-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center text-2xl shrink-0">🌊</div>
+                  <div className="w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center text-2xl shrink-0">🛕</div>
                   <div>
                     <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-0.5">Registrations Open!</p>
-                    <p className="font-black text-gray-900 leading-snug">Beach, Chills &amp; Hills</p>
-                    <p className="text-xs text-gray-500">Vizag &amp; Araku · 11–12 July</p>
+                    <p className="font-black text-gray-900 leading-snug">Between Soul &amp; Shore</p>
+                    <p className="text-xs text-gray-500">Arunachalam &amp; Pondicherry · Aug 7–10</p>
                   </div>
                 </div>
                 <button
@@ -481,7 +584,7 @@ export default function Home() {
               <p className="text-sm text-gray-600 mt-3 mb-4">Limited seats available. Book your slot before they fill up! 🎟️</p>
               <div className="flex gap-2">
                 <Button
-                  onClick={() => { setTripAlert(false); sessionStorage.setItem("sd_trip_alert_seen", "1"); setLocation("/trips/vizag-araku"); }}
+                  onClick={() => { setTripAlert(false); sessionStorage.setItem("sd_trip_alert_seen", "1"); setLocation("/trips/arunachalam-pondicherry"); }}
                   className="flex-1 rounded-full bg-primary hover:bg-primary/90 text-white h-10 text-sm font-bold shadow-[0_0_15px_rgba(26,107,255,0.3)]"
                 >
                   Book My Slot
@@ -499,28 +602,14 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-{/* Stories Releasing Soon Modal */}
-      <Dialog open={storiesOpen} onOpenChange={setStoriesOpen}>
-        <DialogContent className="sm:max-w-sm bg-white text-center" data-testid="stories-dialog">
-          <DialogHeader>
-            <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center text-3xl">🎬</div>
-            </div>
-            <DialogTitle className="text-2xl font-black text-blue-900 text-center">Stories Releasing Soon</DialogTitle>
-            <DialogDescription className="text-gray-600 text-center mt-2">
-              Our documentary stories are in the making. Every trip, every moment — captured for you to relive forever. Stay tuned!
-            </DialogDescription>
+{/* Stories Modal */}
+      <Dialog open={storiesOpen} onOpenChange={(open) => { setStoriesOpen(open); }}>
+        <DialogContent className="sm:max-w-2xl bg-black text-white border-0 p-0 overflow-hidden" data-testid="stories-dialog">
+          <DialogHeader className="sr-only">
+            <DialogTitle>Documentary Stories</DialogTitle>
+            <DialogDescription>Watch our StudentDays documentary stories</DialogDescription>
           </DialogHeader>
-          <div className="mt-4 flex flex-col gap-3">
-            <a href="https://www.instagram.com/studentdays.co?igsh=MWg2cDBtN2NjYXJuaQ==" target="_blank" rel="noopener noreferrer">
-              <Button className="w-full rounded-full bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F56040] text-white border-0 h-11">
-                Follow us on Instagram
-              </Button>
-            </a>
-            <Button variant="outline" onClick={() => setStoriesOpen(false)} className="rounded-full h-11">
-              Close
-            </Button>
-          </div>
+          <StoriesContent onClose={() => setStoriesOpen(false)} />
         </DialogContent>
       </Dialog>
 
@@ -576,7 +665,7 @@ export default function Home() {
                       <SelectValue placeholder="Pick your vibe..." />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="vizag-araku">Beach, Chills &amp; Hills — Vizag &amp; Araku</SelectItem>
+                      <SelectItem value="arunachalam-pondicherry">Between Soul &amp; Shore — Arunachalam &amp; Pondicherry</SelectItem>
                       <SelectItem value="manali">Manali</SelectItem>
                       <SelectItem value="kashmir">Kashmir</SelectItem>
                       <SelectItem value="ooty">Ooty</SelectItem>
