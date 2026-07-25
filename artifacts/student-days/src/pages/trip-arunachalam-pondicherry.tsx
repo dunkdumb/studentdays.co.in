@@ -70,10 +70,11 @@ const notIncluded = ["Lunches", "Personal Expenses"];
 const packages = [
   {
     name: "🚆 Student Saver",
-    transport: "Sleeper Train + Premium AC Bus (from Chennai)",
+    transport: "Sleeper Train (Subject to availability)",
     price: "₹7,499",
     highlight: true,
     note: "Limited – closes 10 days before departure. Pre-registration mandatory.",
+    travelItem: "Sleeper Train (Subject to availability)",
   },
   {
     name: "🚌 Comfort Student Travel",
@@ -81,6 +82,7 @@ const packages = [
     price: "₹7,999",
     highlight: false,
     note: "Available until seats are filled.",
+    travelItem: "AC Bus Travel",
   },
 ];
 
@@ -276,7 +278,7 @@ export default function TripArunachalamPondicherry() {
                 <p className="text-gray-500 text-sm mb-4">{pkg.transport}</p>
                 <p className="text-4xl font-black text-primary mb-4">{pkg.price}</p>
                 <ul className="space-y-2 mb-4">
-                  {["Sleeper/AC Bus Travel", "Premium AC Private Bus", "Stay", "Food", "All Activities", "StudentDays Trip Experience"].map((item, j) => (
+                  {[pkg.travelItem, ...(pkg.highlight ? [] : ["Premium AC Private Bus"]), "Stay", "Food", "All Activities", "StudentDays Trip Experience"].map((item, j) => (
                     <li key={j} className="flex items-center gap-2 text-gray-700 text-sm font-medium">
                       <span className="text-green-500">✅</span> {item}
                     </li>
