@@ -17,6 +17,7 @@ import videoPath from "@assets/remove_the_pen_in_viedo_and_k_1780684303486.mp4";
 
 // Trip Assets
 import soulShorePosterPath from "@/assets/soul-shore-poster.png";
+import lonavlaPosterPath from "@/assets/lonavla-poster.png";
 import storiesBgPath from "@/assets/stories-bg.jpg";
 
 type Trip = { title: string; collab: string; price: string };
@@ -394,28 +395,28 @@ export default function Home() {
               <Card className="bg-card/50 border-white/10 overflow-hidden group hover:border-primary/50 transition-colors shadow-xl">
                 <div className="relative overflow-hidden rounded-t-xl">
                   <img
-                    src={soulShorePosterPath}
-                    alt="Between Soul & Shore – Arunachalam & Pondicherry"
+                    src={lonavlaPosterPath}
+                    alt="Backpack to Heaven – Lonavla Monsoon Special"
                     className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
                 <CardContent className="p-6">
                   <div className="flex flex-wrap gap-2 mb-4">
                     <Badge className="bg-primary/10 text-primary border-primary/20 font-semibold">🎓 Students Only</Badge>
-                    <Badge variant="secondary" className="bg-orange-50 text-orange-700 border-orange-200">Arunachalam • Pondicherry</Badge>
+                    <Badge variant="secondary" className="bg-green-50 text-green-700 border-green-200">Lonavla • Monsoon Special</Badge>
                   </div>
-                  <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-2">Between Soul &amp; Shore</h3>
+                  <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-2">Backpack to Heaven</h3>
                   <p className="text-gray-600 mb-4 leading-relaxed">
-                    Discover spirituality at Arunachalam Temple, then unwind at Pondicherry's French Colony, Rock Beach, and Mangrove Forest with your travel crew.
+                    Trek through Lohagad Fort, chase Kataldhar Waterfall, and soak in the magic of the Western Ghats draped in monsoon green.
                   </p>
                   <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-6">
-                    <span>📅 <strong className="text-gray-800">August 7 to 10</strong></span>
-                    <span>🚆 <strong className="text-gray-800">Departing 7th Evening</strong></span>
-                    <span>🎟️ <strong className="text-gray-800">30 Seats Only</strong></span>
+                    <span>📅 <strong className="text-gray-800">August 22 to 26</strong></span>
+                    <span>🚆 <strong className="text-gray-800">Departing 22nd Evening</strong></span>
+                    <span>🎟️ <strong className="text-gray-800">Limited Seats</strong></span>
                   </div>
                   <Button
-                    onClick={() => setLocation("/trips/arunachalam-pondicherry")}
-                    className="bg-primary hover:bg-primary/90 text-white rounded-full px-8 h-12 text-base font-semibold w-full sm:w-auto shadow-[0_0_20px_rgba(26,107,255,0.3)]"
+                    onClick={() => setLocation("/trips/lonavla")}
+                    className="bg-green-600 hover:bg-green-700 text-white rounded-full px-8 h-12 text-base font-semibold w-full sm:w-auto shadow-[0_0_20px_rgba(22,163,74,0.3)]"
                   >
                     🎟️ Trip Details
                   </Button>
@@ -568,11 +569,11 @@ export default function Home() {
             <div className="p-5">
               <div className="flex items-start justify-between gap-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center text-2xl shrink-0">🛕</div>
+                  <div className="w-11 h-11 rounded-xl bg-green-50 flex items-center justify-center text-2xl shrink-0">🏔️</div>
                   <div>
-                    <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-0.5">Registrations Open!</p>
-                    <p className="font-black text-gray-900 leading-snug">Between Soul &amp; Shore</p>
-                    <p className="text-xs text-gray-500">Arunachalam &amp; Pondicherry · Aug 7–10</p>
+                    <p className="text-xs font-semibold text-green-600 uppercase tracking-wider mb-0.5">New Trip — Registrations Open!</p>
+                    <p className="font-black text-gray-900 leading-snug">Backpack to Heaven</p>
+                    <p className="text-xs text-gray-500">Lonavla · Aug 22–26</p>
                   </div>
                 </div>
                 <button
@@ -581,13 +582,13 @@ export default function Home() {
                   aria-label="Close"
                 >×</button>
               </div>
-              <p className="text-sm text-gray-600 mt-3 mb-4">Limited seats available. Book your slot before they fill up! 🎟️</p>
+              <p className="text-sm text-gray-600 mt-3 mb-4">Monsoon magic awaits — limited seats! 🌧️🎒</p>
               <div className="flex gap-2">
                 <Button
-                  onClick={() => { setTripAlert(false); sessionStorage.setItem("sd_trip_alert_seen", "1"); setLocation("/trips/arunachalam-pondicherry"); }}
-                  className="flex-1 rounded-full bg-primary hover:bg-primary/90 text-white h-10 text-sm font-bold shadow-[0_0_15px_rgba(26,107,255,0.3)]"
+                  onClick={() => { setTripAlert(false); sessionStorage.setItem("sd_trip_alert_seen", "1"); setLocation("/trips/lonavla"); }}
+                  className="flex-1 rounded-full bg-green-600 hover:bg-green-700 text-white h-10 text-sm font-bold shadow-[0_0_15px_rgba(22,163,74,0.3)]"
                 >
-                  Book My Slot
+                  Register Now
                 </Button>
                 <Button
                   variant="outline"
@@ -666,6 +667,7 @@ export default function Home() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="arunachalam-pondicherry">Between Soul &amp; Shore — Arunachalam &amp; Pondicherry</SelectItem>
+                      <SelectItem value="lonavla">Backpack to Heaven — Lonavla Monsoon Special</SelectItem>
                       <SelectItem value="manali">Manali</SelectItem>
                       <SelectItem value="kashmir">Kashmir</SelectItem>
                       <SelectItem value="ooty">Ooty</SelectItem>

@@ -12,6 +12,7 @@ import Refund from "@/pages/refund";
 import Faqs from "@/pages/faqs";
 import TripVizagAraku from "@/pages/trip-vizag-araku";
 import TripArunachalamPondicherry from "@/pages/trip-arunachalam-pondicherry";
+import TripLonavla from "@/pages/trip-lonavla";
 import Stories from "@/pages/stories";
 
 function ScrollToTop() {
@@ -35,6 +36,7 @@ function Router() {
       <Route path="/faqs" component={Faqs} />
       <Route path="/trips/vizag-araku" component={TripVizagAraku} />
       <Route path="/trips/arunachalam-pondicherry" component={TripArunachalamPondicherry} />
+      <Route path="/trips/lonavla" component={TripLonavla} />
       <Route path="/stories" component={Stories} />
       <Route component={NotFound} />
     </Switch>
