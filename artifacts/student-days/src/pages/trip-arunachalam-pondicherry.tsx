@@ -3,6 +3,9 @@ import { useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useTheme } from "@/context/ThemeContext";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import TripArunachalamPondichecherryGenz from "./trip-arunachalam-pondicherry-genz";
 
 import logoPath from "@assets/WhatsApp_Image_2026-05-18_at_12.12.18_AM-removebg-preview_1780684297152.png";
 import heroBgPath from "@/assets/pondicherry-bus.png";
@@ -113,7 +116,7 @@ const faqs = [
   },
 ];
 
-export default function TripArunachalamPondicherry() {
+function TripArunachalamPondichecherryClassic() {
   const [, setLocation] = useLocation();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -140,6 +143,7 @@ export default function TripArunachalamPondicherry() {
           <button onClick={() => setLocation("/")} className="focus:outline-none">
             <img src={logoPath} alt="StudentDays" className="h-12 w-auto object-contain" />
           </button>
+          <ThemeToggle variant="light" />
           <a href={bookUrl} target="_blank" rel="noopener noreferrer">
             <Button className="rounded-full bg-primary hover:bg-primary/90 text-white font-semibold px-6 shadow-[0_0_20px_rgba(26,107,255,0.3)]">
               Book My Seat
@@ -486,6 +490,11 @@ export default function TripArunachalamPondicherry() {
       </footer>
     </div>
   );
+}
+
+export default function TripArunachalamPondicherry() {
+  const { theme } = useTheme();
+  return theme === "genz" ? <TripArunachalamPondichecherryGenz /> : <TripArunachalamPondichecherryClassic />;
 }
 
 

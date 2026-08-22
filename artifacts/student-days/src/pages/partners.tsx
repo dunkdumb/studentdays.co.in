@@ -1,6 +1,8 @@
 import { useLocation } from "wouter";
 import { motion } from "framer-motion";
 import logoPath from "@assets/WhatsApp_Image_2026-05-18_at_12.12.18_AM-removebg-preview_1780684297152.png";
+import { useTheme } from "@/context/ThemeContext";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const COLLEGES = [
   "Anurag University",
@@ -18,7 +20,75 @@ const COLLEGES = [
 // duplicate for seamless marquee loop
 const MARQUEE = [...COLLEGES, ...COLLEGES];
 
-export default function Partners() {
+function PartnersClassic() {
+  const [, setLocation] = useLocation();
+
+  return (
+    <div className="min-h-screen bg-white text-gray-900 overflow-x-hidden">
+      <header className="fixed top-4 inset-x-4 z-50 flex items-center justify-between px-5 py-3 rounded-2xl bg-white/90 backdrop-blur-xl border border-gray-200 shadow-sm">
+        <button onClick={() => setLocation("/")} className="focus:outline-none">
+          <img src={logoPath} alt="StudentDays" className="h-9 w-auto object-contain" />
+        </button>
+        <div className="flex items-center gap-3">
+          <ThemeToggle variant="light" />
+          <button onClick={() => setLocation("/")} className="text-sm text-gray-500 hover:text-gray-800 transition-colors">
+            ← Back
+          </button>
+        </div>
+      </header>
+
+      <section className="relative flex flex-col items-center justify-center min-h-screen px-6 pt-32 pb-20">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <p className="text-xs font-bold uppercase tracking-[0.3em] text-primary mb-5">Our College Network</p>
+          <h1 className="text-4xl md:text-6xl font-black text-gray-900 leading-tight mb-6">
+            Our Partner Colleges
+          </h1>
+          <p className="text-gray-500 text-lg max-w-md mx-auto">
+            Top colleges across Hyderabad have partnered with StudentDays. Their students went on a trip and never looked back.
+          </p>
+        </div>
+
+        <div className="w-full max-w-xl mx-auto">
+          <div className="h-px w-full bg-gray-200 mb-8" />
+          {COLLEGES.map((name, i) => (
+            <div
+              key={i}
+              className="flex items-center justify-between py-4 border-b border-gray-100 group"
+            >
+              <div className="flex items-center gap-4">
+                <span className="text-xs text-gray-400 font-mono w-5 text-right">{String(i + 1).padStart(2, "0")}</span>
+                <span className="text-gray-800 group-hover:text-primary font-semibold transition-colors">{name}</span>
+              </div>
+              <span className="inline-flex items-center gap-1 bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full">
+                Partner
+              </span>
+            </div>
+          ))}
+          <div className="h-px w-full bg-gray-200 mt-0" />
+        </div>
+      </section>
+
+      <section className="py-24 px-6 text-center bg-blue-50">
+        <div className="max-w-lg mx-auto">
+          <h2 className="text-3xl md:text-4xl font-black mb-4 text-blue-900">Your college not here?</h2>
+          <p className="text-gray-500 mb-8">Book a trip and put your college on the map.</p>
+          <button
+            onClick={() => setLocation("/")}
+            className="px-10 py-4 rounded-full bg-primary hover:bg-primary/90 text-white font-bold text-base transition-all shadow-[0_0_20px_rgba(26,107,255,0.3)]"
+          >
+            Explore Trips →
+          </button>
+        </div>
+      </section>
+
+      <footer className="py-8 text-center text-gray-400 text-sm border-t border-gray-100">
+        © 2026 StudentDays.co · Made for students across India
+      </footer>
+    </div>
+  );
+}
+
+function PartnersGenz() {
   const [, setLocation] = useLocation();
 
   return (
@@ -33,12 +103,15 @@ export default function Partners() {
         <button onClick={() => setLocation("/")} className="focus:outline-none">
           <img src={logoPath} alt="StudentDays" className="h-9 w-auto object-contain" />
         </button>
-        <button
-          onClick={() => setLocation("/")}
-          className="text-sm text-white/60 hover:text-white transition-colors"
-        >
-          ← Back
-        </button>
+        <div className="flex items-center gap-3">
+          <ThemeToggle variant="dark" />
+          <button
+            onClick={() => setLocation("/")}
+            className="text-sm text-white/60 hover:text-white transition-colors"
+          >
+            ← Back
+          </button>
+        </div>
       </motion.header>
 
       {/* Hero */}
@@ -158,4 +231,9 @@ export default function Partners() {
       `}</style>
     </div>
   );
+}
+
+export default function Partners() {
+  const { theme } = useTheme();
+  return theme === "genz" ? <PartnersGenz /> : <PartnersClassic />;
 }

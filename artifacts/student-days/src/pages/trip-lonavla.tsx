@@ -3,6 +3,9 @@ import { useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useTheme } from "@/context/ThemeContext";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import TripLonavlaGenz from "./trip-lonavla-genz";
 
 import logoPath from "@assets/WhatsApp_Image_2026-05-18_at_12.12.18_AM-removebg-preview_1780684297152.png";
 import heroBgPath from "@/assets/lonavla-poster.png";
@@ -118,7 +121,7 @@ const faqs = [
   },
 ];
 
-export default function TripLonavla() {
+function TripLonavlaClassic() {
   const [, setLocation] = useLocation();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -145,6 +148,7 @@ export default function TripLonavla() {
           <button onClick={() => setLocation("/")} className="focus:outline-none">
             <img src={logoPath} alt="StudentDays" className="h-12 w-auto object-contain" />
           </button>
+          <ThemeToggle variant="light" />
           <a href={bookUrl} target="_blank" rel="noopener noreferrer">
             <Button className="rounded-full bg-green-600 hover:bg-green-700 text-white font-semibold px-6 shadow-[0_0_20px_rgba(22,163,74,0.3)]">
               Register Now
@@ -394,4 +398,9 @@ export default function TripLonavla() {
       </footer>
     </div>
   );
+}
+
+export default function TripLonavla() {
+  const { theme } = useTheme();
+  return theme === "genz" ? <TripLonavlaGenz /> : <TripLonavlaClassic />;
 }

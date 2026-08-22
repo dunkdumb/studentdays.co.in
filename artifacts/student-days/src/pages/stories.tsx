@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import logoPath from "@assets/WhatsApp_Image_2026-05-18_at_12.12.18_AM-removebg-preview_1780684297152.png";
+import { useTheme } from "@/context/ThemeContext";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const YT_VIDEOS = [
   { id: "4E648bz2aR4", title: "Arunachalam & Pondicherry", subtitle: "Between Soul & Shore" },
@@ -95,7 +97,7 @@ function CinemaIntro({ onDone }: { onDone: () => void }) {
   );
 }
 
-export default function Stories() {
+function StoriesGenz() {
   const [, setLocation] = useLocation();
   const [introComplete, setIntroComplete] = useState(false);
   const [activeReel, setActiveReel] = useState(0);
@@ -117,12 +119,15 @@ export default function Stories() {
         <button onClick={() => setLocation("/")} className="focus:outline-none">
           <img src={logoPath} alt="StudentDays" className="h-9 w-auto object-contain" />
         </button>
-        <button
-          onClick={() => setLocation("/")}
-          className="text-sm text-white/60 hover:text-white transition-colors"
-        >
-          ← Back
-        </button>
+        <div className="flex items-center gap-3">
+          <ThemeToggle variant="dark" />
+          <button
+            onClick={() => setLocation("/")}
+            className="text-sm text-white/60 hover:text-white transition-colors"
+          >
+            ← Back
+          </button>
+        </div>
       </motion.header>
 
       {/* ── VIDEO SECTION – first thing visible ── */}
@@ -344,4 +349,148 @@ export default function Stories() {
       </footer>
     </div>
   );
+}
+
+function StoriesClassic() {
+  const [, setLocation] = useLocation();
+  const [activeReel, setActiveReel] = useState(0);
+  const [activeVideo, setActiveVideo] = useState(0);
+  const currentVideo = YT_VIDEOS[activeVideo];
+
+  return (
+    <div className="min-h-screen bg-white text-gray-900">
+      <header className="fixed top-4 inset-x-4 z-50 flex items-center justify-between px-5 py-3 rounded-2xl bg-white/90 backdrop-blur-xl border border-gray-200 shadow-sm">
+        <button onClick={() => setLocation("/")} className="focus:outline-none">
+          <img src={logoPath} alt="StudentDays" className="h-9 w-auto object-contain" />
+        </button>
+        <div className="flex items-center gap-3">
+          <ThemeToggle variant="light" />
+          <button onClick={() => setLocation("/")} className="text-sm text-gray-500 hover:text-gray-800 transition-colors">
+            ← Back
+          </button>
+        </div>
+      </header>
+
+      <section className="min-h-screen flex flex-col justify-center px-4 pt-28 pb-12">
+        <div className="container mx-auto max-w-5xl">
+          <div className="mb-6">
+            <span className="inline-flex items-center gap-2 bg-red-50 border border-red-200 text-red-600 text-xs font-bold px-4 py-2 rounded-full uppercase tracking-widest">
+              <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+              Documentary
+            </span>
+          </div>
+
+          <h1 className="text-3xl md:text-5xl font-black text-gray-900 mb-6">Our Documentaries</h1>
+
+          <div className="flex gap-3 mb-5 flex-wrap">
+            {YT_VIDEOS.map((v, i) => (
+              <button
+                key={v.id}
+                onClick={() => setActiveVideo(i)}
+                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+                  activeVideo === i
+                    ? "bg-red-600 text-white"
+                    : "bg-gray-100 border border-gray-200 text-gray-500 hover:text-gray-800 hover:bg-gray-200"
+                }`}
+              >
+                {i + 1}. {v.title}
+              </button>
+            ))}
+          </div>
+
+          <div className="rounded-3xl overflow-hidden border border-gray-200 shadow-xl bg-gray-900">
+            <div style={{ paddingTop: "56.25%" }} className="relative">
+              <iframe
+                key={currentVideo.id}
+                className="absolute inset-0 w-full h-full"
+                src={`https://www.youtube.com/embed/${currentVideo.id}?autoplay=1&rel=0`}
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+
+          <div className="mt-4 flex justify-end">
+            <a
+              href={`https://www.youtube.com/watch?v=${currentVideo.id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-red-600 hover:bg-red-500 text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors"
+            >
+              ▶ Watch on YouTube
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="reels" className="py-24 px-4 bg-gray-50">
+        <div className="container mx-auto max-w-5xl">
+          <h2 className="text-3xl md:text-4xl font-black text-center mb-3 text-gray-900">Trip Moments</h2>
+          <p className="text-center text-gray-400 mb-10 text-lg">Raw. Real. Unforgettable.</p>
+
+          <div className="flex justify-center gap-3 mb-8">
+            {REELS.map((r, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveReel(i)}
+                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
+                  activeReel === i
+                    ? "bg-primary text-white shadow"
+                    : "bg-white border border-gray-200 text-gray-500 hover:text-gray-800"
+                }`}
+              >
+                {r.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="flex justify-center">
+            <div className="rounded-3xl overflow-hidden border border-gray-200 shadow-xl bg-white" style={{ width: 340 }}>
+              <iframe
+                src={`${REELS[activeReel].url}embed/`}
+                className="w-full border-0 block"
+                style={{ height: 580 }}
+                allowTransparency
+                allow="encrypted-media"
+              />
+            </div>
+          </div>
+
+          <div className="flex justify-center mt-6">
+            <a
+              href={REELS[activeReel].url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-semibold px-5 py-2.5 rounded-full border border-gray-200 bg-white hover:bg-gray-50 text-gray-500 hover:text-gray-800 transition-all"
+            >
+              Open on Instagram →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 px-6 text-center bg-blue-50">
+        <div className="max-w-xl mx-auto">
+          <div className="text-5xl mb-6">🎒</div>
+          <h2 className="text-3xl md:text-4xl font-black mb-4 text-blue-900">Ready to Create Your Story?</h2>
+          <p className="text-gray-500 mb-8 text-lg">Join the next StudentDays trip and become part of the film.</p>
+          <button
+            onClick={() => setLocation("/trips/arunachalam-pondicherry")}
+            className="px-10 py-4 rounded-full bg-primary hover:bg-primary/90 text-white font-bold text-lg transition-all shadow-[0_0_20px_rgba(26,107,255,0.3)]"
+          >
+            🎟️ Join Next Trip
+          </button>
+        </div>
+      </section>
+
+      <footer className="py-8 text-center text-gray-400 text-sm border-t border-gray-100">
+        © 2026 StudentDays.co · Made for students across India
+      </footer>
+    </div>
+  );
+}
+
+export default function Stories() {
+  const { theme } = useTheme();
+  return theme === "genz" ? <StoriesGenz /> : <StoriesClassic />;
 }

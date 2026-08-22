@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
+import { useTheme } from "@/context/ThemeContext";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import HomeGenz from "./home-genz";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -123,7 +126,7 @@ function StoriesContent({ onClose }: { onClose: () => void }) {
   );
 }
 
-export default function Home() {
+function HomeClassic() {
   const [, setLocation] = useLocation();
   const shouldShowLoader = () => {
     const last = sessionStorage.getItem("sd_loader_time");
@@ -245,23 +248,18 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
-      <header
-        className={`fixed top-0 inset-x-0 z-40 transition-all duration-500 border-b border-transparent ${
-          scrolled ? "bg-background/80 backdrop-blur-md border-border/50 py-3 shadow-lg" : "bg-transparent py-5"
-        }`}
-      >
-        <div className="container mx-auto px-6 flex items-center justify-between">
-          <button onClick={() => scrollTo("hero")} className="focus:outline-none" data-testid="button-logo-home">
-            <img src={logoPath} alt="StudentDays" className="h-22 w-auto object-contain" />
-          </button>
-          
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/80">
-            <button onClick={() => scrollTo("upcoming")} className="hover:text-primary transition-colors" data-testid="nav-upcoming">Upcoming Trips</button>
-            <button onClick={() => setLocation("/stories")} className="hover:text-primary transition-colors" data-testid="nav-stories">Documentary Stories</button>
-            <button onClick={() => setLocation("/partners")} className="hover:text-primary transition-colors" data-testid="nav-partners">College Partners</button>
-            <button onClick={() => setLocation("/about")} className="hover:text-primary transition-colors" data-testid="nav-about">About Us</button>
-          </nav>
-
+      <header className={`fixed top-0 inset-x-0 z-40 flex items-center justify-between px-6 py-4 transition-all duration-500 border-b ${scrolled ? "bg-background/90 backdrop-blur-md border-border/50 shadow-sm" : "bg-transparent border-transparent"}`}>
+        <button onClick={() => scrollTo("hero")} className="focus:outline-none" data-testid="button-logo-home">
+          <img src={logoPath} alt="StudentDays" className="h-10 w-auto object-contain" />
+        </button>
+        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/80">
+          <button onClick={() => scrollTo("upcoming")} className="hover:text-primary transition-colors" data-testid="nav-upcoming">Upcoming Trips</button>
+          <button onClick={() => setLocation("/stories")} className="hover:text-primary transition-colors" data-testid="nav-stories">Documentary Stories</button>
+          <button onClick={() => setLocation("/partners")} className="hover:text-primary transition-colors" data-testid="nav-partners">College Partners</button>
+          <button onClick={() => setLocation("/about")} className="hover:text-primary transition-colors" data-testid="nav-about">About Us</button>
+        </nav>
+        <div className="flex items-center gap-3">
+          <ThemeToggle variant="light" />
           <Button data-testid="button-join" onClick={openJoin} className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 shadow-[0_0_20px_rgba(26,107,255,0.3)] hover:shadow-[0_0_30px_rgba(26,107,255,0.5)] transition-all">
             May I Join?
           </Button>
@@ -601,7 +599,7 @@ export default function Home() {
       </AnimatePresence>
 
 {/* Stories Modal */}
-      <Dialog open={storiesOpen} onOpenChange={(open) => { setStoriesOpen(open); }}>
+      <Dialog open={storiesOpen} onOpenChange={(open: boolean) => { setStoriesOpen(open); }}>
         <DialogContent className="sm:max-w-2xl bg-black text-white border-0 p-0 overflow-hidden" data-testid="stories-dialog">
           <DialogHeader className="sr-only">
             <DialogTitle>Documentary Stories</DialogTitle>
@@ -696,7 +694,7 @@ export default function Home() {
         </DialogContent>
       </Dialog>
 
-      <Dialog open={!!selectedTrip} onOpenChange={(open) => !open && setSelectedTrip(null)}>
+      <Dialog open={!!selectedTrip} onOpenChange={(open: boolean) => !open && setSelectedTrip(null)}>
         <DialogContent className="sm:max-w-md bg-white" data-testid="reserve-dialog">
           {!submitted ? (
             <>
@@ -769,4 +767,9 @@ export default function Home() {
       </Dialog>
     </div>
   );
+}
+
+export default function Home() {
+  const { theme } = useTheme();
+  return theme === "genz" ? <HomeGenz /> : <HomeClassic />;
 }
