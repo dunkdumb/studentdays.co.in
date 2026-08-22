@@ -14,6 +14,7 @@ import TripVizagAraku from "@/pages/trip-vizag-araku";
 import TripArunachalamPondicherry from "@/pages/trip-arunachalam-pondicherry";
 import TripLonavla from "@/pages/trip-lonavla";
 import Stories from "@/pages/stories";
+import Partners from "@/pages/partners";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -38,6 +39,7 @@ function Router() {
       <Route path="/trips/arunachalam-pondicherry" component={TripArunachalamPondicherry} />
       <Route path="/trips/lonavla" component={TripLonavla} />
       <Route path="/stories" component={Stories} />
+      <Route path="/partners" component={Partners} />
       <Route component={NotFound} />
     </Switch>
   );

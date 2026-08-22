@@ -258,7 +258,7 @@ export default function Home() {
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/80">
             <button onClick={() => scrollTo("upcoming")} className="hover:text-primary transition-colors" data-testid="nav-upcoming">Upcoming Trips</button>
             <button onClick={() => setLocation("/stories")} className="hover:text-primary transition-colors" data-testid="nav-stories">Documentary Stories</button>
-            <button onClick={() => scrollTo("partners")} className="hover:text-primary transition-colors" data-testid="nav-partners">College Partners</button>
+            <button onClick={() => setLocation("/partners")} className="hover:text-primary transition-colors" data-testid="nav-partners">College Partners</button>
             <button onClick={() => setLocation("/about")} className="hover:text-primary transition-colors" data-testid="nav-about">About Us</button>
           </nav>
 
