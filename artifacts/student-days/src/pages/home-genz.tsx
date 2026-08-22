@@ -37,6 +37,12 @@ function submitToGoogleForm(name: string, college: string, phone: string) {
 
 export default function HomeGenz() {
   const [, setLocation] = useLocation();
+  const shouldShowLoader = () => {
+    const last = sessionStorage.getItem("sd_loader_time");
+    if (!last) return true;
+    return Date.now() - Number(last) > 10 * 60 * 1000;
+  };
+  const [loading, setLoading] = useState(shouldShowLoader);
   const [scrolled, setScrolled] = useState(false);
   const [joinOpen, setJoinOpen] = useState(false);
   const [joinForm, setJoinForm] = useState({ name: "", college: "", phone: "", trip: "" });
@@ -56,6 +62,13 @@ export default function HomeGenz() {
   };
 
   useEffect(() => {
+    if (!loading) return;
+    sessionStorage.setItem("sd_loader_time", String(Date.now()));
+    const timer = setTimeout(() => setLoading(false), 3500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -67,6 +80,54 @@ export default function HomeGenz() {
 
   return (
     <div className="min-h-screen bg-[#050510] text-white selection:bg-primary/30 overflow-x-hidden">
+      <AnimatePresence>
+        {loading && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0, transition: { duration: 1, ease: "easeInOut" } }}
+            className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#050510]"
+          >
+            <motion.img
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
+              src={logoPath}
+              alt="StudentDays Logo"
+              className="h-24 w-auto mb-8"
+            />
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 1 }}
+              className="tracking-[0.2em] text-sm font-medium text-white/50 uppercase mb-6"
+            >
+              LIVE IT • LOVE IT • REMEMBER IT
+            </motion.p>
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={{ visible: { transition: { staggerChildren: 0.055, delayChildren: 1.8 } } }}
+              className="flex flex-wrap justify-center"
+              style={{ fontFamily: "'Caveat', cursive" }}
+            >
+              {"Every Trip Becomes A Story".split("").map((char, i) => (
+                <motion.span
+                  key={i}
+                  variants={{
+                    hidden: { opacity: 0, y: 12, rotate: -4 },
+                    visible: { opacity: 1, y: 0, rotate: 0, transition: { duration: 0.4, ease: "easeOut" } }
+                  }}
+                  className="text-3xl font-bold"
+                  style={{ color: "#1a6bff", display: "inline-block", whiteSpace: char === " " ? "pre" : "normal" }}
+                >
+                  {char === " " ? " " : char}
+                </motion.span>
+              ))}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Navbar */}
       <header className={`fixed top-0 inset-x-0 z-50 flex items-center justify-between px-6 py-4 transition-all duration-500 border-b ${scrolled ? "bg-[#050510]/90 backdrop-blur-md border-white/10 shadow-sm" : "bg-transparent border-transparent"}`}>
         <button onClick={() => scrollTo("hero")} className="focus:outline-none">
