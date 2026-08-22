@@ -16,13 +16,16 @@ import mapPath from "@assets/ChatGPT_Image_Jun_5,_2026,_11_18_35_PM_178068430909
 import videoPath from "@assets/remove_the_pen_in_viedo_and_k_1780684303486.mp4";
 
 // Trip Assets
-import soulShorePosterPath from "@/assets/soul-shore-poster.png";
 import lonavlaPosterPath from "@/assets/lonavla-poster.png";
 import storiesBgPath from "@/assets/stories-bg.jpg";
 
 type Trip = { title: string; collab: string; price: string };
 
-const YT_VIDEO_ID = "lN502PsnETI";
+const YT_VIDEOS = [
+  { id: "4E648bz2aR4", title: "Arunachalam & Pondicherry" },
+  { id: "lN502PsnETI", title: "StudentDays Documentary" },
+];
+const YT_VIDEO_ID = YT_VIDEOS[0].id;
 const YT_URL = `https://www.youtube.com/watch?v=${YT_VIDEO_ID}`;
 const INSTAGRAM_REELS = [
   "https://www.instagram.com/reel/Da17yG6vTWJ/",
@@ -31,19 +34,9 @@ const INSTAGRAM_REELS = [
 
 function StoriesContent({ onClose }: { onClose: () => void }) {
   const [tab, setTab] = useState<"yt" | "ig">("yt");
-  const [secondsLeft, setSecondsLeft] = useState(60);
-  const [redirected, setRedirected] = useState(false);
+  const [videoIndex, setVideoIndex] = useState(0);
 
-  useEffect(() => {
-    if (tab !== "yt" || redirected) return;
-    if (secondsLeft <= 0) {
-      setRedirected(true);
-      window.open(YT_URL, "_blank");
-      return;
-    }
-    const t = setTimeout(() => setSecondsLeft((s) => s - 1), 1000);
-    return () => clearTimeout(t);
-  }, [tab, secondsLeft, redirected]);
+  const currentVideo = YT_VIDEOS[videoIndex];
 
   return (
     <div className="flex flex-col bg-black text-white min-h-[480px]">
@@ -71,27 +64,31 @@ function StoriesContent({ onClose }: { onClose: () => void }) {
         <div className="flex flex-col flex-1">
           <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
             <iframe
+              key={currentVideo.id}
               className="absolute inset-0 w-full h-full"
-              src={`https://www.youtube.com/embed/${YT_VIDEO_ID}?autoplay=1&rel=0`}
+              src={`https://www.youtube.com/embed/${currentVideo.id}?autoplay=1&rel=0`}
               allow="autoplay; encrypted-media"
               allowFullScreen
             />
           </div>
-          <div className="flex items-center justify-between px-4 py-3 bg-black/80">
-            {!redirected ? (
-              <p className="text-sm text-white/60">
-                Redirecting to YouTube in <strong className="text-white">{secondsLeft}s</strong>
-              </p>
-            ) : (
-              <p className="text-sm text-green-400">Opened in YouTube ✓</p>
-            )}
+          {/* Video selector */}
+          <div className="flex items-center gap-2 px-4 py-3 bg-black/80 overflow-x-auto">
+            {YT_VIDEOS.map((v, i) => (
+              <button
+                key={v.id}
+                onClick={() => setVideoIndex(i)}
+                className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${videoIndex === i ? "bg-red-600 text-white" : "bg-white/10 text-white/60 hover:bg-white/20"}`}
+              >
+                {i + 1}. {v.title}
+              </button>
+            ))}
             <a
-              href={YT_URL}
+              href={`https://www.youtube.com/watch?v=${currentVideo.id}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-red-400 hover:text-red-300 font-semibold"
+              className="ml-auto shrink-0 text-sm text-red-400 hover:text-red-300 font-semibold"
             >
-              Watch on YouTube →
+              YouTube →
             </a>
           </div>
         </div>
@@ -410,8 +407,8 @@ export default function Home() {
                     Trek through Lohagad Fort, chase Kataldhar Waterfall, and soak in the magic of the Western Ghats draped in monsoon green.
                   </p>
                   <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-6">
-                    <span>📅 <strong className="text-gray-800">August 22 to 26</strong></span>
-                    <span>🚆 <strong className="text-gray-800">Departing 22nd Evening</strong></span>
+                    <span> <strong className="text-gray-800"></strong></span>
+                    <span>🚆 <strong className="text-gray-800">Departing soon</strong></span>
                     <span>🎟️ <strong className="text-gray-800">Limited Seats</strong></span>
                   </div>
                   <Button
@@ -573,7 +570,7 @@ export default function Home() {
                   <div>
                     <p className="text-xs font-semibold text-green-600 uppercase tracking-wider mb-0.5">New Trip — Registrations Open!</p>
                     <p className="font-black text-gray-900 leading-snug">Backpack to Heaven</p>
-                    <p className="text-xs text-gray-500">Lonavla · Aug 22–26</p>
+                    <p className="text-xs text-gray-500">Lonavla </p>
                   </div>
                 </div>
                 <button

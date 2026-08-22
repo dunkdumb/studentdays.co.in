@@ -163,7 +163,7 @@ export default function TripVizagAraku() {
 
             <div className="flex flex-wrap gap-4 text-base md:text-lg mb-10">
               <span className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full border border-white/20">
-                📅 <strong>11th &amp; 12th July</strong>
+                 <strong>11th &amp; 12th July</strong>
               </span>
               <span className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full border border-white/20">
                 🚆 <strong>Departing 10th July Evening</strong>

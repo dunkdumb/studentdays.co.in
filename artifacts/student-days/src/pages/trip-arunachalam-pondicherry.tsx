@@ -180,10 +180,7 @@ export default function TripArunachalamPondicherry() {
 
             <div className="flex flex-wrap gap-4 text-base md:text-lg mb-10">
               <span className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full border border-white/20">
-                📅 <strong>August 7 to 10</strong>
-              </span>
-              <span className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full border border-white/20">
-                🚆 <strong>Departing 7th Evening</strong>
+                🚆 <strong>Departing Soon</strong>
               </span>
               <span className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full border border-white/20">
                 💰 <strong>From ₹7,499</strong>
@@ -302,7 +299,7 @@ export default function TripArunachalamPondicherry() {
               <span className="text-3xl">📅</span>
               <div>
                 <p className="font-bold text-gray-900">Booking Closes</p>
-                <p className="text-orange-500 font-semibold text-sm">2 August 2026</p>
+                <p className="text-orange-500 font-semibold text-sm">Coming Soon</p>
               </div>
             </div>
           </div>
@@ -347,9 +344,9 @@ export default function TripArunachalamPondicherry() {
           </motion.h2>
 
           {[
-            { label: "Day 0 – Departure (7th August Evening)", items: day0, color: "bg-gray-700" },
-            { label: "Day 1 – Arunachalam (8th August)", items: day1, color: "bg-orange-500" },
-            { label: "Day 2 – Pondicherry (9th August)", items: day2, color: "bg-blue-600" },
+            { label: "Day 0 – Departure Evening", items: day0, color: "bg-gray-700" },
+            { label: "Day 1 – Arunachalam", items: day1, color: "bg-orange-500" },
+            { label: "Day 2 – Pondicherry", items: day2, color: "bg-blue-600" },
           ].map((day, di) => (
             <motion.div
               key={di}
@@ -394,7 +391,7 @@ export default function TripArunachalamPondicherry() {
               <ul className="space-y-3">
                 {included.map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-gray-700 font-medium">
-                    <span className="text-green-500 text-lg">✅</span> {item}
+                    <span className="text-green -500 text-lg">✅</span> {item}
                   </li>
                 ))}
               </ul>
@@ -461,7 +458,7 @@ export default function TripArunachalamPondicherry() {
               Soul &amp; Shore Awaits You
             </h2>
             <p className="text-xl text-white/80 mb-2">From ₹7,499 Per Person</p>
-            <p className="text-white/70 mb-10">Pre-book your slot with ₹3,000 now. Booking closes 2 August.</p>
+            <p className="text-white/70 mb-10">Pre-book your slot with ₹3,000 now.</p>
             <a href={bookUrl} target="_blank" rel="noopener noreferrer">
               <Button
                 size="lg"

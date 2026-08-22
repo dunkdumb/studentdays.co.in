@@ -93,7 +93,7 @@ const included = [
   "StudentDays Trip Experience",
 ];
 
-const notIncluded = ["Lunches (Day 1, 2, 3)", "Personal Expenses", "Chikki & Café Stops"];
+const notIncluded = ["Lunches", "Personal Expenses", ];
 
 const faqs = [
   {
@@ -186,10 +186,7 @@ export default function TripLonavla() {
 
             <div className="flex flex-wrap gap-4 text-base md:text-lg mb-10">
               <span className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full border border-white/20">
-                📅 <strong>August 22 to 26</strong>
-              </span>
-              <span className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full border border-white/20">
-                🚆 <strong>Departing 22nd Evening</strong>
+                🚆 <strong>Departing soon</strong>
               </span>
               <span className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full border border-white/20">
                 🏔️ <strong>Western Ghats</strong>
@@ -262,11 +259,11 @@ export default function TripLonavla() {
           </motion.h2>
 
           {[
-            { day: "Day 0", date: "22nd August", title: "Departure", items: day0, color: "bg-gray-100 border-gray-300" },
-            { day: "Day 1", date: "23rd August", title: "Forts • Waterfalls • Sunset", items: day1, color: "bg-green-50 border-green-200" },
-            { day: "Day 2", date: "24th August", title: "Heaven in Monsoon", items: day2, color: "bg-blue-50 border-blue-200" },
-            { day: "Day 3", date: "25th August", title: "Peaks • Memories • Return", items: day3, color: "bg-orange-50 border-orange-200" },
-            { day: "Day 4", date: "26th August", title: "Home", items: day4, color: "bg-rose-50 border-rose-200" },
+            { day: "Day 0", date: "", title: "Departure", items: day0, color: "bg-gray-100 border-gray-300" },
+            { day: "Day 1", date: "", title: "Forts • Waterfalls • Sunset", items: day1, color: "bg-green-50 border-green-200" },
+            { day: "Day 2", date: "", title: "Heaven in Monsoon", items: day2, color: "bg-blue-50 border-blue-200" },
+            { day: "Day 3", date: "", title: "Peaks • Memories • Return", items: day3, color: "bg-orange-50 border-orange-200" },
+            { day: "Day 4", date: "", title: "Home", items: day4, color: "bg-rose-50 border-rose-200" },
           ].map(({ day, date, title, items, color }, idx) => (
             <motion.div
               key={idx}

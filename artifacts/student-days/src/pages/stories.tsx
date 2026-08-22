@@ -3,8 +3,10 @@ import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import logoPath from "@assets/WhatsApp_Image_2026-05-18_at_12.12.18_AM-removebg-preview_1780684297152.png";
 
-const YT_VIDEO_ID = "lN502PsnETI";
-const YT_URL = `https://www.youtube.com/watch?v=${YT_VIDEO_ID}`;
+const YT_VIDEOS = [
+  { id: "4E648bz2aR4", title: "Arunachalam & Pondicherry", subtitle: "Between Soul & Shore" },
+  { id: "lN502PsnETI", title: "Vizag & Araku", subtitle: "Beach, Chills & Hills" },
+];
 
 const REELS = [
   { url: "https://www.instagram.com/reel/Da17yG6vTWJ/", label: "Vizag Reel #1" },
@@ -96,23 +98,10 @@ function CinemaIntro({ onDone }: { onDone: () => void }) {
 export default function Stories() {
   const [, setLocation] = useLocation();
   const [introComplete, setIntroComplete] = useState(false);
-  const [secondsLeft, setSecondsLeft] = useState(60);
-  const [redirected, setRedirected] = useState(false);
   const [activeReel, setActiveReel] = useState(0);
+  const [activeVideo, setActiveVideo] = useState(0);
 
-  useEffect(() => {
-    if (!introComplete || redirected || secondsLeft <= 0) {
-      if (introComplete && secondsLeft <= 0 && !redirected) {
-        setRedirected(true);
-        window.open(YT_URL, "_blank");
-      }
-      return;
-    }
-    const t = setTimeout(() => setSecondsLeft((s) => s - 1), 1000);
-    return () => clearTimeout(t);
-  }, [introComplete, secondsLeft, redirected]);
-
-  const progress = ((60 - secondsLeft) / 60) * 100;
+  const currentVideo = YT_VIDEOS[activeVideo];
 
   return (
     <div className="min-h-screen bg-[#050510] text-white overflow-x-hidden">
@@ -155,7 +144,29 @@ export default function Stories() {
               <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
               Documentary
             </span>
-            <span className="text-white/40 text-sm">Beach, Chills &amp; Hills — Vizag &amp; Araku</span>
+            <span className="text-white/40 text-sm">{currentVideo.subtitle} — {currentVideo.title}</span>
+          </motion.div>
+
+          {/* Video selector tabs */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={introComplete ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.35, duration: 0.5 }}
+            className="flex gap-3 mb-5 flex-wrap"
+          >
+            {YT_VIDEOS.map((v, i) => (
+              <button
+                key={v.id}
+                onClick={() => setActiveVideo(i)}
+                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+                  activeVideo === i
+                    ? "bg-red-600 text-white"
+                    : "bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-white/10"
+                }`}
+              >
+                {i + 1}. {v.title}
+              </button>
+            ))}
           </motion.div>
 
           {/* Video */}
@@ -172,8 +183,9 @@ export default function Stories() {
             <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-black">
               <div style={{ paddingTop: "56.25%" }} className="relative">
                 <iframe
+                  key={currentVideo.id}
                   className="absolute inset-0 w-full h-full"
-                  src={`https://www.youtube.com/embed/${YT_VIDEO_ID}?autoplay=1&rel=0&color=white`}
+                  src={`https://www.youtube.com/embed/${currentVideo.id}?autoplay=1&rel=0&color=white`}
                   allow="autoplay; encrypted-media; picture-in-picture"
                   allowFullScreen
                 />
@@ -181,34 +193,15 @@ export default function Stories() {
             </div>
           </motion.div>
 
-          {/* Redirect bar */}
+          {/* Watch on YouTube */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={introComplete ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.7, duration: 0.5 }}
-            className="mt-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur p-4 flex flex-col sm:flex-row items-center gap-4"
+            className="mt-5 flex justify-end"
           >
-            <div className="flex-1 w-full">
-              <div className="flex justify-between text-sm mb-2">
-                {!redirected ? (
-                  <span className="text-white/50">
-                    Opening on YouTube in <strong className="text-white">{secondsLeft}s</strong>
-                  </span>
-                ) : (
-                  <span className="text-green-400 font-semibold">✓ Opened in YouTube</span>
-                )}
-              </div>
-              <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
-                <motion.div
-                  className="h-full rounded-full"
-                  style={{ background: "linear-gradient(90deg, #1a6bff, #a855f7)" }}
-                  animate={{ width: `${progress}%` }}
-                  transition={{ duration: 0.5 }}
-                />
-              </div>
-            </div>
             <a
-              href={YT_URL}
+              href={`https://www.youtube.com/watch?v=${currentVideo.id}`}
               target="_blank"
               rel="noopener noreferrer"
               className="shrink-0 flex items-center gap-2 bg-red-600 hover:bg-red-500 text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors"
