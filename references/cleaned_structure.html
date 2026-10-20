@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="[BASE64_IMAGE]">
+<title>StudentDays.co — Every trip becomes a story</title>
+<meta name="description" content="India's first student-only travel experience platform. Curated trips, cinematic documentaries and memories you keep.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Sans:wght@400;500;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--hero:url([BASE64_IMAGE]);--ink:#000;--paper:#fff;--blue:#1E6BFF;--deep:#06122b;--yellow:#FFD23F;--green:#2ECC71;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--ink);color:#fff;font:400 17px/1.55 'DM Sans',system-ui,sans-serif}
+body.intro{overflow:hidden}
+h1,h2,h3{font-family:'Bricolage Grotesque','DM Sans',system-ui,sans-serif;margin:0;letter-spacing:-.03em;line-height:1}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+.glass{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 16px 'DM Sans',sans-serif;color:#fff;text-decoration:none;cursor:pointer;padding:15px 28px;border-radius:999px;border:1px solid rgba(255,255,255,.4);background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,.08));-webkit-backdrop-filter:blur(18px) saturate(180%);backdrop-filter:blur(18px) saturate(180%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(255,255,255,.1),0 8px 28px rgba(0,0,0,.28);transition:transform .15s,background .2s}
+.glass:hover{transform:translateY(-2px);background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(255,255,255,.14))}
+.glass.blue{border-color:rgba(160,200,255,.7);background:linear-gradient(180deg,rgba(60,130,255,.85),rgba(20,80,230,.6));box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 10px 36px rgba(30,107,255,.55)}
+.glass.big{padding:19px 34px;font-size:18px}
+nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:20}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;background:rgba(0,0,0,.35);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-radius:0 0 22px 22px}
+nav img{height:42px;display:block;visibility:hidden}body.settled nav img{visibility:visible}
+nav .glass{padding:10px 18px;font-size:15px;opacity:0;transition:opacity .8s .9s,transform .15s,background .2s}body.ready nav .glass{opacity:1}
+.fly{position:fixed;z-index:60;pointer-events:none;max-width:none}.fly.go{transition:left 1.2s cubic-bezier(.65,0,.25,1),top 1.2s cubic-bezier(.65,0,.25,1),width 1.2s cubic-bezier(.65,0,.25,1),height 1.2s cubic-bezier(.65,0,.25,1)}
+#hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#06122b}
+#hero .bg{position:absolute;inset:0;background:var(--hero) center bottom/cover no-repeat}
+#hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,15,60,.3),rgba(0,15,60,.12) 50%,rgba(0,0,0,.25))}
+.hc{position:relative;width:100%;text-align:center;display:flex;flex-direction:column;align-items:center;padding-top:80px;padding-bottom:40px;transition:opacity 1s .5s,transform 1s .5s}
+body:not(.ready) .hc{opacity:0;transform:translateY(24px)}
+.hc h1{font-size:clamp(34px,8vw,96px);font-weight:800;line-height:1.02;text-shadow:0 2px 30px rgba(0,0,0,.4)}
+.tag{font:600 clamp(22px,3vw,32px)/1.2 'Dancing Script','Brush Script MT',cursive;letter-spacing:0;margin:20px 0 28px;text-shadow:0 1px 14px rgba(0,0,0,.55)}
+.row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.ov{position:fixed;inset:0;z-index:40;background:#000;display:grid;place-items:center;overflow:hidden;transition:opacity 1s}
+.ov video{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(170vw,177vh,1280px);aspect-ratio:16/9;background:#000}
+body.ready .ov{opacity:0;pointer-events:none}
+.skip{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:50;padding:10px 18px;font-size:14px;transition:opacity .4s}
+body.ready .skip{opacity:0;pointer-events:none}
+section{padding:clamp(64px,10vw,120px) 0;position:relative}
+h2{font-size:clamp(34px,6vw,64px);font-weight:800;max-width:15ch}
+.lead{max-width:50ch;color:#aab6cc;margin:18px 0 0}
+.about{background:#fff;color:#000}
+.about .lead{color:#4a5568}
+.pillars{display:grid;gap:14px;margin-top:40px}
+@media(min-width:800px){.pillars{grid-template-columns:repeat(3,1fr)}}
+.pillar{padding:28px 26px 32px;border-radius:28px;min-height:210px;display:flex;flex-direction:column;justify-content:space-between;color:#fff}
+.pillar h3{font-size:clamp(32px,4vw,44px);font-weight:800}
+.pillar p{margin:16px 0 0;max-width:30ch}
+.pillar:nth-child(1){background:var(--blue)}.pillar:nth-child(2){background:#000}.pillar:nth-child(3){background:var(--deep)}
+.memories{background:radial-gradient(120% 80% at 50% 0,#0b2a66,#030a1a 70%)}
+.wall{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:44px}
+.wall figure{margin:0;padding:10px;border:0;background:#fff;box-shadow:0 14px 40px rgba(0,0,0,.5);transform:rotate(var(--r,0deg))}
+.wall img{display:block;width:100%;height:100%;object-fit:cover}
+.wall figure{aspect-ratio:var(--ar,16/10)}
+.f0{--r:-2deg;--ar:3/4;background:var(--yellow)!important;grid-row:span 2}
+.f1{--r:1.5deg;background:var(--green)!important}
+.f2{--r:-1deg;background:#fff!important}
+.f3{--r:2deg;background:var(--blue)!important}
+.f4{--r:-1.5deg;background:var(--yellow)!important;grid-column:1/-1}
+@media(min-width:800px){
+.wall{grid-template-columns:repeat(6,1fr)}
+.f0{grid-column:1/3;grid-row:1/3}.f1{grid-column:3/7}.f2{grid-column:3/5}.f3{grid-column:5/7}.f4{grid-column:2/6}
+.wall figure{aspect-ratio:auto}.f0,.f1,.f2,.f3,.f4{min-height:0}
+.f1{height:300px}.f2,.f3{height:230px}.f0{height:100%}.f4{height:320px;grid-row:3}
+}
+.join{background:linear-gradient(160deg,#1E6BFF,#0a2f8f 55%,#030a1a)}
+.cards{display:grid;gap:16px;margin-top:40px}
+@media(min-width:800px){.cards{grid-template-columns:1fr 1fr}}
+.card{padding:30px 28px;border-radius:30px;border:1px solid rgba(255,255,255,.35);background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.07));-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);box-shadow:inset 0 1px 0 rgba(255,255,255,.5)}
+.card h3{font-size:34px;font-weight:800;margin-bottom:12px}
+.card p{margin:0 0 24px;color:#e3ecff}
+.app{margin-top:28px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.app small{color:#cfe0ff}
+.contact{background:#030a1a;color:#fff}
+.contact a.mail{display:inline-block;font:800 clamp(26px,5.5vw,56px)/1.1 'Bricolage Grotesque',sans-serif;letter-spacing:-.03em;color:#6ea2ff;margin-top:22px;word-break:break-all}
+footer{background:#000;padding:44px 0 36px}
+footer img{height:56px;display:block;margin-bottom:26px}
+summary{cursor:pointer;font-weight:700}
+details p,details li{color:#aab6cc;font-size:15px;max-width:70ch}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+
+nav .glass{padding:10px 16px;font-size:14px}
+.cp{background:radial-gradient(120% 70% at 50% 0,#0b2a66,#030a1a 70%);padding-top:96px}
+.cp .back{padding:10px 18px;font-size:14px;margin-top:14px}
+.ctop{text-align:center;padding-top:clamp(30px,6vh,70px)}
+.pill{display:inline-block;padding:9px 18px;border-radius:999px;font-weight:700;font-size:14px;color:#a9cbff;border:1px solid rgba(255,255,255,.25);background:rgba(30,107,255,.2)}
+.cp h1{font-size:clamp(38px,8vw,92px);font-weight:800;line-height:1.03;margin:24px auto 0}
+.cp h1 em{font-style:normal;color:#4a5b80}
+.cp .sub{color:#aab6cc;max-width:42ch;margin:24px auto 0;font-size:clamp(17px,2vw,20px)}
+.marq{overflow:hidden;margin:56px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marq>div{display:flex;gap:12px;width:max-content;animation:mq 34s linear infinite}
+.chip{white-space:nowrap;padding:13px 24px;border-radius:999px;font-weight:700;border:1px solid rgba(255,255,255,.28);background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.05));box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.chip::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--blue);margin-right:10px}
+@keyframes mq{to{transform:translateX(-50%)}}
+.list{list-style:none;margin:70px auto 0;padding:0;max-width:760px;border-top:1px solid rgba(255,255,255,.18)}
+.list li{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:6px;padding:20px 4px;border-bottom:1px solid rgba(255,255,255,.12);font:700 clamp(18px,2.4vw,24px)/1.2 'Bricolage Grotesque','DM Sans',sans-serif;letter-spacing:-.01em}
+.list .n{font:500 15px 'DM Sans',sans-serif;color:#62729a}
+.list .t{font:500 14px 'DM Sans',sans-serif;color:#a9cbff;white-space:nowrap}
+.cta2{text-align:center;padding:clamp(80px,12vw,130px) 0}
+.cta2 h2{margin:0 auto;max-width:16ch}
+.cta2 .lead{margin:20px auto 32px}
+@media(prefers-reduced-motion:reduce){.marq>div{animation:none}}
+
+.ab section{padding:clamp(56px,8vw,96px) 0}
+.ab h2{max-width:none}
+.ab h2.c{text-align:center;margin:0 auto 40px}
+.ab p{margin:0}
+.lt{background:#fff;color:#000}
+.who{display:grid;gap:36px;align-items:center}
+.who p{color:#3a4456;margin-top:16px;max-width:52ch}
+.who h2{margin-bottom:8px}
+.map{width:100%;border-radius:28px;display:block;box-shadow:0 20px 60px rgba(0,20,80,.25)}
+@media(min-width:800px){.who{grid-template-columns:1fr 1fr;gap:56px}}
+.two{display:grid;gap:16px}
+@media(min-width:800px){.two{grid-template-columns:1fr 1fr}}
+.ic{font-size:30px;display:block;margin-bottom:14px}
+.gc{padding:32px 30px;border-radius:30px;border:1px solid rgba(255,255,255,.3);background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.04));box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
+.gc h3{font-size:30px;font-weight:800;margin-bottom:12px}
+.gc p{color:#c3cfe6}
+.lc{padding:26px 24px;border-radius:24px;background:#EAF1FF;border:1px solid #d3e1ff}
+.lc h3{font-size:22px;font-weight:800;color:#0b2a8a;margin-bottom:10px}
+.lc p{color:#3a4456;font-size:16px}
+.vals{display:grid;gap:14px}
+@media(min-width:620px){.vals{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.vals{grid-template-columns:repeat(4,1fr)}}
+.why{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+@media(min-width:700px){.why{grid-template-columns:1fr 1fr}}
+.why li{display:flex;gap:14px;align-items:center;padding:20px 22px;border-radius:20px;font-weight:500;border:1px solid rgba(255,255,255,.22);background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.03))}
+.why li::before{content:"✓";flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--blue);font-weight:700}
+.prom{background:linear-gradient(160deg,#1E6BFF,#0a2f8f);text-align:center}
+.prom h2{margin:0 auto 24px}
+.pl{font-size:clamp(18px,2.4vw,22px);color:#e3ecff}
+.pb{font:800 clamp(22px,3.6vw,34px)/1.35 'Bricolage Grotesque',sans-serif;margin:14px 0 26px!important}
+.pq{font:600 clamp(22px,3vw,30px) 'Dancing Script',cursive;color:#cfe0ff;margin-bottom:32px!important}
+.info{display:grid;gap:14px}
+@media(min-width:700px){.info{grid-template-columns:repeat(3,1fr)}}
+.info div{padding:22px 24px;border-radius:22px;border:1px solid rgba(255,255,255,.22);background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.03))}
+.info small{display:block;color:#8fb3f5;margin-bottom:6px;font-size:14px}
+.info b{font-size:18px;font-weight:700;word-break:break-word}
+.info a{text-decoration:none}
+
+nav .wrap{gap:10px;position:relative}
+nav .ab{margin-left:6px}
+nav .j{margin-left:auto}
+nav .mb{display:inline-flex}
+.links{display:none;position:absolute;top:74px;right:0;width:min(300px,100%);flex-direction:column;gap:6px;padding:12px;border-radius:24px;background:rgba(6,18,43,.88);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,.25)}
+nav.open .links{display:flex}
+.links .glass{justify-content:flex-start;padding:14px 18px;font-size:16px;opacity:1}
+@media(max-width:820px){nav .glass{padding:9px 14px;font-size:14px}.links .glass{font-size:16px;padding:14px 18px}}
+@media(max-width:640px){nav img{height:36px}nav .ab{margin-left:auto}nav .j{display:none}}
+
+.rev{position:relative;overflow:hidden;background:#030a1a;padding:clamp(60px,9vw,100px) 0}
+.rev::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,10,40,.55),rgba(0,10,40,.72));pointer-events:none}
+.rev>.wrap,.rev>.rmq{position:relative;z-index:2}
+.rbg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;animation:rb 16s infinite}
+.rbg.b{animation-delay:8s}
+@keyframes rb{0%{opacity:0}8%{opacity:1}50%{opacity:1}58%{opacity:0}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.rbg{animation:none}.rbg.a{opacity:1}}
+.rev h2{margin-bottom:36px;max-width:none}
+.rmq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.rmq>div{display:flex;gap:16px;width:max-content;animation:rm 40s linear infinite}
+.rmq:hover>div{animation-play-state:paused}
+@keyframes rm{to{transform:translateX(-50%)}}
+.rc{width:min(78vw,340px);padding:24px;border-radius:26px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
+.rc .who2{display:flex;gap:12px;align-items:center}
+.rc .av{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:rgba(30,107,255,.55);font-weight:700;font-size:15px}
+.rc b{display:block;font-size:17px}.rc small{color:#cfe0ff}
+.rc .st{color:#FFD23F;letter-spacing:2px;margin:14px 0 8px}
+.rc p{margin:0;font:600 22px/1.25 'Dancing Script','DM Sans',cursive}
+@media(prefers-reduced-motion:reduce){.rmq>div{animation:none}}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:36px 0 22px}
+.tab{cursor:pointer;font:700 15px 'DM Sans',sans-serif;color:#fff;padding:13px 22px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08)}
+.tab[aria-selected=true]{background:var(--blue);border-color:#9ec2ff;box-shadow:0 8px 28px rgba(30,107,255,.5)}
+.player{position:relative;aspect-ratio:16/9;max-width:980px;margin:0 auto;border-radius:26px;overflow:hidden;background:linear-gradient(135deg,#0a2f8f,#030a1a);box-shadow:0 24px 70px rgba(30,107,255,.3);border:1px solid rgba(255,255,255,.2)}
+.player img,.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover}
+.player .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:20px;background:none;border:0;color:#fff;cursor:pointer;font:800 clamp(20px,4vw,38px)/1.1 'Bricolage Grotesque',sans-serif;width:100%}
+.player .pb2{display:grid;place-items:center;width:78px;height:54px;border-radius:16px;background:#ff0033;font-size:26px;box-shadow:0 8px 30px rgba(0,0,0,.4)}
+.player .ph small{font:500 15px 'DM Sans',sans-serif;color:#cfe0ff}
+.scr{text-align:center;margin:26px 0 0!important;color:#8fa3c7}
+.reel{max-width:400px;height:640px;margin:36px auto 0;border-radius:28px;overflow:hidden;background:#fff;box-shadow:0 24px 70px rgba(30,107,255,.3)}
+.reel iframe{width:100%;height:100%;border:0}
+.dc section{padding:clamp(56px,8vw,90px) 0}
+.fg{display:grid;gap:34px}
+@media(min-width:800px){.fg{grid-template-columns:1.2fr 1fr 1fr}}
+.fg h4{margin:0 0 14px;font:800 18px 'Bricolage Grotesque',sans-serif;color:#8fb3f5}
+.fg a{display:block;color:#cfd8ea;text-decoration:none;padding:6px 0}
+.fg a:hover{color:#fff}
+.fg img{margin-bottom:14px}
+.ft{margin:0;color:#6ea2ff;font-weight:700}
+.fb{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;margin-top:36px;padding-top:22px;border-top:1px solid #222;color:#7a869c;font-size:14px}
+.pol .wrap{max-width:820px}
+.pol h1{text-align:center}
+.pol .body{margin:44px 0 90px}
+.pol h3{font-size:22px;font-weight:800;margin:30px 0 8px}
+.pol p{color:#b9c6df;margin:0 0 10px}
+.faq{border:1px solid rgba(255,255,255,.2);border-radius:20px;background:rgba(255,255,255,.06);padding:4px 22px;margin-bottom:12px}
+.faq summary{padding:16px 0;cursor:pointer;font-weight:700}
+.dn{display:inline-block;margin-top:14px;font-size:14px;color:#8fa3c7}
+.mob{margin:26px 0 0;font-size:18px}.mob span{display:block;color:#8fa3c7;font-size:14px;margin-bottom:4px}.mob a{font:700 24px 'Bricolage Grotesque',sans-serif;text-decoration:none;color:#fff}
+dialog{border:1px solid rgba(255,255,255,.28);border-radius:28px;background:#06122b;color:#fff;width:min(520px,92vw);max-height:90vh;padding:0;overflow:auto}
+dialog::backdrop{background:rgba(0,0,0,.65);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+#pf{padding:28px 24px;position:relative}
+#pf h3{font-size:30px;font-weight:800;padding-right:40px}
+.pds{color:#aab6cc;margin:8px 0 6px}
+#pf label{display:block;margin-top:14px;font-size:14px;color:#cfe0ff}
+#pf input,#pf select,#pf textarea{display:block;width:100%;margin-top:6px;padding:13px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08);color:#fff;font:16px 'DM Sans',sans-serif}
+#pf select option{color:#000}
+#pf textarea{resize:vertical}
+#pf .row{margin-top:22px}
+.x{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;font-size:16px;cursor:pointer}
+
+.hl{background:linear-gradient(100deg,#fff 10%,#8fc0ff 55%,#1E6BFF 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-size:clamp(44px,10vw,112px)!important;text-shadow:none;filter:drop-shadow(0 6px 30px rgba(30,107,255,.45))}
+.tg{display:grid;gap:22px;margin:56px 0 100px;align-items:start}
+@media(min-width:760px){.tg{grid-template-columns:repeat(3,1fr)}}
+.tc{border-radius:28px;overflow:hidden;border:1px solid rgba(255,255,255,.25);background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.04));box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.kcard{cursor:pointer;transition:transform .2s,box-shadow .2s}
+.kcard:hover{transform:translateY(-4px);box-shadow:0 26px 70px rgba(30,107,255,.4)}
+.ti{position:relative;line-height:0}
+.ti img{width:100%;height:auto;display:block}
+.hf{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-14deg);padding:10px 22px;border:5px solid #e8192c;border-radius:12px;color:#e8192c;background:rgba(255,255,255,.88);font:800 clamp(26px,4.2vw,40px)/1 'Bricolage Grotesque',sans-serif;letter-spacing:.06em;box-shadow:0 0 0 3px rgba(255,255,255,.7);opacity:.96}
+.tb{padding:20px 22px 24px}
+.tb h3{font-size:28px;font-weight:800}
+.tb p{margin:8px 0 14px;color:#b9c6df;font-size:15px}
+.tl{font-weight:700;color:#8fc0ff}
+.tbd{display:inline-block;padding:9px 16px;border-radius:999px;font-weight:700;font-size:14px;border:1px solid rgba(255,255,255,.35);background:rgba(30,107,255,.3)}
+#fx{position:fixed;inset:0;width:100%;height:100%;z-index:70;pointer-events:none;display:none}
+#plane{position:fixed;left:0;top:0;z-index:71;pointer-events:none;opacity:0;will-change:transform;filter:drop-shadow(0 2px 6px rgba(0,20,80,.35))}
+#kd{width:min(780px,94vw)}
+#kdb{padding:26px 22px 30px;position:relative}
+.kh{text-align:center;padding:10px 30px 0}
+.hfb{display:inline-block;padding:6px 16px;border:3px solid #e8192c;color:#e8192c;background:#fff;border-radius:10px;font:800 16px 'Bricolage Grotesque',sans-serif;letter-spacing:.08em;transform:rotate(-4deg)}
+.kk{color:#8fc0ff;font-weight:700;font-size:13px;margin:16px 0 8px!important}
+.kh h3{font-size:clamp(30px,6vw,46px);font-weight:800}
+.kr{color:#cfe0ff;margin:10px 0 14px!important}
+.kc{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.kc span{padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);font-size:14px;font-weight:500}
+.kbox{margin-top:18px;padding:18px 18px;border-radius:22px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);text-align:center}
+.kbox>b{display:block;color:#8fc0ff;font-size:14px;margin-bottom:10px}
+.kb{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.kb div{padding:12px 4px;border-radius:14px;background:#0a2f8f}
+.kb strong{display:block;font:800 28px 'Bricolage Grotesque',sans-serif}
+.kb small{color:#cfe0ff}
+.kp strong{display:block;font:800 clamp(34px,7vw,52px)/1.1 'Bricolage Grotesque',sans-serif}
+.kp p{margin:8px 0!important;color:#cfe0ff}
+.kp small,.kn{color:#8fa3c7;font-size:13px}
+.kd1{margin-top:22px}
+.kdh{display:flex;gap:12px;align-items:center;margin-bottom:10px}
+.kdh i{font:800 18px 'Bricolage Grotesque',sans-serif;font-style:normal;padding:10px 14px;border-radius:14px;background:var(--blue);white-space:nowrap}
+.kdh b{display:block;font:800 20px/1.15 'Bricolage Grotesque',sans-serif}
+.kdh span{color:#aab6cc;font-size:14px}
+.kr2{display:grid;grid-template-columns:96px 1fr;gap:10px;margin-bottom:8px;padding:12px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14)}
+.kr2>em{font-style:normal;font-weight:700;color:#8fc0ff;font-size:14px}
+.kr2 ul{margin:0;padding-left:18px;color:#dbe5f7;font-size:15px}
+.knote{margin:8px 0;padding:12px 14px;border-radius:14px;background:#FFD23F;color:#000;font-weight:700;font-size:14px}
+.kst{margin:8px 0;color:#aab6cc;font-size:14px}
+.kro{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:18px}
+.kro span{padding:6px 12px;border-radius:999px;background:rgba(30,107,255,.3);font-size:13px}
+.kin{display:grid;gap:8px;margin-top:10px;text-align:left}
+@media(min-width:620px){.kin{grid-template-columns:1fr 1fr}}
+.kin div{padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.07);font-size:14px;color:#cfd8ea}
+.kin b{display:block;color:#fff;font-size:15px}
+.kact{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:22px}
+
+.pol .body{max-width:760px;margin:44px auto 90px}
+.pol ul{margin:6px 0 14px;padding-left:20px;color:#b9c6df}
+.pol li{margin:5px 0}
+.pol b{color:#e6eeff}
+.upd{display:inline-block;padding:6px 14px;border-radius:999px;background:rgba(30,107,255,.25);color:#cfe0ff!important;font-size:14px}
+.cb{margin:14px 0;padding:18px 20px;border-radius:20px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2)}
+.cb b{display:block;margin-bottom:6px}
+.cb a,.cb span{display:block;color:#cfe0ff;text-decoration:none;margin:3px 0}
+.tgl{text-align:center;margin-top:34px!important;font:600 clamp(22px,3vw,28px)/1.3 'Dancing Script',cursive;color:#8fc0ff!important}
+.fcat{margin:38px 0 14px!important;font-size:20px!important;color:#8fc0ff}
+.rt{display:grid;gap:10px;margin:10px 0}
+.rt div{padding:16px 18px;border-radius:18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18)}
+.rt b{display:block;color:#fff}
+.rt span{color:#b9c6df;font-size:15px}
+.kn2{padding:14px 16px;border-radius:14px;background:#FFD23F;color:#000!important;font-weight:700;font-size:14px}
+/* trips cards: one row */
+.tg{display:flex;grid-template-columns:none;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 4px 18px;margin:44px 0 80px;align-items:stretch;-webkit-overflow-scrolling:touch}
+.tc{flex:0 0 min(300px,74vw);scroll-snap-align:center;display:flex;flex-direction:column}
+.tb{flex:1}
+.ti img{aspect-ratio:4/5;object-fit:cover;height:auto}
+.tc.lp .ti img{object-position:left center}
+@media(min-width:760px){.tg{display:flex;grid-template-columns:none;justify-content:center;overflow:visible}.tc{flex:0 0 min(330px,31%)}}
+.kcard{position:relative;border-color:rgba(232,25,44,.75);background:#0b0305;box-shadow:0 20px 60px rgba(150,0,15,.6),0 0 0 1px rgba(232,25,44,.4)}
+.kcard:hover{box-shadow:0 26px 76px rgba(200,0,25,.7),0 0 0 1px rgba(232,25,44,.6)}
+.kcard .ti{overflow:hidden}
+.kcard .ti img{filter:grayscale(1) contrast(1.1) brightness(.78)}
+.kcard .ti::after{content:"";position:absolute;inset:-12%;pointer-events:none;background:radial-gradient(55% 38% at 18% 82%,rgba(205,0,24,.8),transparent 70%),radial-gradient(48% 36% at 85% 18%,rgba(160,0,18,.75),transparent 70%),radial-gradient(42% 30% at 60% 52%,rgba(225,20,40,.45),transparent 70%);filter:blur(14px);animation:drift 9s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(5%,-4%) scale(1.1)}}
+.kcard .hf{z-index:2;font-size:clamp(22px,2.2vw,28px);padding:8px 16px;white-space:nowrap;background:#e8192c;color:#fff;border-color:#fff;box-shadow:0 0 0 4px #e8192c,0 0 38px 10px rgba(232,25,44,.85);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{50%{transform:translate(-50%,-50%) rotate(-14deg) scale(1.07)}}
+.kcard .tb p{color:#e8bcc1}
+.kcard .tl{color:#ff6b78}
+@media(prefers-reduced-motion:reduce){.kcard .ti::after,.kcard .hf{animation:none}}
+
+.tg{display:flex!important;justify-content:flex-start!important;overflow-x:auto!important;scroll-snap-type:none!important;scrollbar-width:none;gap:18px}
+.tg::-webkit-scrollbar{display:none}
+.tc{scroll-snap-align:none}
+.jt{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:25;padding:16px 30px;font-size:17px;opacity:0;pointer-events:none;transform:translate(-50%,28px);transition:opacity .45s,transform .45s cubic-bezier(.2,.8,.2,1),background .2s}
+.jt.on{opacity:1;pointer-events:auto;transform:translateX(-50%)}
+.jt.on:hover{transform:translateX(-50%) translateY(-2px)}
+footer{padding-bottom:100px}
+
+.ch{font-size:28px!important;line-height:1.1}
+.cnote{display:inline-block;padding:7px 14px;border-radius:999px;background:rgba(255,210,63,.95);color:#000!important;font-weight:700;font-size:14px}
+#cd{width:min(560px,94vw);background-size:cover;background-position:center;background-color:#06122b}
+#cdi{padding:0 22px 28px;position:relative;overflow:hidden;overflow:clip}
+.cbar{position:sticky;top:0;z-index:5;margin:0 -22px 10px;padding:16px 22px 6px;background:linear-gradient(rgba(3,10,26,.78),rgba(3,10,26,.55));-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.cbar .mood{margin:6px 0 4px}
+#cdi .x{z-index:6}
+#cdi h3{font-size:clamp(24px,5vw,32px);font-weight:800;padding-right:44px}
+.crew{display:flex;gap:6px;justify-content:center;margin:6px 0 4px}
+.crew i{font-style:normal;display:grid;place-items:center;width:clamp(44px,13vw,60px);height:clamp(44px,13vw,60px);border-radius:50%;font-size:clamp(28px,8vw,38px);background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.crew i.b{animation:bop .5s cubic-bezier(.3,1.6,.5,1) both}
+.crew i.j{animation:jump .6s ease-in-out 3}
+@keyframes bop{0%{transform:scale(.7) translateY(8px)}100%{transform:none}}
+@keyframes jump{50%{transform:translateY(-14px) rotate(-8deg)}}
+.mood{text-align:center;color:#cfe0ff;font-weight:700;margin:8px 0 14px}
+#cf label{display:block;margin-top:14px;font-size:14px;color:#e3ecff}
+#cf input,#cf select{display:block;width:100%;margin-top:6px;padding:13px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.35);background:rgba(0,10,40,.5);color:#fff;font:16px 'DM Sans',sans-serif}
+#cf select option{color:#000}
+.two2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.capmsg{margin:8px 0 0;padding:10px 14px;border-radius:12px;background:#ffe3e3;color:#a10018;font-weight:700;font-size:14px}
+.cfp{position:absolute;top:-16px;width:9px;height:15px;border-radius:2px;animation:fall 2s linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(900px) rotate(540deg);opacity:.9}}
+
+.ap{position:relative;overflow:hidden;background:#030a1a}
+.aps{position:absolute;inset:0}
+.aps::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(3,10,26,.5),rgba(3,10,26,.72) 45%,rgba(3,10,26,.9))}
+.sl{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;animation:sl 24s infinite}
+@keyframes sl{0%{opacity:0;transform:scale(1.02)}4.2%{opacity:1}16.7%{opacity:1}20.8%{opacity:0;transform:scale(1.15)}100%{opacity:0;transform:scale(1.15)}}
+.apc{position:relative;z-index:2}
+.pass{text-align:center;margin:44px 0 10px}
+.pk{margin:0;color:#8fc0ff;font-weight:700}
+.hl2{font-size:clamp(36px,8.5vw,84px);font-weight:800;max-width:none;margin:8px auto 28px;background:linear-gradient(100deg,#fff 5%,#8fc0ff 50%,#1E6BFF 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(0 6px 30px rgba(30,107,255,.55))}
+.pimg{width:min(560px,92%);border-radius:4.4%;box-shadow:0 30px 80px rgba(0,10,60,.75),0 0 0 1px rgba(255,255,255,.2);transform:perspective(900px) rotateX(5deg) rotateY(-8deg);animation:pf 6s ease-in-out infinite}
+@keyframes pf{50%{transform:perspective(900px) rotateX(2deg) rotateY(8deg) translateY(-12px)}}
+.pn{color:#aab6cc;font-size:14px;margin:18px 0 0}
+.feat{display:grid;gap:14px;margin-top:34px}
+@media(min-width:800px){.feat{grid-template-columns:repeat(3,1fr)}}
+.feat .gc{background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.06));-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.feat h3{font-size:24px!important}
+#ad{background:transparent;border:0;width:min(430px,94vw);overflow:auto}
+#ad::backdrop{background:rgba(0,0,0,.7);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.adw{padding:6px 0 10px}
+.trv{display:block;width:min(300px,80%);margin:0 auto -18px;position:relative;z-index:3;overflow:visible}
+.trv .hd{animation:bob 2.4s ease-in-out infinite}
+.trv .eyes{animation:blink 4s infinite;transform-box:fill-box;transform-origin:center}
+.trv .m2{display:none}
+.trv .hand,.trv .arm{transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes bob{50%{transform:translateY(-5px)}}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+.fcard{position:relative;background:#06122b;border:1px solid rgba(255,255,255,.3);border-radius:26px;padding:34px 22px 26px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+#ad[open] .fcard{animation:unfold .7s cubic-bezier(.2,.9,.3,1.15) both;transform-origin:50% 0}
+#ad[open] .trv{animation:hop .8s cubic-bezier(.3,1.5,.5,1) both}
+@keyframes unfold{from{transform:scale(.8,.05);opacity:0}to{transform:none;opacity:1}}
+@keyframes hop{from{transform:translateY(60px) scale(.7);opacity:0}to{transform:none;opacity:1}}
+.fcard h3{font-size:26px;font-weight:800;padding-right:40px}
+#af label{display:block;margin-top:14px;font-size:14px;color:#e3ecff}
+#af input,#af select{display:block;width:100%;margin-top:6px;padding:13px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;font:16px 'DM Sans',sans-serif}
+#af select option{color:#000}
+.fcard .x{top:14px;right:14px}
+#ad.done .trv .m1{display:none}#ad.done .trv .m2{display:block}
+#ad.done .hand.l{transform:translate(-4px,-70px)}#ad.done .hand.r{transform:translate(4px,-70px)}
+#ad.done .trv .hd{animation:bob .5s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.sl,.pimg,.trv .hd,.trv .eyes{animation:none}.sl:first-child{opacity:1}}
+
+.vf{aspect-ratio:16/9;width:100%;max-width:1000px;margin:34px auto 0;border-radius:24px;overflow:hidden;background:#000;box-shadow:0 26px 70px rgba(0,10,60,.7),0 0 0 1px rgba(255,255,255,.2)}
+.vf video{display:block;width:100%;height:100%;object-fit:contain;background:#000}
+.ph1{width:min(760px,96%)!important;margin-bottom:34px;animation:none!important;transform:none!important;border-radius:22px!important}
+.pimg:not(.ph1){width:min(420px,86%)}
+
+.wvid{display:grid;gap:22px;margin-top:44px}
+@media(min-width:800px){.wvid{grid-template-columns:1fr 1fr}}
+.wvid+.wall{margin-top:22px}
+.wf{margin:0;padding:10px;background:#1E6BFF;border:3px solid #6fa5ff;box-shadow:0 14px 40px rgba(0,10,60,.6),0 0 30px rgba(30,107,255,.5)}
+.wf.v1{transform:rotate(-1deg)}.wf.v2{transform:rotate(1deg)}
+.wf video{display:block;width:100%;aspect-ratio:16/9;object-fit:contain;background:#000}
+</style></head>
+<body class="intro">
+<nav id="nav"><div class="wrap">
+<a href="#hero" data-go="home" aria-label="StudentDays.co home"><img src="[BASE64_IMAGE]" alt="StudentDays.co"></a>
+<a class="glass ab" href="#about" data-go="about">About us</a>
+<a class="glass j" href="#trips" data-trip>Join the trip</a>
+<button class="glass mb" id="mb" type="button" aria-label="Menu" aria-expanded="false">Menu ▾</button>
+<div class="links" id="links">
+<a class="glass" href="#colleges" data-go="colleges">College partners</a>
+<a class="glass" href="#doc" data-go="doc">Documentary Stories</a>
+<a class="glass" href="#partner" id="pw">Partner with us!</a>
+</div>
+</div></nav>
+<button class="glass skip" id="skip" type="button">Skip intro</button>
+
+<div class="ov"><video id="v" muted playsinline preload="auto" autoplay data-b64="[BASE64_VIDEO]"></video></div>
+<script>
+(function(){
+var b=document.body,v=document.getElementById('v'),ov=document.querySelector('.ov'),logo=document.querySelector('nav img'),fired=false;
+window.blobUrl=function(b64){var bin=atob(b64),n=bin.length,a=new Uint8Array(n);for(var i=0;i<n;i++)a[i]=bin.charCodeAt(i);return URL.createObjectURL(new Blob([a],{type:'video/mp4'}))};
+v.src=blobUrl(v.getAttribute('data-b64'));v.removeAttribute('data-b64');
+function set(c,o){c.style.left=o.l+'px';c.style.top=o.t+'px';c.style.width=o.w+'px';c.style.height=o.h+'px'}
+function finish(){
+ if(fired)return;fired=true;
+ try{v.pause()}catch(e){}
+ var r=v.getBoundingClientRect(),w=r.width*0.4227,h=w*621/1505,e=logo.getBoundingClientRect();
+ var c=document.createElement('img');c.src=logo.src;c.alt='';c.className='fly';
+ set(c,{l:r.left+r.width*.507-w/2,t:r.top+r.height*.504-h/2,w:w,h:h});
+ b.appendChild(c);v.style.opacity=0;b.classList.remove('intro');
+ function done(){b.classList.add('settled');c.remove()}
+ requestAnimationFrame(function(){requestAnimationFrame(function(){
+  b.classList.add('ready');
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){done();return}
+  setTimeout(function(){c.classList.add('go');set(c,{l:e.left,t:e.top,w:e.width,h:e.height});setTimeout(done,1300)},350);
+ })});
+}
+
+function start(){var p=v.play&&v.play();if(p&&p.catch)p.catch(function(){})}
+v.muted=true;v.defaultMuted=true;v.setAttribute('muted','');v.setAttribute('playsinline','');
+v.addEventListener('ended',finish);
+['loadeddata','canplay'].forEach(function(n){v.addEventListener(n,function(){if(v.paused&&!fired)start()})});
+['touchstart','pointerdown','keydown'].forEach(function(n){addEventListener(n,function(){if(v.paused&&!fired)start()},{passive:true})});
+document.getElementById('skip').addEventListener('click',finish);
+start();
+setTimeout(function(){if(v.paused&&!fired)start()},800);
+setTimeout(function(){if(v.paused&&v.readyState>=3)finish()},9000);
+setTimeout(function(){if(v.paused)finish()},20000);
+})();
+</script>
+
+
+<div id="home">
+<header id="hero"><div class="bg"></div>
+<div class="wrap hc">
+<h1>India's first<br>student experience<br>platform</h1>
+<p class="tag">Here every Experience becomes a story.</p>
+<div class="row"><a class="glass blue" href="#trips" data-trip>Lets Bunk Bro !</a><a class="glass" href="#memories">See the memories</a></div>
+</div></header>
+
+<section class="rev" aria-label="What students say">
+<div class="rbg a" style="background-image:url([BASE64_IMAGE])"></div><div class="rbg b" style="background-image:url([BASE64_IMAGE])"></div>
+<div class="wrap"><h2>What students say</h2></div>
+<div class="rmq"><div id="rv"></div></div>
+</section>
+
+<section class="memories" id="memories"><div class="wrap">
+<h2>Wall of memories from Student Days.</h2>
+<p class="lead">Real trips, real students, real moments.</p>
+<div class="wvid">
+<figure class="wf v1"><video id="wv1" muted loop playsinline preload="metadata" aria-label="StudentDays.co trips: trekking, beach and nights out"></video></figure>
+<figure class="wf v2"><video id="wv2" muted loop playsinline preload="metadata" aria-label="River rafting with friends" data-b64="[BASE64_VIDEO]"></video></figure>
+</div>
+<div class="wall">
+<figure class="f0"><img src="[BASE64_IMAGE]" alt="Two StudentDays travellers by a lake" loading="lazy"></figure>
+<figure class="f1"><img src="[BASE64_IMAGE]" alt="Students exploring a forest trail" loading="lazy"></figure>
+<figure class="f2"><img src="[BASE64_IMAGE]" alt="Friends smiling on a beach" loading="lazy"></figure>
+<figure class="f3"><img src="[BASE64_IMAGE]" alt="Group photo in a bamboo grove" loading="lazy"></figure>
+<figure class="f4"><img src="[BASE64_IMAGE]" alt="Students relaxing in a park" loading="lazy"></figure>
+</div></div></section>
+
+<section class="join" id="join"><div class="wrap">
+<h2>Your next story starts here.</h2>
+<p class="lead" style="color:#d7e6ff">Pick your trip, grab your slot and bring your people.</p>
+<div class="cards">
+<div class="card"><h3 class="ch">Create Trip with Your College/Group</h3><p><b>Not we, you guys tell us.</b> Tell us where your group wants to go. You plan, we create it for you. You explore &amp; experience.</p><p class="cnote">Note: minimum 10 members per group.</p><button class="glass blue" type="button" id="ctb">Create Trip</button></div>
+<div class="card"><h3>Book a trip</h3><p>Reserve your slot for an upcoming trip. Seats are limited.</p><a class="glass" href="#trips" data-trip>Book a trip</a></div>
+</div>
+<div class="app"><a class="glass blue big" href="#app" data-go="app">Join Our Community App</a><div class="row"><a class="glass" href="https://www.instagram.com/studentdays.co?rpxt=MWdpdXhrMjRnaXg1Yg==" target="_blank" rel="noopener">Follow Instagram</a><a class="glass" href="https://chat.whatsapp.com/KGGn6INH2lJIzgUylSXbCM?s=cl&amp;p=i&amp;ilr=4&amp;iam=2" target="_blank" rel="noopener" id="wa1">Join WhatsApp community</a></div><small>Book slots and explore trips from the StudentDays app.</small></div>
+</div></section>
+
+<section class="about"><div class="wrap">
+<h2>Travel built for student life.</h2>
+<p class="lead">Curated trips, cinematic documentaries and memories you keep. Every person on board is a student.</p>
+<div class="pillars">
+<article class="pillar"><h3>Live it</h3><p>Curated trips with students from across India.</p></article>
+<article class="pillar"><h3>Love it</h3><p>Real people, real vibes and friends you did not have last week.</p></article>
+<article class="pillar"><h3>Remember it</h3><p>A cinematic documentary of your own crew after every trip.</p></article>
+</div></div></section>
+
+<section class="contact" id="contact"><div class="wrap">
+<h2>Say hello.</h2>
+<p class="lead" style="color:#aab6cc">Questions about a trip, a booking or a college visit? Write to us.</p>
+<a class="mail" href="mailto:hello@studentdays.co.in">hello@studentdays.co.in</a>
+<p class="mob"><span>Mobile number</span><a href="tel:+919640389230">+91 9640389230</a></p>
+</div></section>
+
+</div>
+
+<div id="colleges" class="cp" hidden>
+<div class="wrap">
+<a class="glass back" href="#hero" data-go="home">← Back</a>
+<div class="ctop">
+<span class="pill">🎓 No cap, these are our people</span>
+<h1>These colleges<br><em>said let's go.</em><br>We said bet. 🫡</h1>
+<p class="sub">Hyderabad's top colleges have been eating with us. Their students went on a trip and lowkey never recovered (in a good way).</p>
+</div>
+</div>
+<div class="marq" aria-hidden="true"><div id="mq"></div></div>
+<div class="wrap"><ol class="list" id="cl"></ol>
+<div class="cta2">
+<h2>your college not here? that's on you fr 💀</h2>
+<p class="lead">lock in, book a trip, put your college on the map. no cap.</p>
+<button class="glass blue big" type="button" id="cpb">ok i'm in, let's go →</button>
+</div></div>
+</div>
+
+<div id="about" class="cp ab" hidden>
+<div class="wrap">
+<a class="glass back" href="#hero" data-go="home">← Back</a>
+<div class="ctop">
+<span class="pill">Travel. Connect. Experience.</span>
+<h1>About Us</h1>
+<p class="sub">StudentDays.co is a student-first Travel Community &amp; Experience platform built to create unforgettable experiences beyond classrooms.</p>
+</div></div>
+
+<section class="lt"><div class="wrap who">
+<div><h2>Who we are</h2>
+<p>We believe that the best memories of student life are not only made inside colleges but also through adventures, friendships, events, and shared experiences.</p>
+<p>Our mission is to bring students together through affordable trips, meaningful connections, and exciting opportunities.</p>
+<p>Whether it's exploring new destinations, meeting like-minded people, attending student events, or building lifelong friendships, StudentDays.co is designed to make every student journey more memorable.</p></div>
+<img class="map" src="[BASE64_IMAGE]" alt="Map of India with StudentDays.co destinations: Kashmir, Manali, Darjeeling, Hampi, Goa, Munnar, Ooty, Pondicherry and Vizag" loading="lazy">
+</div></section>
+
+<section><div class="wrap"><div class="two">
+<div class="gc"><span class="ic">🎯</span><h3>Our Mission</h3><p>To create affordable, safe, and memorable experiences that help students explore the world, build meaningful connections, and make the most of their student life.</p></div>
+<div class="gc"><span class="ic">🚀</span><h3>Our Vision</h3><p>To become India's largest student community platform where students can travel, connect, learn, and create lifelong memories together.</p></div>
+</div></div></section>
+
+<section class="lt"><div class="wrap"><h2 class="c">What we do</h2>
+<div class="two wd">
+<div class="lc"><span class="ic">✈️</span><h3>Student Trips</h3><p>Curated and budget-friendly trips designed specifically for students.</p></div>
+<div class="lc"><span class="ic">🤝</span><h3>Student Communities</h3><p>Building communities where students can connect, collaborate, and grow together.</p></div>
+<div class="lc"><span class="ic">🎉</span><h3>Campus Experiences</h3><p>Organizing events, meetups, workshops, and activities that make college life more exciting.</p></div>
+<div class="lc"><span class="ic">🌐</span><h3>Networking Opportunities</h3><p>Helping students meet peers from different colleges, cities, and backgrounds.</p></div>
+</div></div></section>
+
+<section><div class="wrap"><h2 class="c">Why StudentDays?</h2>
+<ul class="why">
+<li>Student-friendly pricing</li><li>Safe and organized experiences</li><li>Opportunities to make new friends</li><li>Community-driven experiences</li><li>Memorable adventures and stories</li><li>Exclusive experiences designed for students</li>
+</ul></div></section>
+
+<section class="lt"><div class="wrap"><h2 class="c">Our values</h2>
+<div class="vals">
+<div class="lc"><h3>Community First</h3><p>We believe great experiences are created together.</p></div>
+<div class="lc"><h3>Authentic Experiences</h3><p>Every trip, event, and activity is designed to create genuine memories.</p></div>
+<div class="lc"><h3>Accessibility</h3><p>Quality experiences should be affordable and accessible to every student.</p></div>
+<div class="lc"><h3>Growth Through Exploration</h3><p>Travel and experiences help students learn, grow, and discover new perspectives.</p></div>
+</div></div></section>
+
+<section class="prom"><div class="wrap">
+<h2>Our promise</h2>
+<p class="pl">At StudentDays.co, we don't just organize trips.</p>
+<p class="pb">We create experiences.<br>We build friendships.<br>We connect students.<br>We create stories that last a lifetime.</p>
+<p class="pq">"Every Trip Becomes a Story."</p>
+<a class="glass big" href="#join" data-go="home" data-anchor="join">Explore trips</a>
+</div></section>
+
+<section><div class="wrap"><h2 class="c">Company information</h2>
+<div class="info">
+<div><small>Founded</small><b>2026</b></div>
+<div><small>Founders</small><b>Rohith Banoth &amp; Lohith Ajmeera</b></div>
+<div><small>Headquarters</small><b>Hyderabad, India</b></div>
+<div><small>Email</small><b><a href="mailto:hello@studentdays.co.in">hello@studentdays.co.in</a></b></div>
+<div><small>Website</small><b>www.studentdays.co.in</b></div>
+<div><small>Category</small><b>Student Travel &amp; Experiences</b></div>
+</div></div></section>
+</div>
+
+<div id="doc" class="cp dc" hidden>
+<div class="wrap">
+<a class="glass back" href="#hero" data-go="home">← Back</a>
+<div class="ctop">
+<span class="pill">● Documentary</span>
+<h1>Stories shot like films.</h1>
+<p class="sub" id="dsub">Between Soul &amp; Shore — Arunachalam &amp; Pondicherry</p>
+</div>
+<div class="tabs" id="dtabs"></div>
+<div class="player" id="player"></div>
+<p class="scr">scroll for reels ↓</p>
+</div>
+<section><div class="wrap">
+<div class="ctop"><span class="pill">Reels</span>
+<h2 style="margin:20px auto 0;max-width:none">Trip moments</h2>
+<p class="sub">Raw. Real. Unforgettable.</p></div>
+<div class="reel"><iframe src="https://www.instagram.com/reel/DckZsfaTwJc/embed" title="StudentDays.co Instagram reel" loading="lazy" allowfullscreen scrolling="no"></iframe></div>
+<p class="scr"><a class="glass" href="https://www.instagram.com/reel/DckZsfaTwJc/" target="_blank" rel="noopener">Open on Instagram</a></p>
+</div></section>
+</div>
+
+
+<div id="trips" class="cp tr" hidden>
+<div class="wrap">
+<a class="glass back" href="#hero" data-go="home">← Back</a>
+<div class="ctop"><span class="pill">Upcoming trips</span>
+<h1 class="hl">Trip Near To You</h1>
+<p class="sub">Pick your crew, pick your route and let us handle the rest.</p></div>
+<div class="tg">
+<article class="tc kcard" id="kcard" role="button" tabindex="0" aria-label="Kerala trip, tap to view the itinerary">
+<div class="ti"><img src="[BASE64_IMAGE]" alt="Kerala, God's Own Country: houseboats on the backwaters" loading="lazy"><span class="hf">HOUSEFULL</span></div>
+<div class="tb"><h3>Kerala</h3><p>God's Own Country · 5 days · Hyderabad pickup &amp; drop · Rs. 7,999/-</p><span class="tl">Tap to view itinerary →</span></div>
+</article>
+<article class="tc lp">
+<div class="ti"><img src="[BASE64_IMAGE]" alt="Gokarna Dandeli, 3 days" loading="lazy"></div>
+<div class="tb"><h3>Gokarna – Dandeli</h3><p>3 days</p><span class="tbd">In November, Details TBA</span></div>
+</article>
+<article class="tc lp">
+<div class="ti"><img src="[BASE64_IMAGE]" alt="Araku Vanajangi, 3 days" loading="lazy"></div>
+<div class="tb"><h3>Araku &amp; Vanajangi</h3><p>3 days</p><span class="tbd">In November, Details TBA</span></div>
+</article>
+</div></div>
+</div>
+<div id="app" class="cp ap" hidden>
+<div class="aps" id="aps" aria-hidden="true"></div>
+<div class="wrap apc">
+<a class="glass back" href="#hero" data-go="home">← Back</a>
+<div class="ctop"><span class="pill">Coming soon</span>
+<h1>Our App Is Coming Soon…</h1>
+<p class="sub">With more features</p></div>
+<div class="vf"><video id="av" muted loop playsinline preload="auto" aria-label="StudentDays.co trips: trekking, beach and nights out" data-b64="[BASE64_VIDEO]"></video></div>
+<div class="pass">
+<p class="pk">Introducing</p>
+<h2 class="hl2">Student Travel Passport</h2>
+<img class="pimg ph1" src="[BASE64_IMAGE]" alt="A student holding the StudentDays.co Student Travel Passport">
+<img class="pimg" src="[BASE64_IMAGE]" alt="StudentDays.co Student Travel Passport sample card with member ID and QR code">
+<p class="pn">Your sample Student Travel Passport</p>
+</div>
+<div class="feat">
+<div class="gc"><span class="ic">🏷️</span><h3>Trip discounts</h3><p>Member-only savings on StudentDays.co trips.</p></div>
+<div class="gc"><span class="ic">🎒</span><h3>Packages</h3><p>Ready-to-go student travel packages.</p></div>
+<div class="gc"><span class="ic">🎉</span><h3>Events</h3><p>Meetups, workshops and experiences for students.</p></div>
+</div>
+<div class="row" style="justify-content:center;margin:44px 0 100px"><button class="glass blue big" type="button" id="atb">Be the First to Taste the App !</button></div>
+</div></div>
+<!--PAGES-->
+<dialog id="pd" aria-labelledby="pdt"><form id="pf">
+<button type="button" class="x" id="px" aria-label="Close">✕</button>
+<h3 id="pdt">Partner with us!</h3>
+<p class="pds">Tell us about you and what you have in mind. We will get back to you.</p>
+<label>Name<input name="name" required autocomplete="name"></label>
+<label>Contact<input name="contact" required placeholder="Phone number or email" autocomplete="tel"></label>
+<label>Partnership type<select name="type" id="pt" required><option value="">Select type</option><option>College Clubs</option><option>B2B deals</option><option>Content Creation</option><option>Marketing Stuffs</option><option>Trip Coordinator</option><option>International Deals</option><option>Others</option></select></label>
+<label id="po" hidden>If others, drop your thoughts here<textarea name="others" rows="3"></textarea></label>
+<label>Mention your page<input name="page" placeholder="Instagram, YouTube or website link"></label>
+<label>Reference<input name="ref" placeholder="Who referred you? (optional)"></label>
+<label>About yourself<textarea name="about" rows="3"></textarea></label>
+<div class="row"><button class="glass blue" type="submit">Send by email →</button></div>
+<p class="pds" style="margin-top:14px">This opens a new email to hello@studentdays.co.in with everything you filled in already written.</p>
+</form></dialog>
+<dialog id="cd" aria-labelledby="cdt"><div id="cdi">
+<button type="button" class="x" id="cx" aria-label="Close">✕</button>
+<div class="cbar"><div class="crew" id="crew" aria-hidden="true"><i>😐</i><i>😐</i><i>😐</i><i>😐</i><i>😐</i></div>
+<p class="mood" id="mood" aria-live="polite">Your crew is waiting…</p></div>
+<h3 id="cdt">Create trip with your college/group</h3>
+<p class="pds">You tell us where, we create it for you. Minimum 10 members.</p>
+<form id="cf" novalidate>
+<label>Trip planner name<input name="planner" required autocomplete="name"></label>
+<label>Contact<input name="contact" required inputmode="tel" placeholder="Phone number" autocomplete="tel"></label>
+<label>College &amp; year of studying<input name="college" required placeholder="e.g. Anurag University, 2nd year"></label>
+<label>Group capacity (minimum 10 members)<input name="cap" type="number" inputmode="numeric" required></label>
+<p class="capmsg" id="capmsg" hidden>Minimum group size is 10 members. Please enter 10 or more.</p>
+<div class="two2"><label>Number of males<input name="male" type="number" inputmode="numeric" min="0" required></label><label>Number of females<input name="female" type="number" inputmode="numeric" min="0" required></label></div>
+<label>Destinations<input name="dest" required placeholder="Where does your group want to go?"></label>
+<label>Preferred travel option<select name="travel" required><option value="">Select</option><option>Train</option><option>Bus</option><option>Car</option><option>Anything Works</option></select></label>
+<div class="row" style="margin-top:22px"><button class="glass blue" type="submit">Submit &amp; send on WhatsApp</button></div>
+<p class="pds" style="margin-top:12px"><a id="cwa" target="_blank" rel="noopener" href="#" hidden style="color:#8fc0ff">Didn't open? Tap here to send on WhatsApp</a></p>
+</form></div></dialog>
+<dialog id="ad" aria-labelledby="adt"><div class="adw">
+<svg class="trv" viewBox="0 0 300 130" aria-hidden="true">
+<path d="M122 108Q90 126 58 112" stroke="#f0c08a" stroke-width="16" stroke-linecap="round" fill="none" class="arm l"/>
+<path d="M178 108Q210 126 242 112" stroke="#f0c08a" stroke-width="16" stroke-linecap="round" fill="none" class="arm r"/>
+<circle class="hand l" cx="56" cy="114" r="15" fill="#f0c08a"/><circle class="hand r" cx="244" cy="114" r="15" fill="#f0c08a"/>
+<g class="hd"><circle cx="150" cy="70" r="40" fill="#f0c08a"/><path d="M108 62a42 40 0 0 1 84 0z" fill="#1E6BFF"/><path d="M146 58h62a10 7 0 0 1-8 11h-54z" fill="#0a2f8f"/>
+<g class="eyes"><ellipse cx="135" cy="76" rx="5.5" ry="6.5" fill="#fff"/><circle cx="136" cy="77" r="3.2" fill="#111"/><ellipse cx="165" cy="76" rx="5.5" ry="6.5" fill="#fff"/><circle cx="166" cy="77" r="3.2" fill="#111"/></g>
+<path class="m1" d="M134 90q16 14 32 0" stroke="#111" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+<path class="m2" d="M132 88q18 26 36 0z" fill="#7a1f1f"/></g>
+</svg>
+<div class="fcard"><button type="button" class="x" id="ax" aria-label="Close">✕</button>
+<div id="aform"><h3 id="adt">Be the first to taste the app!</h3>
+<p class="pds">Join the early access list.</p>
+<form id="af">
+<label>Name<input name="nm" required autocomplete="name"></label>
+<label>Age<input name="age" type="number" inputmode="numeric" min="14" max="60" required></label>
+<label>College name<input name="col" required></label>
+<label>Gender<select name="gen" required><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select></label>
+<label>Mobile number<input name="mob" type="tel" inputmode="tel" required autocomplete="tel"></label>
+<div class="row" style="margin-top:22px"><button class="glass blue" type="submit">Count me in 🎉</button></div>
+</form></div>
+<div id="athx" hidden><h3>You're on the list! 🎉</h3><p class="pds">We'll message you as soon as the app is ready. Opening WhatsApp to confirm…</p><p class="pds"><a id="awa" target="_blank" rel="noopener" href="#" style="color:#8fc0ff">Didn't open? Tap here to confirm on WhatsApp</a></p></div>
+</div></div></dialog>
+<dialog id="kd" aria-label="Kerala trip itinerary"><div id="kdb"></div></dialog>
+<a class="glass blue jt" href="#trips" data-trip>Lets Go !</a>
+<canvas id="fx"></canvas>
+<svg id="plane" viewBox="0 0 64 64" width="64" height="64" aria-hidden="true"><path d="M62 32 40 26 28 8h-6l6 18-16-2-6-8H2l4 16-4 16h4l6-8 16-2-6 18h6l12-18Z" fill="#fff"/></svg>
+<footer id="policies"><div class="wrap">
+<div class="fg">
+<div><img src="[BASE64_IMAGE]" alt="StudentDays.co"><p class="ft">Live it. Love it. Remember it.</p></div>
+<div><h4>Quick links</h4>
+<a href="#faq" data-go="faq">FAQs</a><a href="#terms" data-go="terms">Terms &amp; Conditions</a><a href="#refund" data-go="refund">Refund &amp; Cancellation Policy</a><a href="#privacy" data-go="privacy">Privacy Policy</a></div>
+<div><h4>Contact</h4>
+<a href="mailto:hello@studentdays.co.in">hello@studentdays.co.in</a><a href="https://www.instagram.com/studentdays.co?rpxt=MWdpdXhrMjRnaXg1Yg==" target="_blank" rel="noopener">Instagram</a><a href="https://chat.whatsapp.com/KGGn6INH2lJIzgUylSXbCM?s=cl&amp;p=i&amp;ilr=4&amp;iam=2" target="_blank" rel="noopener" id="wa2">WhatsApp</a></div>
+</div>
+<div class="fb"><span>© 2026 StudentDays.co</span><span>Made for students across India</span><span>A Rohith Banoth &amp; Lohith Ajmeera vision</span></div>
+</div></footer>
+
+<script>
+(function(){
+['av','wv2'].forEach(function(id){var e=document.getElementById(id);e.src=blobUrl(e.getAttribute('data-b64'));e.removeAttribute('data-b64')});
+
+
+var names=["Anurag University","University of Hyderabad","JNTUH","Osmania University","BVRIT","Malla Reddy Group (MLRIT)","Bhoj Reddy Engineering College","KMIT","GRIET","VNR VJIET"];
+document.getElementById('cl').innerHTML=names.map(function(n,i){return '<li><span class="n">'+String(i+1).padStart(2,'0')+'</span><span>'+n+'</span><span class="t">They ate 🔥</span></li>'}).join('');
+var chips=names.map(function(n){return '<span class="chip">'+n+'</span>'}).join('');
+document.getElementById('mq').innerHTML=chips+chips;
+
+function L(a){return '<ul>'+a.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>'}
+function S(h){var r='<h3>'+h+'</h3>';for(var i=1;i<arguments.length;i++){var x=arguments[i];r+=Array.isArray(x)?L(x):'<p>'+x+'</p>'}return r}
+var CB='<div class="cb"><b>StudentDays.co</b><a href="mailto:hello@studentdays.co.in">Email: hello@studentdays.co.in</a><span>Website: www.studentdays.co.in</span></div><p class="tgl">Travel. Connect. Experience.<br>Every Trip Becomes a Story.</p>';
+function QA(q,a){return '<details class="faq"><summary>'+q+'</summary>'+(Array.isArray(a)?L(a):'<p>'+a+'</p>')+'</details>'}
+var TERMS='<p class="upd">Last updated: June 2026</p><p>Welcome to StudentDays.co. By accessing our website, registering for trips, events, or services, you agree to comply with the following Terms &amp; Conditions. Please read them carefully before making any booking.</p>'+
+S('1. Acceptance of terms','By using StudentDays.co, you acknowledge that you have read, understood, and agreed to these Terms &amp; Conditions. If you do not agree, please refrain from using our services.')+
+S('2. Eligibility',['StudentDays.co experiences are primarily designed for students and young adults.','Participants must provide accurate information during registration.','Participants under 18 years of age may require parental or guardian consent.'])+
+S('3. Bookings &amp; registrations',['All bookings are subject to availability.','A booking is confirmed only after successful payment and confirmation from StudentDays.co.','StudentDays.co reserves the right to reject or cancel any registration if necessary.'])+
+S('4. Payments',['Trip and event fees must be paid through approved payment methods.','Prices displayed on the website are subject to change without prior notice.','Any applicable taxes, convenience fees, or third-party charges may be added during checkout.'])+
+S('5. Participant responsibilities','Participants are expected to:',['Follow trip coordinators\' instructions.','Respect fellow travelers and organizers.','Maintain appropriate behavior during trips and events.','Comply with local laws and regulations.'],'StudentDays.co reserves the right to remove any participant whose behavior is disruptive, unsafe, or harmful to others.')+
+S('6. Travel &amp; event changes','StudentDays.co may modify:',['Itineraries','Schedules','Accommodation arrangements','Transportation plans'],'Such changes may occur due to weather conditions, operational requirements, safety concerns, government regulations, or unforeseen circumstances.')+
+S('7. Cancellation by participant','Cancellation and refund policies may vary depending on the trip or event. Please refer to the Refund &amp; Cancellation Policy page for complete details.')+
+S('8. Cancellation by StudentDays.co','StudentDays.co reserves the right to cancel or postpone any trip or event due to:',['Insufficient registrations','Natural disasters','Government restrictions','Safety concerns','Unforeseen operational issues'],'In such cases, participants will be informed and eligible compensation or refunds will be handled according to the Refund Policy.')+
+S('9. Liability disclaimer','StudentDays.co acts as an organizer and facilitator of experiences. While every effort is made to ensure safety and quality, StudentDays.co shall not be held responsible for:',['Personal injuries','Loss of belongings','Accidents','Delays','Third-party service failures','Natural disasters','Circumstances beyond our reasonable control'],'Participants join trips and events at their own risk.')+
+S('10. Photography &amp; media consent','By participating in StudentDays.co trips or events, you grant permission for photographs, videos, and other media captured during the experience to be used for:',['Marketing','Social media promotions','Website content','Future promotional campaigns'],'The StudentDays team captures moments throughout the whole trip, and you may be recorded during the journey and sightseeing.','If you wish to opt out, please notify the organizing team before the event begins.')+
+S('11. Intellectual property','All website content, branding, logos, graphics, videos, and materials are the property of StudentDays.co and may not be copied, reproduced, or distributed without written permission.')+
+S('12. Prohibited activities','Users must not:',['Provide false information','Misuse the platform','Engage in unlawful activities','Harass participants or organizers','Damage property during trips or events'],'Violation may result in immediate removal from services without refund.')+
+S('13. Privacy','Your use of StudentDays.co is also governed by our Privacy Policy, which explains how we collect, use, and protect your information.')+
+S('14. Changes to terms','StudentDays.co reserves the right to update these Terms &amp; Conditions at any time. Updated versions will be posted on this page.')+
+S('15. Contact us','For any questions regarding these Terms &amp; Conditions, please contact:')+CB;
+var PRIV='<p class="upd">Last updated: June 2026</p><p>At StudentDays.co, we value your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, store, and protect your information when you visit our website, register for trips, participate in events, or interact with our services.</p><p>By using StudentDays.co, you agree to the practices described in this Privacy Policy.</p>'+
+S('1. Information we collect','<b>Personal information</b>',['Full name','Email address','Phone number','College/University name','City and state','Emergency contact information','Date of birth (if required for specific trips)'],'<b>Booking information</b>',['Trip registrations','Event registrations','Payment details (processed through secure third-party payment providers)'],'<b>Technical information</b>',['Device information','Browser type','IP address','Website usage data','Cookies and analytics data'])+
+S('2. How we use your information','We use your information to:',['Process trip and event registrations','Communicate important updates','Provide customer support','Improve website functionality','Personalize user experience','Send trip announcements, offers, and updates','Maintain safety and security during experiences','Comply with legal requirements'])+
+S('3. Information sharing','StudentDays.co does not sell, rent, or trade your personal information. We may share information only with:',['Trip partners and service providers','Transportation providers','Accommodation partners','Payment processing providers','Government authorities when legally required'],'All partners are expected to maintain appropriate data protection standards.')+
+S('4. Cookies &amp; analytics','Our website may use cookies and analytics tools to:',['Improve website performance','Understand visitor behavior','Enhance user experience','Measure marketing effectiveness'],'You may disable cookies through your browser settings, although some features may not function properly.')+
+S('5. Data security','We implement reasonable security measures to protect your personal information from:',['Unauthorized access','Misuse','Disclosure','Alteration','Loss'],'While we strive to protect your information, no online system can guarantee complete security.')+
+S('6. Communications','By registering on StudentDays.co, you may receive:',['Trip updates','Booking confirmations','Event notifications','Community announcements','Promotional offers'],'You may unsubscribe from marketing communications at any time.')+
+S('7. Media &amp; photography','During trips, events, and experiences, photos and videos may be captured for promotional purposes. These materials may be used on:',['StudentDays.co website','Social media platforms','Marketing campaigns','Promotional content'],'If you do not wish to appear in such content, please notify the organizing team before the event begins.')+
+S('8. Third-party links','Our website may contain links to third-party websites or services. StudentDays.co is not responsible for the privacy practices or content of external websites. Users are encouraged to review the privacy policies of those websites separately.')+
+S('9. Children\'s privacy','StudentDays.co services are primarily intended for students and young adults. Where required, participants below the age of 18 should obtain consent from a parent or legal guardian before registering.')+
+S('10. Changes to this privacy policy','We may update this Privacy Policy periodically to reflect changes in our services, legal requirements, or business practices. Any updates will be published on this page with the revised effective date.')+
+S('11. Your rights','You may request to:',['Access your personal information','Correct inaccurate information','Update your details','Request deletion of your information where applicable'],'Requests can be submitted through our contact details below.')+
+S('12. Contact us','For questions regarding this Privacy Policy or your personal information, please contact:')+CB+
+S('Our commitment','Your trust is important to us. StudentDays.co is committed to creating safe, memorable, and meaningful experiences while protecting your privacy and personal information.');
+var REF='<p class="upd">Last updated: June 2026</p><p>At StudentDays.co, we work closely with transportation providers, accommodation partners, activity organizers, and vendors to create memorable experiences for students. Since many arrangements are booked in advance, the following Refund &amp; Cancellation Policy applies to all trips and events.</p><p>By booking a trip or event with StudentDays.co, you agree to this policy.</p>'+
+S('1. Cancellation by participant','If a participant chooses to cancel their booking, the following refund structure may apply:')+
+'<div class="rt"><div><b>More than 15 days before departure</b><span>Up to 75% refund of the booking amount. Processing charges and third-party fees may be deducted.</span></div><div><b>8 to 14 days before departure</b><span>Up to 50% refund of the booking amount.</span></div><div><b>3 to 7 days before departure</b><span>Up to 25% refund of the booking amount.</span></div><div><b>Less than 72 hours before departure</b><span>No refund will be provided.</span></div><div><b>No show</b><span>No refund will be provided if the participant fails to attend the trip, event, or departure point.</span></div></div>'+
+'<p class="kn2">Advance booking amounts are non-refundable but may be adjusted against future StudentDays.co trips at management discretion.</p>'+
+S('2. Cancellation request process','To request a cancellation, send an email to hello@studentdays.co.in and include:',['Full name','Registered phone number','Trip/Event name','Booking details','Reason for cancellation'],'Refund requests will be processed only after verification.')+
+S('3. Refund processing time',['Approved refunds will generally be processed within 7 to 15 business days.','Refund timelines may vary depending on the payment provider or banking institution.'])+
+S('4. Transfer of booking','Where possible, StudentDays.co may allow booking transfers to another eligible participant. Approval is subject to:',['Availability','Verification of the replacement participant','Operational feasibility'],'Transfer requests must be made before the specified deadline communicated by the organizing team.')+
+S('5. Cancellation by StudentDays.co','StudentDays.co reserves the right to cancel, postpone, or reschedule trips/events due to:',['Insufficient registrations','Extreme weather conditions','Government restrictions','Natural disasters','Safety concerns','Transport disruptions','Other unforeseen circumstances'],'In such cases, participants may receive:',['Full refund, or','Credit towards a future trip/event, depending on the situation.'],'The final decision will be communicated to all registered participants.')+
+S('6. Non-refundable charges','The following may be non-refundable:',['Booking convenience fees','Payment gateway charges','Government taxes','Third-party reservation charges','Customized add-ons or special requests'])+
+S('7. Participant removal during trip','StudentDays.co reserves the right to remove any participant whose behavior:',['Threatens safety','Violates local laws','Harasses others','Disrupts the experience'],'In such cases:',['No refund will be provided.','Additional expenses incurred may be charged to the participant.'])+
+S('8. Force majeure','StudentDays.co shall not be held liable for cancellations, delays, or changes caused by circumstances beyond reasonable control, including:',['Natural disasters','Floods','Earthquakes','Political unrest','Government restrictions','Pandemic-related restrictions','Transportation strikes'],'Refunds in such situations will depend on recoveries from third-party vendors and service providers.')+
+S('9. Contact us','For cancellation requests or refund-related queries:')+CB+
+S('Our goal','We strive to keep our cancellation and refund process fair while ensuring the sustainability of student-friendly experiences. Thank you for being a part of the StudentDays.co community.');
+var FAQH='<h3 class="fcat">Trip related questions</h3>'+
+QA('How do I book a trip?','You can book a trip directly through our website by selecting your preferred trip and completing the registration and payment process.')+
+QA('How will I know if my booking is confirmed?','Once your payment is successfully completed, you will receive a confirmation through WhatsApp, email, or a phone call from our team.')+
+QA('What is included in the trip package?','Trip inclusions vary by destination. Generally, transportation, accommodation, trip coordination, planned activities, and sightseeing are included.')+
+QA('What is not included in the trip cost?','Personal expenses, shopping, additional meals, travel insurance, and activities not listed in the itinerary.')+
+QA('Can I join alone?','Yes. Many students join solo and make new friends during the trip.')+
+QA('Will there be trip coordinators?','Yes. Every trip is managed by StudentDays.co coordinators.')+
+QA('Do I need to arrange my own transportation?','Trip details will clearly mention whether transportation is included.')+
+QA('Can I bring friends?','Yes, provided they complete the registration process.')+
+QA('What should I carry for the trip?',['Valid ID proof','Comfortable clothes','Personal medicines','Charger / power bank','Water bottle','Personal essentials'])+
+'<h3 class="fcat">Payments &amp; refunds</h3>'+
+QA('What payment methods are accepted?','We accept secure online payments through approved payment gateways.')+
+QA('Is the booking amount refundable?','Refund eligibility depends on the cancellation timeline. Please refer to the Refund &amp; Cancellation Policy.')+
+QA('How long does a refund take?','Approved refunds are usually processed within 3 to 7 business days.')+
+'<h3 class="fcat">Safety &amp; security</h3>'+
+QA('Is StudentDays.co safe?','Yes. Safety is our top priority. Trips are carefully planned and managed by coordinators.')+
+QA('Are female travelers welcome?','Absolutely. StudentDays.co promotes a safe, respectful, and inclusive environment for all participants.')+
+QA('What should I do during an emergency?','Immediately contact the assigned trip coordinator. Emergency contact details are shared before departure.')+
+'<h3 class="fcat">Community &amp; experiences</h3>'+
+QA('Can I become a StudentDays Campus Ambassador?','Yes. Students can apply through our website or contact our team.')+
+QA('Do you organize college-specific trips?','Yes. We collaborate with colleges, clubs, and student communities.')+
+QA('Do you organize events apart from trips?','Yes. We conduct meetups, workshops, networking sessions, and student experiences.')+
+'<h3 class="fcat">Contact &amp; support</h3>'+
+QA('How can I contact StudentDays.co?','Email hello@studentdays.co.in or visit www.studentdays.co.in.')+
+QA('How can I stay updated about upcoming trips?','Follow StudentDays.co on Instagram and regularly check our website for announcements.')+
+'<p class="tgl">Travel. Connect. Experience.<br>Every Trip Becomes a Story.</p>';
+var PAGES={faq:{t:'FAQs',s:'Frequently asked questions',h:FAQH},terms:{t:'Terms &amp; Conditions',s:'Please read these before making any booking.',h:TERMS},refund:{t:'Refund &amp; Cancellation Policy',s:'How cancellations and refunds work.',h:REF},privacy:{t:'Privacy Policy',s:'How we collect, use and protect your information.',h:PRIV}};
+var foot=document.getElementById('policies');
+Object.keys(PAGES).forEach(function(k){var p=PAGES[k],d=document.createElement('div');d.id=k;d.className='cp pol';d.hidden=true;
+ d.innerHTML='<div class="wrap"><a class="glass back" href="#hero" data-go="home">← Back</a><div class="ctop"><h1>'+p.t+'</h1><p class="sub">'+p.s+'</p></div><div class="body">'+p.h+'</div></div>';
+ foot.parentNode.insertBefore(d,foot)});
+var VIDS=[{id:'4E648bz2aR4',tab:'1. Arunachalam & Pondicherry',sub:'Between Soul & Shore — Arunachalam & Pondicherry',ti:'Between Soul & Shore'},{id:'lN502PsnETI',tab:'2. Vizag & Araku',sub:'Beach, Chills & Hills — Vizag & Araku',ti:'Beach: Chills & Hills'}];
+var pl=document.getElementById('player'),tabs=document.getElementById('dtabs'),ds=document.getElementById('dsub');
+pl.insertAdjacentHTML('afterend','<p class="scr"><a class="glass" id="yt" target="_blank" rel="noopener">▶ Watch on YouTube</a></p>');
+function vid(i){var v=VIDS[i];ds.textContent=v.sub;document.getElementById('yt').href='https://youtu.be/'+v.id;
+ [].forEach.call(tabs.children,function(b,j){b.setAttribute('aria-selected',j===i)});
+ pl.innerHTML='<button class="ph" type="button" aria-label="Play '+v.ti+'"><img alt="" src="https://i.ytimg.com/vi/'+v.id+'/hqdefault.jpg" onerror="this.remove()"><span class="pb2" style="position:relative">▶</span><span style="position:relative">'+v.ti+'</span><small style="position:relative">StudentDays Stories</small></button>';
+ pl.firstChild.onclick=function(){pl.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+v.id+'?autoplay=1&rel=0" title="'+v.ti+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>'}}
+VIDS.forEach(function(v,i){var b=document.createElement('button');b.className='tab';b.type='button';b.textContent=v.tab;b.onclick=function(){vid(i)};tabs.appendChild(b)});
+vid(0);
+var RV=[['Rahul Kumar','Anurag University','RK','Best trip of my college life.'],['Priya Sharma','GNU','PS','The documentary film made me relive everything.'],['N Varadarajulu','Rao Institute','NV','Never thought student travel could feel this good.']];
+var rc=RV.map(function(r){return '<div class="rc"><div class="who2"><span class="av">'+r[2]+'</span><div><b>'+r[0]+'</b><small>'+r[1]+'</small></div></div><div class="st" aria-label="5 stars">★★★★★</div><p>“'+r[3]+'”</p></div>'}).join('');
+document.getElementById('rv').innerHTML=rc+rc+rc+rc;
+var pg={home:document.getElementById('home'),colleges:document.getElementById('colleges'),about:document.getElementById('about'),doc:document.getElementById('doc'),trips:document.getElementById('trips'),app:document.getElementById('app')};
+Object.keys(PAGES).forEach(function(k){pg[k]=document.getElementById(k)});
+var nav=document.getElementById('nav');
+function show(n,a){for(var k in pg)pg[k].hidden=(k!==n);nav.classList.remove('open');setTimeout(updJt,60);
+ if(n!=='home')window.scrollTo({top:0,behavior:'instant'});else{var el=a&&document.getElementById(a);if(el)el.scrollIntoView();else window.scrollTo({top:0,behavior:'instant'})}
+ try{history.replaceState(null,'',n!=='home'?'#'+n:'#'+(a||'hero'))}catch(e){}}
+document.addEventListener('click',function(e){var g=e.target.closest('[data-go]');if(g){e.preventDefault();show(g.dataset.go,g.dataset.anchor)}});
+var nav=document.getElementById('nav'),mb=document.getElementById('mb');
+mb.addEventListener('click',function(){var o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o)});
+document.addEventListener('click',function(e){if(!nav.contains(e.target)&&nav.classList.contains('open')){nav.classList.remove('open');mb.setAttribute('aria-expanded',false)}});
+
+var KH='<button type="button" class="x" id="kx" aria-label="Close">✕</button><div class="kh"><span class="hfb">HOUSEFULL</span><p class="kk">God\'s own country · A trip you\'ll never forget</p><h3>Kerala trip itinerary</h3><p class="kr">Munnar · Kolukkumalai · Alappuzha · Athirapally</p><div class="kc"><span>Pickup &amp; drop: Hyderabad</span><span>Only for college students (female &amp; male)</span></div></div>';
+KH+='<div class="kbox kp"><b>All-inclusive package</b><strong>Rs. 7,999/-</strong><p>Train tickets · Stays · Houseboat night · All meals · Tent stay on the peak · Photos, videos &amp; a documentary shoot</p><small>* 5 days including travel days (train journey to and from Kochi).</small></div>';
+function rows(a){return a.map(function(r){return '<div class="kr2"><em>'+r[0]+'</em><ul>'+r[1].map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul></div>'}).join('')}
+var DAYS=[
+['Day 0','Start from Hyderabad','Relax and enjoy the train journey with your gang. Tickets included.',[],'',''],
+['Day 1','Kochi to Munnar','Tea gardens, waterfalls &amp; misty hills',[['Morning',['Reach <b>Kochi</b> and meet your trip team','<b>Pickup from Kochi</b> and transfer to Munnar','En-route stop at <b>Cheeyapara Waterfalls</b>']],['Afternoon',['Arrival &amp; check-in at <b>Munnar</b>','Visit <b>Mattupetty Dam</b>','<b>Elephant Park</b> and <b>Photo Point</b>','Stroll through the <b>Botanical Garden</b>']],['Night',['Dinner &amp; overnight stay in Munnar']]],'Rest well tonight. Tomorrow starts at 3:00 AM for the sunrise of a lifetime!','Stay in Munnar: the whole resort is reserved for our group, with comfortable rooms, misty hill views and separate rooms for girls and boys.'],
+['Day 2','Kolukkumalai to Alappuzha','Sunrise above the clouds, then the backwaters',[['3:00 AM',['Early wake-up','Depart for <b>Kolukkumalai</b>, one of the highest tea estates in the world']],['Morning',['Experience the spectacular <b>Kolukkumalai Sunrise</b>','Return from Kolukkumalai','Breakfast and freshen up']],['Afternoon',['Depart towards <b>Alappuzha</b>','Check in to your <b>Alappuzha Houseboat</b>','Relaxing <b>backwater cruise</b>','Enjoy Kerala-style scenery &amp; local experience']],['Night',['Dinner &amp; overnight stay on the <b>Houseboat</b>']]],'','Boat stay: a whole day and night afloat on your own houseboat, with breakfast, lunch and dinner served on board.'],
+['Day 3','Alappuzha to Athirapally to Kochi','Thundering falls, then homeward bound',[['9:00 AM',['Breakfast','Houseboat checkout']],['Morning',['Transfer to <b>Athirapally</b>']],['Afternoon',['<b>Athirapally Waterfalls</b>, the Niagara of India','<b>Thumboormuzhy Dam</b>','<b>Butterfly Park</b>','<b>Hanging Bridge</b>']],['Evening',['Depart towards Kochi and reach Kochi']]],'Return to Hyderabad by train.','']
+];
+KH+=DAYS.map(function(d){return '<div class="kd1"><div class="kdh"><i>'+d[0]+'</i><div><b>'+d[1]+'</b><span>'+d[2]+'</span></div></div>'+rows(d[3])+(d[4]?'<div class="knote">'+d[4]+'</div>':'')+(d[5]?'<p class="kst">'+d[5]+'</p>':'')+'</div>'}).join('');
+KH+='<div class="kro">'+['Hyderabad','Kochi','Munnar','Kolukkumalai','Alappuzha','Athirapally','Kochi','Hyderabad'].map(function(x){return '<span>'+x+'</span>'}).join('')+'</div>';
+KH+='<div class="kbox" style="text-align:left"><b style="text-align:center">What\'s included</b><div class="kin">'+[['Train tickets','Hyderabad to Kochi and back'],['Local transport','All pickups, transfers &amp; sightseeing travel in Kerala'],['Comfortable stays','Hand-picked stays during the trip'],['Houseboat stay','A full night floating on the Alappuzha backwaters'],['Food on the boat','Kerala-style breakfast, lunch &amp; dinner on board'],['Tent stay on the peak','Camp at the Kolukkumalai peak point'],['Photos &amp; videos','Camera coverage so every moment is captured'],['Documentary shoot','Your trip turned into a keepsake documentary'],['Trip guide &amp; support','A guide and support team with you throughout']].map(function(x){return '<div><b>'+x[0]+'</b>'+x[1]+'</div>'}).join('')+'</div><p class="kn" style="margin:12px 0 0">* Except food on trains. Lunch on one day is not included. Just about Rs. 1,600 per day for travel, stay, food, adventure and memories.</p></div>';
+KH+='<div class="kact"><a class="glass blue" href="https://forms.gle/zBD1r477KBZxSiDF6" target="_blank" rel="noopener">Pre-booking form</a><button class="glass" type="button" id="kx2">Close</button></div>';
+var kd=document.getElementById('kd');document.getElementById('kdb').innerHTML=KH;
+function kopen(){if(kd.open)return;if(kd.showModal)kd.showModal();else kd.setAttribute('open','')}
+var kc=document.getElementById('kcard');kc.addEventListener('click',kopen);kc.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();kopen()}});
+document.getElementById('kx').addEventListener('click',function(){kd.close()});document.getElementById('kx2').addEventListener('click',function(){kd.close()});
+kd.addEventListener('click',function(e){if(e.target===kd)kd.close()});
+var busy=false;
+function fly(btn,mid){
+ if(busy)return;busy=true;
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches){mid();busy=false;return}
+ var W=innerWidth,H=innerHeight,r=btn.getBoundingClientRect(),x0=r.left+r.width/2,y0=r.top+r.height/2,
+ c=document.getElementById('fx'),ctx=c.getContext('2d'),pl=document.getElementById('plane'),dpr=Math.min(2,window.devicePixelRatio||1);
+ c.width=W*dpr;c.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);c.style.display='block';
+ var P=y0>H*.5?[[x0,y0],[x0+W*.05,y0-H*.5],[W*.5,H*.05],[W*1.2,-H*.2]]:[[x0,y0],[x0+W*.28,y0+H*.30],[W*.5,H*.02],[W*1.18,-H*.12]];
+ function B(t){var u=1-t;return [u*u*u*P[0][0]+3*u*u*t*P[1][0]+3*u*t*t*P[2][0]+t*t*t*P[3][0],u*u*u*P[0][1]+3*u*u*t*P[1][1]+3*u*t*t*P[2][1]+t*t*t*P[3][1]]}
+ function D(t){var u=1-t;return [3*u*u*(P[1][0]-P[0][0])+6*u*t*(P[2][0]-P[1][0])+3*t*t*(P[3][0]-P[2][0]),3*u*u*(P[1][1]-P[0][1])+6*u*t*(P[2][1]-P[1][1])+3*t*t*(P[3][1]-P[2][1])]}
+ var DUR=2600,t0=performance.now(),pts=[],did=false;
+ function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
+ function frame(now){
+  var k=Math.min(1,(now-t0)/DUR),e=ease(k),p=B(e),d=D(e),a=Math.atan2(d[1],d[0]);
+  pts.push(p);if(pts.length>70)pts.shift();
+  ctx.clearRect(0,0,W,H);ctx.lineCap='round';
+  for(var i=1;i<pts.length;i++){var f=i/pts.length;ctx.strokeStyle='rgba(255,255,255,'+(f*.85)+')';ctx.lineWidth=.6+f*2.2;ctx.beginPath();ctx.moveTo(pts[i-1][0],pts[i-1][1]);ctx.lineTo(pts[i][0],pts[i][1]);ctx.stroke()}
+  var s=.55+Math.sin(Math.PI*e)*.7,op=Math.min(1,k/.06)*(k>.86?Math.max(0,(1-k)/.14):1);
+  pl.style.opacity=op;pl.style.transform='translate('+(p[0]-32)+'px,'+(p[1]-32)+'px) rotate('+a+'rad) scale('+s+')';
+  if(!did&&k>.55){did=true;mid()}
+  if(k<1)requestAnimationFrame(frame);else{pl.style.opacity=0;c.style.display='none';busy=false}
+ }
+ requestAnimationFrame(frame)}
+document.addEventListener('click',function(e){var g=e.target.closest('[data-trip]');if(!g)return;e.preventDefault();nav.classList.remove('open');fly(g,function(){show('trips')})});
+
+(function(){var tg=document.querySelector('.tg');
+[].slice.call(tg.children).forEach(function(c){var n=c.cloneNode(true);n.removeAttribute('id');n.setAttribute('aria-hidden','true');n.tabIndex=-1;tg.appendChild(n)});
+document.getElementById('trips').addEventListener('click',function(e){if(e.target.closest('.kcard'))kopen()});
+if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+var paused=false,rt,pos=0,tr=document.getElementById('trips');
+function hold(ms){paused=true;clearTimeout(rt);rt=setTimeout(function(){paused=false},ms)}
+['pointerdown','wheel','touchstart','touchmove','mouseenter'].forEach(function(ev){tg.addEventListener(ev,function(){hold(2500)},{passive:true})});
+tg.addEventListener('mouseleave',function(){hold(500)});
+function step(){if(!paused&&!tr.hidden){var half=tg.children[3].offsetLeft-tg.children[0].offsetLeft;if(half>0){if(Math.abs(tg.scrollLeft-pos)>2)pos=tg.scrollLeft;pos+=.7;if(pos>=half)pos-=half;tg.scrollLeft=pos}}requestAnimationFrame(step)}
+requestAnimationFrame(step)})();
+
+var jt=document.querySelector('.jt'),hb=document.querySelector('#hero [data-trip]');
+function updJt(){var home=!pg.home.hidden,on=document.body.classList.contains('ready')&&(!home||hb.getBoundingClientRect().bottom<40);jt.classList.toggle('on',on)}
+addEventListener('scroll',updJt,{passive:true});addEventListener('resize',updJt);
+new MutationObserver(updJt).observe(document.body,{attributes:true,attributeFilter:['class']});
+updJt();
+
+(function(){
+// Paste your Google Apps Script web app URL here to send Create Trip forms to your Google Sheet
+var SHEET_URL='https://script.google.com/macros/s/AKfycbwvMQxwC7YnpiBdW9usDjbHZYcN2h2mq2MCiBHDlvlYurJ_7Z7sbKstlJ3nnbCe2CSFOg/exec';
+var cd=document.getElementById('cd'),cf=document.getElementById('cf'),crew=[].slice.call(document.querySelectorAll('#crew i')),md=document.getElementById('mood'),cm=document.getElementById('capmsg'),wa=document.getElementById('cwa'),cur=-1,sent=false;
+var bg=document.querySelector('.rbg.b');if(bg)cd.style.backgroundImage='linear-gradient(rgba(3,10,26,.3),rgba(3,10,26,.62)),'+bg.style.backgroundImage;
+var FACES=['😐','🙂','😊','😄','🤩'],CAP=['Your crew is waiting…','Nice start!','Looking good!','They are getting excited!','Extremely excited!!'];
+function setMood(l,txt,face){if(l===cur&&!txt)return;cur=l;crew.forEach(function(el,i){el.textContent=face||FACES[l];el.classList.remove('b','j');void el.offsetWidth;el.style.animationDelay=(i*70)+'ms';el.classList.add(txt?'j':'b')});md.textContent=txt||CAP[l]}
+function score(){var f=cf.elements,n=0;if(f.planner.value.trim().length>1)n++;if(f.contact.value.trim().length>=8)n++;if(f.college.value.trim())n++;if(+f.cap.value>=10)n++;if(f.male.value!=='')n++;if(f.female.value!=='')n++;if(f.dest.value.trim())n++;if(f.travel.value)n++;return n}
+function upd(){var f=cf.elements;cm.hidden=!(f.cap.value!==''&&+f.cap.value<10);var n=score();setMood(n?Math.min(4,Math.ceil(n/2)):0)}
+cf.addEventListener('input',upd);cf.addEventListener('change',upd);
+function open(){if(sent){cf.reset();sent=false;wa.hidden=true}cur=-1;upd();if(cd.showModal)cd.showModal();else cd.setAttribute('open','')}
+document.getElementById('ctb').addEventListener('click',open);
+document.getElementById('cx').addEventListener('click',function(){cd.close()});
+cd.addEventListener('click',function(e){if(e.target===cd)cd.close()});
+function confetti(){var cs=['#FFD23F','#1E6BFF','#2ECC71','#fff','#ff5a7a'],box=document.getElementById('cdi');for(var i=0;i<46;i++){var s=document.createElement('span');s.className='cfp';s.style.left=(Math.random()*100)+'%';s.style.background=cs[i%5];s.style.animationDelay=(Math.random()*.5)+'s';box.appendChild(s);(function(x){setTimeout(function(){x.remove()},2700)})(s)}}
+cf.addEventListener('submit',function(e){e.preventDefault();var f=cf.elements;
+ if(+f.cap.value<10||f.cap.value===''){cm.hidden=false;f.cap.focus();return}
+ if(!cf.checkValidity&&false)return;
+ var miss=['planner','contact','college','male','female','dest','travel'].filter(function(k){return !String(f[k].value).trim()});
+ if(miss.length){f[miss[0]].focus();setMood(Math.min(4,Math.ceil(score()/2)));md.textContent='Please fill every field to continue';return}
+ var txt='Create Trip request (College/Group)\n\nTrip planner: '+f.planner.value+'\nContact: '+f.contact.value+'\nCollege & year: '+f.college.value+'\nGroup capacity: '+f.cap.value+'\nMales: '+f.male.value+'\nFemales: '+f.female.value+'\nDestinations: '+f.dest.value+'\nPreferred travel: '+f.travel.value;
+ var url='https://wa.me/919640389230?text='+encodeURIComponent(txt);
+ if(SHEET_URL){try{fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({planner:f.planner.value,contact:f.contact.value,college:f.college.value,cap:f.cap.value,male:f.male.value,female:f.female.value,dest:f.dest.value,travel:f.travel.value})}).catch(function(){})}catch(err){}}
+ sent=true;setMood(5,'Cheers! 🥂 Opening WhatsApp…','🥳');confetti();wa.href=url;wa.hidden=false;
+ setTimeout(function(){window.open(url,'_blank')},1500)});
+})();
+
+(function(){
+var sl=document.getElementById('aps');
+var srcs=[].slice.call(document.querySelectorAll('.wall img')).map(function(i){return 'url("'+i.src+'")'});
+var bg=document.querySelector('.rbg.b');if(bg)srcs.unshift(bg.style.backgroundImage);
+srcs.forEach(function(s,i){var d=document.createElement('div');d.className='sl';d.style.backgroundImage=s;d.style.animationDelay=(i*4)+'s';d.style.animationDuration=(srcs.length*4)+'s';sl.appendChild(d)});
+var ad=document.getElementById('ad'),af=document.getElementById('af'),fm=document.getElementById('aform'),th=document.getElementById('athx'),wa=document.getElementById('awa'),done=false;
+function open(){if(done){af.reset();done=false;fm.hidden=false;th.hidden=true;ad.classList.remove('done')}if(ad.showModal)ad.showModal();else ad.setAttribute('open','')}
+document.getElementById('atb').addEventListener('click',open);
+document.getElementById('ax').addEventListener('click',function(){ad.close()});
+ad.addEventListener('click',function(e){if(e.target===ad)ad.close()});
+function confetti(){var cs=['#FFD23F','#1E6BFF','#2ECC71','#fff','#ff5a7a'],box=document.querySelector('.fcard');for(var i=0;i<44;i++){var s=document.createElement('span');s.className='cfp';s.style.left=(Math.random()*100)+'%';s.style.background=cs[i%5];s.style.animationDelay=(Math.random()*.5)+'s';box.appendChild(s);(function(x){setTimeout(function(){x.remove()},2700)})(s)}}
+af.addEventListener('submit',function(e){e.preventDefault();var f=af.elements;
+ var txt='App early access request\n\nName: '+f.nm.value+'\nAge: '+f.age.value+'\nCollege: '+f.col.value+'\nGender: '+f.gen.value+'\nMobile: '+f.mob.value;
+ var url='https://wa.me/919640389230?text='+encodeURIComponent(txt);
+ done=true;fm.hidden=true;th.hidden=false;ad.classList.add('done');wa.href=url;confetti();
+ setTimeout(function(){window.open(url,'_blank')},1500)});
+})();
+
+(function(){var ap=document.getElementById('app'),av=document.getElementById('av');
+function sync(){if(ap.hidden){av.pause()}else{var p=av.play();if(p&&p.catch)p.catch(function(){})}}
+new MutationObserver(sync).observe(ap,{attributes:true,attributeFilter:['hidden']});})();
+
+(function(){var v1=document.getElementById('wv1'),v2=document.getElementById('wv2'),av=document.getElementById('av');
+v1.src=av.src;
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause()})},{threshold:.3});io.observe(v1);io.observe(v2)}
+else{v1.play();v2.play()}})();
+var pd=document.getElementById('pd'),pf=document.getElementById('pf'),pt=document.getElementById('pt'),po=document.getElementById('po');
+document.getElementById('pw').addEventListener('click',function(e){e.preventDefault();nav.classList.remove('open');mb.setAttribute('aria-expanded',false);if(pd.showModal)pd.showModal();else pd.setAttribute('open','')});
+document.getElementById('cpb').addEventListener('click',function(){if(pd.open)return;if(pd.showModal)pd.showModal();else pd.setAttribute('open','')});
+document.getElementById('px').addEventListener('click',function(){pd.close()});
+pd.addEventListener('click',function(e){if(e.target===pd)pd.close()});
+pt.addEventListener('change',function(){po.hidden=pt.value!=='Others'});
+pf.addEventListener('submit',function(e){e.preventDefault();var f=new FormData(pf),m=e.submitter&&e.submitter.dataset.m;
+ var txt='Partnership enquiry\n\nName: '+f.get('name')+'\nContact: '+f.get('contact')+'\nPartnership type: '+f.get('type')+(f.get('type')==='Others'?'\nThoughts: '+f.get('others'):'')+'\nPage: '+f.get('page')+'\nReference: '+f.get('ref')+'\nAbout: '+f.get('about');
+ location.href='mailto:hello@studentdays.co.in?subject='+encodeURIComponent('Partnership enquiry')+'&body='+encodeURIComponent(txt.replace(/\n/g,'\r\n'));
+ pd.close()});
+var h=location.hash.slice(1);if(pg[h]&&h!=='home')show(h);
+})();
+</script>
+</body></html>

@@ -1,0 +1,379 @@
+// StudentDays.co Prisma Schema
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  MASTER_ADMIN
+  ADMIN
+  COORDINATOR
+  STUDENT
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  PENDING
+}
+
+enum TripStatus {
+  DRAFT
+  PUBLISHED
+  FULLY_BOOKED
+  CANCELLED
+  COMPLETED
+}
+
+enum BookingStatus {
+  PENDING_PAYMENT
+  PAYMENT_SUBMITTED
+  CONFIRMED
+  CANCELLED
+  REFUND_PENDING
+  REFUNDED
+  REJECTED
+}
+
+enum PaymentStatus {
+  PENDING
+  SUBMITTED
+  VERIFIED
+  REJECTED
+  REFUNDED
+}
+
+model User {
+  id                   String       @id @default(uuid())
+  email                String       @unique
+  passwordHash         String
+  name                 String
+  phone                String?
+  collegeName          String?
+  studentId            String?
+  role                 Role         @default(STUDENT)
+  status               UserStatus   @default(ACTIVE)
+  avatarUrl            String?
+  refreshToken         String?
+  resetPasswordToken   String?
+  resetPasswordExpires DateTime?
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+
+  bookings             Booking[]
+  assignedTrips        CoordinatorTripAssignment[]
+  verifications        PaymentVerification[]
+  notifications        Notification[]
+  auditLogs            AuditLog[]
+
+  @@index([email])
+  @@index([role])
+}
+
+model College {
+  id          String   @id @default(uuid())
+  name        String
+  slug        String   @unique
+  city        String
+  state       String
+  description String?
+  logoUrl     String?
+  website     String?
+  isPartner   Boolean  @default(true)
+  status      String   @default("ACTIVE")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([slug])
+}
+
+model Trip {
+  id                   String       @id @default(uuid())
+  title                String
+  slug                 String       @unique
+  description          String
+  destination          String
+  startLocation        String
+  startDate            DateTime
+  endDate              DateTime
+  registrationDeadline DateTime
+  price                Int          // In INR
+  capacity             Int
+  confirmedCount       Int          @default(0)
+  reservedCount        Int          @default(0)
+  status               TripStatus   @default(DRAFT)
+  coverImage           String
+  meetingPoint         String?
+  includedServices     String       @default("[]") // JSON string
+  exclusions           String       @default("[]") // JSON string
+  cancellationPolicy   String?
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+
+  images               TripImage[]
+  itinerary            TripItineraryItem[]
+  bookings             Booking[]
+  coordinators         CoordinatorTripAssignment[]
+
+  @@index([slug])
+  @@index([status])
+}
+
+model TripImage {
+  id           String   @id @default(uuid())
+  tripId       String
+  imageUrl     String
+  caption      String?
+  isCover      Boolean  @default(false)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+
+  trip         Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade)
+
+  @@index([tripId])
+}
+
+model TripItineraryItem {
+  id           String   @id @default(uuid())
+  tripId       String
+  dayNumber    Int
+  title        String
+  description  String
+  activities   String   @default("[]") // JSON string
+  timeSlots    String?
+  displayOrder Int      @default(0)
+
+  trip         Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade)
+
+  @@index([tripId])
+}
+
+model CoordinatorTripAssignment {
+  id         String   @id @default(uuid())
+  tripId     String
+  userId     String
+  assignedAt DateTime @default(now())
+  notes      String?
+
+  trip       Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([tripId, userId])
+  @@index([userId])
+}
+
+model Booking {
+  id                    String        @id @default(uuid())
+  bookingReference      String        @unique
+  tripId                String
+  userId                String
+  quantity              Int           @default(1)
+  unitPrice             Int
+  totalAmount           Int
+  status                BookingStatus @default(PENDING_PAYMENT)
+  emergencyContactName  String?
+  emergencyContactPhone String?
+  specialRequirements   String?
+  cancellationReason    String?
+  cancelledAt           DateTime?
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  trip                  Trip          @relation(fields: [tripId], references: [id])
+  user                  User          @relation(fields: [userId], references: [id])
+  participants          BookingParticipant[]
+  payments              Payment[]
+
+  @@index([userId])
+  @@index([tripId])
+  @@index([bookingReference])
+  @@index([status])
+}
+
+model BookingParticipant {
+  id          String   @id @default(uuid())
+  bookingId   String
+  fullName    String
+  email       String
+  phone       String
+  collegeName String?
+  studentId   String?
+  age         Int?
+  gender      String?
+
+  booking     Booking  @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  @@index([bookingId])
+}
+
+model Payment {
+  id              String        @id @default(uuid())
+  bookingId       String
+  amount          Int
+  currency        String        @default("INR")
+  provider        String        @default("mock")
+  paymentMethod   String        @default("UPI_REFERENCE")
+  status          PaymentStatus @default(PENDING)
+  referenceNumber String?
+  payerUpiId      String?
+  submittedAt     DateTime?
+  notes           String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  booking         Booking       @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  verification    PaymentVerification?
+
+  @@index([bookingId])
+  @@index([referenceNumber])
+  @@index([status])
+}
+
+model PaymentVerification {
+  id           String   @id @default(uuid())
+  paymentId    String   @unique
+  verifiedById String
+  decision     String   // "APPROVED" or "REJECTED"
+  adminNotes   String?
+  verifiedAt   DateTime @default(now())
+
+  payment      Payment  @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  verifiedBy   User     @relation(fields: [verifiedById], references: [id])
+
+  @@index([verifiedById])
+}
+
+model GalleryImage {
+  id           String   @id @default(uuid())
+  imageUrl     String
+  caption      String
+  tripLocation String?
+  isPublished  Boolean  @default(true)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+}
+
+model ContactSubmission {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String?
+  college   String?
+  subject   String
+  message   String
+  status    String   @default("NEW")
+  createdAt DateTime @default(now())
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String
+  message   String
+  type      String   @default("GENERAL")
+  link      String?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  userId     String?
+  action     String
+  entityType String
+  entityId   String?
+  metadata   String?
+  ipAddress  String?
+  createdAt  DateTime @default(now())
+
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([action])
+}
+
+model CustomTripRequest {
+  id              String   @id @default(uuid())
+  plannerName     String
+  contactPhone    String
+  collegeYear     String
+  groupCapacity   Int
+  maleCount       Int
+  femaleCount     Int
+  destinations    String
+  preferredTravel String
+  status          String   @default("NEW") // NEW, CONTACTED, QUOTED, BOOKED, ARCHIVED
+  adminNotes      String?
+  ipAddress       String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model EarlyAccessWaitlist {
+  id          String    @id @default(uuid())
+  name        String
+  age         Int
+  collegeName String
+  gender      String
+  mobilePhone String
+  status      String    @default("WAITLISTED") // WAITLISTED, INVITED, ACTIVATED
+  invitedAt   DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@index([mobilePhone])
+  @@index([status])
+}
+
+model PartnershipInquiry {
+  id              String   @id @default(uuid())
+  name            String
+  contact         String
+  partnershipType String
+  otherDetails    String?
+  pageContext     String?
+  reference       String?
+  about           String
+  status          String   @default("PENDING") // PENDING, CONTACTED, APPROVED, REJECTED
+  createdAt       DateTime @default(now())
+
+  @@index([partnershipType])
+  @@index([status])
+}
+
+model DocumentaryMedia {
+  id          String   @id @default(uuid())
+  youtubeId   String   @unique
+  tabLabel    String
+  subtitle    String
+  title       String
+  displayOrder Int     @default(0)
+  createdAt   DateTime @default(now())
+
+  @@index([displayOrder])
+}
+
+model Review {
+  id          String   @id @default(uuid())
+  authorName  String
+  college     String
+  initials    String
+  rating      Int      @default(5)
+  content     String
+  isFeatured  Boolean  @default(true)
+  displayOrder Int     @default(0)
+  createdAt   DateTime @default(now())
+
+  @@index([isFeatured])
+}
+
