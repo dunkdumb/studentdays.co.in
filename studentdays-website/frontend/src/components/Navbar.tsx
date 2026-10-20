@@ -85,6 +85,29 @@ export const Navbar: React.FC = () => {
           id="links"
           style={{ display: menuOpen ? 'flex' : 'none' }}
         >
+          {/* Mobile-only: main nav links */}
+          <Link
+            to="/"
+            className="glass dropdown-mobile-only"
+            onClick={() => { setMenuOpen(false); scrollTo('hero', '/'); }}
+          >
+            Home
+          </Link>
+          <Link
+            to="/trips"
+            className="glass dropdown-mobile-only"
+            onClick={() => { setMenuOpen(false); scrollTo('trips', '/trips'); }}
+          >
+            Trips
+          </Link>
+          <Link
+            to="/about"
+            className="glass dropdown-mobile-only"
+            onClick={() => setMenuOpen(false)}
+          >
+            About
+          </Link>
+
           <a
             className="glass"
             href="#app"

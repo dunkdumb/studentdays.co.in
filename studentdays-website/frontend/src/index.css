@@ -1019,3 +1019,13 @@ a {
     display: none !important;
   }
 }
+
+/* Dropdown: show mobile-only items only when top bar links are hidden */
+.dropdown-mobile-only {
+  display: none !important;
+}
+@media (max-width: 640px) {
+  .dropdown-mobile-only {
+    display: inline-flex !important;
+  }
+}

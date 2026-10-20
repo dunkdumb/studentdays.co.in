@@ -519,6 +519,29 @@ export const Home: React.FC = () => {
 
           {/* Dropdown Navigation Menu */}
           <div className="links">
+            {/* Mobile-only: main nav links */}
+            <button
+              className="glass dropdown-mobile-only"
+              type="button"
+              onClick={() => { setNavOpen(false); showView('home'); }}
+            >
+              Home
+            </button>
+            <button
+              className="glass dropdown-mobile-only"
+              type="button"
+              onClick={(e) => { setNavOpen(false); flyToTrips(e.currentTarget, 'trips'); }}
+            >
+              Trips
+            </button>
+            <button
+              className="glass dropdown-mobile-only"
+              type="button"
+              onClick={() => { setNavOpen(false); showView('about'); }}
+            >
+              About
+            </button>
+
             <button
               className="glass"
               type="button"
