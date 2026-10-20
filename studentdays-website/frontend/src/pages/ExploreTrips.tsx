@@ -61,7 +61,7 @@ export const ExploreTrips: React.FC = () => {
             flexWrap: 'wrap'
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flex: 1, minWidth: '220px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flex: 1, minWidth: 0 }}>
             <Search size={18} color="rgba(255,255,255,0.6)" />
             <input
               type="text"

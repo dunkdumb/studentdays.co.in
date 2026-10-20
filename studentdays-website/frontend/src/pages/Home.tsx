@@ -490,18 +490,18 @@ export const Home: React.FC = () => {
           </a>
 
           <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-            <button className="glass" type="button" onClick={() => showView('home')}>
+            <button className="glass nav-hide-sm" type="button" onClick={() => showView('home')}>
               Home
             </button>
             <button
-              className="glass"
+              className="glass nav-hide-sm"
               type="button"
               data-trip="1"
               onClick={(e) => flyToTrips(e.currentTarget, 'trips')}
             >
               Trips
             </button>
-            <button className="glass" type="button" onClick={() => showView('about')}>
+            <button className="glass nav-hide-sm" type="button" onClick={() => showView('about')}>
               About
             </button>
 

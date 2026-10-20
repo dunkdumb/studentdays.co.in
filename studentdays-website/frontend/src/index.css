@@ -5,8 +5,8 @@
 
 :root{--hero:url(/assets/reference-media/hero.jpeg);--ink:#000;--paper:#fff;--blue:#1E6BFF;--deep:#06122b;--yellow:#FFD23F;--green:#2ECC71;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *,*::before,*::after{box-sizing:inherit}
-html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{margin:0;background:var(--ink);color:#fff;font:400 17px/1.55 'DM Sans',system-ui,sans-serif}
+html{scroll-behavior:smooth;scroll-padding-top:70px;overflow-x:hidden}
+body{margin:0;background:var(--ink);color:#fff;font:400 17px/1.55 'DM Sans',system-ui,sans-serif;overflow-x:hidden}
 body.intro{overflow:hidden}
 h1,h2,h3{font-family:'Bricolage Grotesque','DM Sans',system-ui,sans-serif;margin:0;letter-spacing:-.03em;line-height:1}
 a{color:inherit}
@@ -404,6 +404,7 @@ footer{padding-bottom:100px}
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 70px;
+  overflow-x: hidden;
 }
 
 body {
@@ -415,6 +416,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1008,5 +1010,12 @@ a {
   .glass.big {
     padding: 14px 22px !important;
     font-size: 15px !important;
+  }
+}
+
+/* Hide secondary nav links on small phones — only Menu button stays */
+@media (max-width: 640px) {
+  .nav-hide-sm {
+    display: none !important;
   }
 }

@@ -44,7 +44,7 @@ export const Navbar: React.FC = () => {
         {/* Main Navigation: Home | Trips | About | Menu */}
         <Link
           to="/"
-          className="glass"
+          className="glass nav-hide-sm"
           onClick={() => scrollTo('hero', '/')}
         >
           Home
@@ -52,7 +52,7 @@ export const Navbar: React.FC = () => {
 
         <Link
           to="/trips"
-          className="glass"
+          className="glass nav-hide-sm"
           onClick={() => scrollTo('trips', '/trips')}
         >
           Trips
@@ -60,7 +60,7 @@ export const Navbar: React.FC = () => {
 
         <Link
           to="/about"
-          className="glass ab"
+          className="glass ab nav-hide-sm"
           data-go="about"
           onClick={() => setMenuOpen(false)}
         >
