@@ -219,9 +219,12 @@ export const TripDetails: React.FC = () => {
       </div>
 
       <style>{`
-        @media(max-width: 850px) {
+        @media(max-width: 768px) {
           .trip-layout-grid {
             grid-template-columns: 1fr !important;
+          }
+          .trip-layout-grid > div:last-child > .glass-panel {
+            position: static !important;
           }
         }
       `}</style>

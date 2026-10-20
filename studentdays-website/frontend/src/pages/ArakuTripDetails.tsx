@@ -1217,9 +1217,12 @@ export const ArakuTripDetails: React.FC = () => {
       )}
 
       <style>{`
-        @media(max-width: 850px) {
+        @media(max-width: 768px) {
           .araku-layout-grid {
             grid-template-columns: 1fr !important;
+          }
+          .araku-layout-grid > div:last-child > .glass-panel {
+            position: static !important;
           }
         }
       `}</style>

@@ -52,7 +52,7 @@ export const Colleges: React.FC = () => {
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px' }}>
+        <div className="colleges-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))', gap: '24px' }}>
           {filtered.map((col) => (
             <div key={col.id} className="glass-panel" style={{ padding: '30px 26px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>

@@ -970,3 +970,43 @@ a {
     scroll-behavior: auto !important;
   }
 }
+
+/* =========================================================
+   Mobile Responsive Overrides
+   ========================================================= */
+
+@media (max-width: 768px) {
+  /* Contact page: stack 2-col grid to 1-col */
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+  }
+  /* Contact form field rows: Name/Email, Phone/College */
+  .contact-form-row {
+    grid-template-columns: 1fr !important;
+  }
+  /* Home: custom trip male/female count row */
+  .count-row {
+    grid-template-columns: 1fr !important;
+  }
+  /* Colleges card grid: prevent overflow on narrow screens */
+  .colleges-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)) !important;
+  }
+  /* Join section cards */
+  .card h3 {
+    font-size: clamp(24px, 6vw, 34px) !important;
+  }
+  /* Reel height on small screens */
+  .reel {
+    height: 480px !important;
+  }
+  /* Modal content padding */
+  .modal-content {
+    padding: 20px 16px !important;
+  }
+  /* Glass big button size */
+  .glass.big {
+    padding: 14px 22px !important;
+    font-size: 15px !important;
+  }
+}
